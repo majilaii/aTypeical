@@ -1,0 +1,27 @@
+.statsContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.stats{
+    /* width: 150px; */
+    background-color: rgb(26,26,26);
+    font-size: 70px;
+    color: rgb(208, 139, 1);
+    position: relative;
+}
+
+.description{
+    color: grey;
+    font-size: 30px;
+    background-color: inherit;
+}
+
+.otherTime{
+   font-size: 15px;
+   color: grey;
+   background-color: rgb(26,26,26);
+   position:absolute;
+   right: 0;
+}
+

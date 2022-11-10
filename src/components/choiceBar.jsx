@@ -13,7 +13,7 @@ export default function Bar({ changeWordAmount, setCheckInput }) {
 
 
   useEffect(() => {
-    wordOrQuote(5)
+    wordOrQuote(wordAmount)
 
   }, [typingMode, KEnglish])
 
@@ -67,8 +67,8 @@ export default function Bar({ changeWordAmount, setCheckInput }) {
       <>
            <div className="spacer"></div>
       <button onClick={() => setKEnglish(10)}> HARD </button>
-      <button onClick={() => setKEnglish(1)}> EASY </button>
       <button onClick={() => setKEnglish(5)}> MEDIUM </button>
+      <button onClick={() => setKEnglish(1)}> EASY </button>
       </>
       : null }
     </div>

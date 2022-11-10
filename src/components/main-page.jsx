@@ -1,28 +1,39 @@
 import { useEffect, useState, useRef, ClipboardEvent } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
-import Data from './data'
+
+import { useOutletContext, useNavigate, Link } from "react-router-dom";
 import Bar from "./choiceBar.jsx";
-import APIservice from "../APIService/index";
 import "../css/main-page.css";
 
 export default function Main() {
+    const linkTarget = {
+        pathname: "/",
+        key: Math.random(), // we could use Math.random, but that's not guaranteed unique.
+        state: {
+          applied: true
+        }
+    }
   const navigate = useNavigate();
-  const { wordAmount, setWordAmount } = useOutletContext();
-  const { incorrect, setIncorrect } = useOutletContext();
-  const { setSpeed } = useOutletContext();
-  const { typingMode, setTypingMode } = useOutletContext();
+  const {setWordAmount, setIncorrect,  setSpeed, typingMode, text, setText, author,  reset, setReset, prevInputLength,setPrevInputLength} = useOutletContext();
   const [checkFirstInput, setCheckInput] = useState(0);
-  const { text, setText } = useOutletContext();
-  const { author, setAuthor } = useOutletContext();
-  const { reset, setReset } = useOutletContext();
 
 
-  const inputRef = useRef(null);
+  const inputRef = useRef(null)
+  let interval;
+
+ useEffect(() => {
+    if (checkFirstInput !== 0) {
+       interval = setInterval(() => {
+        if(inputRef.current.value.length){
+            setPrevInputLength(arr => [...arr, inputRef.current.value.length])
+
+        }
+    }, 1000);}
+ }, [checkFirstInput])
 
   useEffect(() => {
     window.addEventListener("keydown", focus);
     inputRef.current.value = "";
-    setCheckInput(0)
+    setCheckInput(0);
   }, [reset]);
 
   const preventCopyPaste = (e) => {
@@ -42,42 +53,41 @@ export default function Main() {
   //TODO: problem with input logic, should stop validating any future values if one is incorrect
   //perhaps you can add logic that whenever a spacebar is pressed, you add
 
-
   function textValidate(e) {
     if (checkFirstInput === 0) {
       setCheckInput(1);
       setSpeed(Date.now());
     }
-
     for (let i = 0; i < e.target.value.length; i++) {
       const current = text[i];
-
       if (current.letter === e.target.value[i]) {
         current.correct = "correct";
       } else if (current.letter !== e.target.value[i]) {
         current.correct = "incorrect";
+        // setErrors(errors => errors+1)
       }
     }
 
     if (text[e.target.value.length + 1]) {
       text[e.target.value.length].correct = "neutral";
-    } 
-
+    }
+ 
     setText([...text]);
 
     if (e.target.value.length === text.length) {
       const currentTime = new Date();
       for (let obj of text) {
-        console.log(obj);
+
         for (let key in obj) {
-          console.log(key);
+          
           if (obj[key] === "incorrect") {
             setIncorrect((incorrect) => (incorrect += 1));
           }
         }
       }
       setSpeed((time) => currentTime - time);
-
+      setPrevInputLength(arr => [...arr, e.target.value.length])
+      clearInterval(interval)
       navigate("/stats");
     }
   }
@@ -86,10 +96,13 @@ export default function Main() {
     { text } && (
       <>
         <div className="Main-container">
-          <Bar changeWordAmount={changeWordAmount} setCheckInput={setCheckInput} />
+          <Bar
+            changeWordAmount={changeWordAmount}
+            setCheckInput={setCheckInput}
+          />
           <div
             className="typing-container"
-            onClick={focus}
+            // onClick={focus}/
             id="typingContainer"
           >
             <p
@@ -117,24 +130,22 @@ export default function Main() {
                 );
               })}
             </p>
-            {typingMode === 1 ? 
-            <span className="author">
-            - {author}
-            </span>
-            : null}
+            {typingMode === 1 ? (
+              <span className="author">- {author}</span>
+            ) : null}
           </div>
           <div className="inputDiv">
-          <input
+            <input
             ref={inputRef}
-            type="text"
-            className="inputBar"
-            onChange={textValidate}
-          />
-          <button className="resetButton" onClick={() => setReset(num => num= num+1)}> Reset </button>
+              type="text"
+              className="inputBar"
+              onChange={textValidate}
+            />
+            <Link to={linkTarget} reloadDocument className='resetButton'>
+            Reset
+            </Link>
           </div>
-          <Data></Data>
         </div>
-
       </>
     )
   );

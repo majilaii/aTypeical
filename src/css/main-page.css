@@ -47,10 +47,12 @@ p{
 .inputBar{
     color: white;
     margin-top: 10px;
-    width: 90%;
+    width: 95%;
+    height: 100%;
     border-color: white;
     font-size: 30px;
     padding-left: 10px;
+    flex-grow: 2;
 }
 
 .correct{
@@ -80,8 +82,10 @@ p{
 
 .inputDiv{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    height: 80px;
+    height: 150px;
     margin-top: 20px;
 }
 
