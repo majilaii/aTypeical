@@ -18,7 +18,7 @@ function shuffle(array) {
 
 async function fetchQuotes() {
     const URL = `api.quotable.io/random`
-    const response = await fetch(`api.quotable.io/random?minLength=150&maxLength=300`)
+    const response = await fetch(`https://api.quotable.io/random?minLength=150&maxLength=300`)
     const data = await response.json()
     console.log(data)
     
