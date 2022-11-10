@@ -10,7 +10,9 @@
     border-radius: 15px;
     padding-right: 15px;
     overflow: hidden;
+   
 }
+
 
 button{
     font-size: 30px;
@@ -19,6 +21,7 @@ button{
     color: white;
     background-color: #2c2e31;
     border: none;
+
 }
 
 button:hover{
