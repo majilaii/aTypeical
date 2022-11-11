@@ -16,7 +16,10 @@ export default function NavBar() {
             <Link to={linkTarget} reloadDocument className='link'>
             aTYPEical
             </Link>
-           
+            <div className='buttons'>
+            <button className='raceButton' > RACE </button>
+            <Link to='/register' className="linkLogin"><button className='logIn'>LOGIN</button> </Link>
+            </div>
         </div>
      
     )

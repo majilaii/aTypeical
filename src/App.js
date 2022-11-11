@@ -15,11 +15,12 @@ function App() {
   const [author, setAuthor ] = useState(null);
   const [reset, setReset ] = useState(true);
   const [prevInputLength, setPrevInputLength] = useState([])
+  const [adjustedWPM, setAdjustedWPM] = useState([])
 
   return (
     <div className='wholeContainer'>
     <NavBar/>
-    <Outlet context={{wordAmount, setWordAmount, speed, setSpeed, text, setText,  incorrect, setIncorrect, KEnglish, setKEnglish ,typingMode, setTypingMode , author, setAuthor, reset, setReset,prevInputLength, setPrevInputLength }}/>
+    <Outlet context={{wordAmount, setWordAmount, speed, setSpeed, text, setText,  incorrect, setIncorrect, KEnglish, setKEnglish ,typingMode, setTypingMode , author, setAuthor, reset, setReset,prevInputLength, setPrevInputLength, adjustedWPM, setAdjustedWPM}}/>
     </div>
   )
 }

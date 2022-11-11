@@ -14,6 +14,26 @@
     transition: 0.25s;
 }
 
+.fadeIn{
+    background-color: inherit;
+    display: inherit;
+    min-height: inherit;
+    height: max-content;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #2c2e31;
+    border-radius: 15px;
+    padding-right: 7px;
+    overflow: hidden;
+    transition: 0.25s;
+    animation: fadeInAnimation ease-in-out 0.5s;
+}
+
+@keyframes fadeInAnimation {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
 
 button{
     font-size: 30px;
@@ -22,7 +42,7 @@ button{
     color: white;
     background-color: #2c2e31;
     border: none;
-    transition: 0.25s;
+    transition: 0.5s;
 
 }
 
@@ -30,7 +50,7 @@ button:hover{
     background-color: white;
     color:green;
     cursor: pointer;
-    transition: 0.25s;
+    transition: 0.5s;
 }
 
 .spacer {

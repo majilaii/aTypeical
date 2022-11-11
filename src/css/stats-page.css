@@ -25,3 +25,36 @@
    right: 0;
 }
 
+img{
+    position: absolute;
+    top: 1050px;
+    left: 970px;
+    width: 29px;
+    transition: transform 0.4s ease-in-out;
+
+}
+
+img:hover {
+    cursor: pointer;
+     transform: rotate(360deg) scale(1.2);
+}
+
+.loginMessage{
+    position: absolute;
+    top: 1200px;
+    left: 800px;
+    color: grey;
+    font-size: 30px;
+    background-color: inherit;
+}
+
+.linkLogin{
+    text-decoration:underline;
+    font-size: 30px;
+}
+
+.linkLogin:visited { 
+    text-decoration: none; 
+
+    color: rgb(208, 139, 1); 
+   }

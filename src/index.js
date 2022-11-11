@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import NavBar from './components/nav-bar';
+import Register from './components/register'
 import MainPage from './components/main-page'
 import Stats from './components/stats-page'
+import Profile from './components/profile'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -27,7 +29,15 @@ const router = createBrowserRouter([
         },
         {
           path: "/stats",
-          element: <Stats />          
+          element: <Stats />, 
+        },
+        {
+          path:'/register',
+          element: <Register/>
+        },
+        {
+          path:'/profile',
+          element:<Profile/>
         }
     ]
   },

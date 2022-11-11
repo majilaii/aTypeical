@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef, ClipboardEvent } from "react";
-
 import { useOutletContext, useNavigate, Link } from "react-router-dom";
 import Bar from "./choiceBar.jsx";
 import "../css/main-page.css";
 
 export default function Main() {
+  const navigate = useNavigate()
     const linkTarget = {
         pathname: "/",
         key: Math.random(), // we could use Math.random, but that's not guaranteed unique.
@@ -12,20 +12,19 @@ export default function Main() {
           applied: true
         }
     }
-  const navigate = useNavigate();
-  const {setWordAmount, setIncorrect,  setSpeed, typingMode, text, setText, author,  reset, setReset, prevInputLength,setPrevInputLength} = useOutletContext();
+  const {setWordAmount, setIncorrect,  setSpeed, typingMode, text, setText, author,  reset, setReset, prevInputLength,setPrevInputLength, adjustedWPM, incorrect, setAdjustedWPM} = useOutletContext();
   const [checkFirstInput, setCheckInput] = useState(0);
 
 
   const inputRef = useRef(null)
   let interval;
 
+  
  useEffect(() => {
     if (checkFirstInput !== 0) {
        interval = setInterval(() => {
         if(inputRef.current.value.length){
             setPrevInputLength(arr => [...arr, inputRef.current.value.length])
-
         }
     }, 1000);}
  }, [checkFirstInput])
@@ -87,6 +86,7 @@ export default function Main() {
       }
       setSpeed((time) => currentTime - time);
       setPrevInputLength(arr => [...arr, e.target.value.length])
+      setAdjustedWPM(arr => [...arr, incorrect])
       clearInterval(interval)
       navigate("/stats");
     }
@@ -141,8 +141,10 @@ export default function Main() {
               className="inputBar"
               onChange={textValidate}
             />
-            <Link to={linkTarget} reloadDocument className='resetButton'>
-            Reset
+            <Link to={linkTarget} reloadDocument className="linkReset">
+                <button className='resetButton'>
+                    Reset
+                </button>
             </Link>
           </div>
         </div>
