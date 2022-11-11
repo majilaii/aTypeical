@@ -16,11 +16,12 @@ function App() {
   const [reset, setReset ] = useState(true);
   const [prevInputLength, setPrevInputLength] = useState([])
   const [adjustedWPM, setAdjustedWPM] = useState([])
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   return (
     <div className='wholeContainer'>
-    <NavBar/>
-    <Outlet context={{wordAmount, setWordAmount, speed, setSpeed, text, setText,  incorrect, setIncorrect, KEnglish, setKEnglish ,typingMode, setTypingMode , author, setAuthor, reset, setReset,prevInputLength, setPrevInputLength, adjustedWPM, setAdjustedWPM}}/>
+    <NavBar isAuthenticated= {isAuthenticated} setIsAuthenticated = {setIsAuthenticated}/>
+    <Outlet context={{wordAmount, setWordAmount, speed, setSpeed, text, setText,  incorrect, setIncorrect, KEnglish, setKEnglish ,typingMode, setTypingMode , author, setAuthor, reset, setReset,prevInputLength, setPrevInputLength, adjustedWPM, setAdjustedWPM, isAuthenticated, setIsAuthenticated}}/>
     </div>
   )
 }

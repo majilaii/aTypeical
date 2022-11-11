@@ -77,7 +77,40 @@ APIservice.profile = () => {
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
   })
-    .then((res) => res.json())
+    .then((res) => {
+      return res.json()
+    })
+    .catch((err) => console.log(err));
+  // REMOVE-END
+};
+
+APIservice.update = (user) => {
+  // REMOVE-START
+  return fetch(`http://localhost:4000/update`, {
+    method: 'PUT',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  })
+    .then((res) => {
+      return res.json()
+    })
+    .catch((err) => console.log(err));
+  // REMOVE-END
+};
+
+APIservice.logout = () => {
+  return fetch(`http://localhost:4000/logout`, {
+    method: 'POST',
+    credentials: 'include',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => {
+      return res.json()
+    }
+    )
     .catch((err) => console.log(err));
   // REMOVE-END
 };

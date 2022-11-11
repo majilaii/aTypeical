@@ -40,4 +40,15 @@
 .raceButton:hover {
     background-color: rgb(26,26,26);
 }
+.profile:hover{
+    background-color: rgb(26,26,26);
+
+}
+
+.profile {
+    position: absolute;
+    background-color: rgb(26,26,26);
+    left: 84%;
+    top: 34.6px;
+}
 

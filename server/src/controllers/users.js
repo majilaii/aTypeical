@@ -3,11 +3,10 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const User = require('./../model/users');
 
-const create = async (req, res) => {
-    console.log(req.body)
+const create = async (req, res, next) => {
     User.findOne({username: req.body.username}, async (err, doc) => {
         if(err) throw new err
-        if(doc) res.send('user exists already dum dum')
+        if(doc) res.send({ error: '409', message: 'User already exists' })
         if(!doc){
             const hashedPass = await bcrypt.hash(req.body.password, 10)
             const newUser = new User({
@@ -16,7 +15,16 @@ const create = async (req, res) => {
                 password: hashedPass
             })
             await newUser.save()
-            res.send('user created').status(201)
+            passport.authenticate("local", (err, user, info) => {
+              if(err) throw err
+              if(!user) res.send({ error: '401', message: 'Username or password is incorrect' })
+              else {
+                  req.logIn(user, err => {
+                      if(err) throw err
+                      res.status(200).send(user)
+                  })
+              }
+          })(req, res, next)
         }
     })
   };
@@ -24,11 +32,11 @@ const create = async (req, res) => {
   const login = async (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
         if(err) throw err
-        if(!user) res.send('no user exists')
+        if(!user) res.send({ error: '401', message: 'Username or password is incorrect' })
         else {
             req.logIn(user, err => {
                 if(err) throw err
-                res.status(200).send(user)
+                res.send(user).status(200)
             })
         }
     })(req, res, next)
@@ -42,13 +50,19 @@ const create = async (req, res) => {
   const logout = (req, res) => {
     req.logout(function(err) {
         if(err) {return next(err)}
-        res.send('logged out')
+        res.send({'message': 'logged out'})
     })
   };
+  
+  const putHistory = (req, res) => {
+    console.log(req.user)
+  }
+
+
 
   const deleteAll = async (req, res) => {
     await User.deleteMany({})
     res.send('deleted all users')
   }
   
-  module.exports = { create, login, profile, logout, deleteAll };
+  module.exports = { create, login, profile, logout, deleteAll , putHistory};

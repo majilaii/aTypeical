@@ -12,9 +12,11 @@ const app = express()
 
 const corsConfig = {
     // REMOVE-START
-    origin: 'http://localhost:3000',
+    // origin: 'http://localhost:3000',
+    origin:true,
+    methods: "GET,POST,PUT,DELETE, PATCH",
     credentials: true,
-    // REMOVE-END
+    maxAge: 3600,
   };
 
 app.use(cors(corsConfig))
@@ -24,7 +26,7 @@ app.use(session({
     name: 'sid',
     saveUninitialized: false,
     resave: false,
-    secret: 'jacky',
+    secret: process.env.SECRET_KEY,
     cookie: {
       maxAge: 1000 * 60 * 60, // 1hr
       sameSite: true,
@@ -33,7 +35,7 @@ app.use(session({
     },
   }))
 
-app.use(cookieParser('jacky'))
+app.use(cookieParser(process.env.SECRET_KEY))
 app.use(passport.initialize())
 app.use(passport.session())
 require('./passportConfig')(passport);

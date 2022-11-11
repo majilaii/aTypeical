@@ -26,7 +26,9 @@ ChartJS.register(
 );
 
 export default function Data() {
-  const { speed, setSpeed, prevInputLength, text, incorrect, adjustedWPM} = useOutletContext();
+  const { speed, setSpeed, prevInputLength, text, incorrect, adjustedWPM, isAuthenticated, setIsAuthenticated} = useOutletContext();
+
+  
 
   const eachInterval = [];
   const textLength = [];
@@ -36,12 +38,6 @@ export default function Data() {
 
   let lastVal = prevInputLength.pop();
   prevInputLength[prevInputLength.length - 1] = lastVal
-
-
-  console.log((prevInputLength[prevInputLength.length - 1] - incorrect) / prevInputLength[prevInputLength.length-1])
-  console.log(((prevInputLength[prevInputLength.length - 1] / 5) - incorrect)/(speed/1000/60))
-
-
 
   if (prevInputLength.length > 1) {
     for (let i = 0; i < prevInputLength.length; i++) {
@@ -54,7 +50,6 @@ export default function Data() {
     finalDataArr.push(
       Math.round(prevInputLength[i] / 5 / (eachInterval[i] / 60))
     );
-    // adjustedWPM.push(Math.round((prevInputLength[i] / 5 )-incorrect/ (eachInterval[i] / 60)))
   }
 
   console.log(speed, text.length, prevInputLength, eachInterval, adjustedWPM);

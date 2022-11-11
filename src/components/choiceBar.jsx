@@ -1,7 +1,7 @@
+import "../css//choiceBar.css";
 import { useState, useRef, useEffect } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import APIservice from "../APIService/index";
-import "../css//choiceBar.css";
 
 export default function Bar({ changeWordAmount, setCheckInput }) {
   const { wordAmount, setWordAmount } = useOutletContext();
@@ -12,7 +12,7 @@ export default function Bar({ changeWordAmount, setCheckInput }) {
   const { reset, setReset } = useOutletContext();
 
   useEffect(() => {
-    wordOrQuote(5);
+    wordOrQuote(30);
   }, [typingMode, KEnglish]);
 
   async function getQuotes(length) {

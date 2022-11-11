@@ -26,10 +26,11 @@ const LoginTarget = {
     applied: true
   }
 }
-
-  const adjustedWPM = Math.round(
-    ((text.length/ 5)- incorrect) / (speed / 1000 / 60)
-  );
+console.log(text)
+console.log(incorrect)
+console.log(((text.length - (incorrect/ 5))) / (speed / 1000 / 60))
+  const adjustedWPM = CalculateRawWPM(text, speed) - ((incorrect) / speed/1000/60)
+  ;
 
   return (
     <>
@@ -56,7 +57,7 @@ const LoginTarget = {
       </div>
       <Data></Data>
       <Link to={linkTarget} reloadDocument className="linkReset">
-      <img class="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"></img>
+      <img className="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"></img>
       </Link>
       
       <p className="loginMessage"> <Link to={LoginTarget} className="linkLogin">log in  </Link> to save results </p>

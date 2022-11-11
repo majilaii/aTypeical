@@ -1,7 +1,8 @@
+import "../css/main-page.css";
 import { useEffect, useState, useRef, ClipboardEvent } from "react";
 import { useOutletContext, useNavigate, Link } from "react-router-dom";
+import APIservice from "../APIService/index.js";
 import Bar from "./choiceBar.jsx";
-import "../css/main-page.css";
 
 export default function Main() {
   const navigate = useNavigate()
@@ -12,14 +13,22 @@ export default function Main() {
           applied: true
         }
     }
-  const {setWordAmount, setIncorrect,  setSpeed, typingMode, text, setText, author,  reset, setReset, prevInputLength,setPrevInputLength, adjustedWPM, incorrect, setAdjustedWPM} = useOutletContext();
+  const {setWordAmount, setIncorrect,  setSpeed, typingMode, text, setText, author,  reset, setReset, prevInputLength,setPrevInputLength, adjustedWPM, incorrect, setAdjustedWPM, setIsAuthenticated} = useOutletContext();
   const [checkFirstInput, setCheckInput] = useState(0);
+  const [loading, setLoading] = useState(true)
 
 
   const inputRef = useRef(null)
   let interval;
 
-  
+  useEffect(() => {
+    (async function logout () {
+      const res = await APIservice.profile()
+      if(res) setIsAuthenticated(true)
+  })()
+  }, [])
+
+
  useEffect(() => {
     if (checkFirstInput !== 0) {
        interval = setInterval(() => {
@@ -33,6 +42,7 @@ export default function Main() {
     window.addEventListener("keydown", focus);
     inputRef.current.value = "";
     setCheckInput(0);
+    setLoading(false)
   }, [reset]);
 
   const preventCopyPaste = (e) => {
@@ -47,11 +57,7 @@ export default function Main() {
     setWordAmount(num);
   }
 
-  //TODO: strict mode/not strict
-  //STRICT: not allow user to proceed UNTIL you get the current word right // NOT STRICT: allow them to go back and fix but after you get the WORD right
-  //TODO: problem with input logic, should stop validating any future values if one is incorrect
-  //perhaps you can add logic that whenever a spacebar is pressed, you add
-
+  
   function textValidate(e) {
     if (checkFirstInput === 0) {
       setCheckInput(1);
@@ -86,16 +92,17 @@ export default function Main() {
       }
       setSpeed((time) => currentTime - time);
       setPrevInputLength(arr => [...arr, e.target.value.length])
-      setAdjustedWPM(arr => [...arr, incorrect])
       clearInterval(interval)
       navigate("/stats");
     }
   }
 
   return (
-    { text } && (
+
+    
       <>
         <div className="Main-container">
+
           <Bar
             changeWordAmount={changeWordAmount}
             setCheckInput={setCheckInput}
@@ -150,5 +157,5 @@ export default function Main() {
         </div>
       </>
     )
-  );
+  ;
 }
