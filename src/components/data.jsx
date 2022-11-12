@@ -26,22 +26,35 @@ ChartJS.register(
 );
 
 export default function Data() {
-  const { speed, setSpeed, prevInputLength, text, incorrect, adjustedWPM, isAuthenticated, setIsAuthenticated} = useOutletContext();
+  const { speed, setSpeed, prevInputLength, setPrevInputLength, text, incorrect, adjustedWPM, isAuthenticated, setIsAuthenticated, setIncorrect, setText} = useOutletContext();
 
-  
+  // useEffect(() => {
+  //   console.log(prevInputLength, speed, 'hello')
+  //   if(prevInputLength.length) {
+  //     localStorage.setItem('arr', JSON.stringify(prevInputLength))
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   if(localStorage.getItem('arr') !== null && localStorage.getItem('speed') !== null) {
+  //     const stats = JSON.parse(localStorage.getItem('arr'))
+  //     setPrevInputLength(stats)
+  //   }
+  // }, [])
 
   const eachInterval = [];
   const textLength = [];
   const finalDataArr = [];
 
-  
-
+ 
   let lastVal = prevInputLength.pop();
   prevInputLength[prevInputLength.length - 1] = lastVal
 
   if (prevInputLength.length > 1) {
     for (let i = 0; i < prevInputLength.length; i++) {
-      if (i !== prevInputLength.length - 1) eachInterval.push(i + 1);
+      if (i !== prevInputLength.length - 1) {
+        eachInterval.push(i + 1);
+      }
       else eachInterval.push(speed / 1000);
     }
   }
@@ -51,9 +64,6 @@ export default function Data() {
       Math.round(prevInputLength[i] / 5 / (eachInterval[i] / 60))
     );
   }
-
-  console.log(speed, text.length, prevInputLength, eachInterval, adjustedWPM);
-
   const options = {
     layout: {
         padding: {

@@ -10,8 +10,9 @@ export default function NavBar({isAuthenticated, setIsAuthenticated}) {
     async function logout () {
         const res = await APIservice.logout()
         if(res.message) {
-            navigate('/')
+            localStorage.removeItem('userData')
             setIsAuthenticated(false)
+            navigate('/')
         }
     }
 

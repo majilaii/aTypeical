@@ -25,7 +25,6 @@ const router = createBrowserRouter([
           element: <MainPage />,
           children:[
           ]
-          
         },
         {
           path: "/stats",

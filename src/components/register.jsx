@@ -1,5 +1,5 @@
 import "../css/register.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import APIservice from "../APIService/index";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
@@ -11,6 +11,10 @@ export default function Register() {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const {isAuthenticated, setIsAuthenticated} = useOutletContext()
+
+  useEffect(() => {
+    if(localStorage.getItem('userData') !== null) navigate('/profile')
+  }, [])
 
   const register = async (e) => {
     const user = {email: registerEmail, username: registerUsername, password: registerPassword} 
@@ -36,13 +40,15 @@ export default function Register() {
         setLoginPassword('')
       } else {
         setIsAuthenticated(true);
+        console.log(res)
+        localStorage.setItem('userData', JSON.stringify(res))
         navigate('/profile')
       }
   };
 
   return (
-    <div>
-      <div>
+    <div className="forms-container">
+      <div className="register">
         <h1>Register</h1>
         <input
           placeholder="email"
@@ -56,10 +62,10 @@ export default function Register() {
           placeholder="password"
           onChange={(e) => setRegisterPassword(e.target.value)}
         />
-        <button onClick={register}>Register</button>
+        <button onClick={register} className="submit">Register</button>
       </div>
 
-      <div>
+      <div className="login">
         <h1>Login</h1>
         <input
           placeholder="username"
@@ -69,7 +75,7 @@ export default function Register() {
           placeholder="password"
           onChange={(e) => setLoginPassword(e.target.value)}
         />
-        <button onClick={login}>Login</button>
+        <button onClick={login} className="submit">Login</button>
       </div>
     </div>
   );

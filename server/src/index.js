@@ -12,7 +12,7 @@ const app = express()
 
 const corsConfig = {
     // REMOVE-START
-    // origin: 'http://localhost:3000',
+    origin: 'http://localhost:3000',
     origin:true,
     methods: "GET,POST,PUT,DELETE, PATCH",
     credentials: true,

@@ -54,8 +54,35 @@ const create = async (req, res, next) => {
     })
   };
   
-  const putHistory = (req, res) => {
-    console.log(req.user)
+  const putHistory = async(req, res) => {
+    const time = req.body.speed/1000
+    const incorrects= req.body.incorrect
+    const textLength = req.body.text
+    const wpm = Math.round(((textLength - incorrects) / 5) / (time/ 60))
+    const accuracy = (100*(textLength - incorrects) / textLength)
+    const rawWPM = Math.round(textLength / 5 / (time / 60))
+    let updatedModel = await User.findByIdAndUpdate(req.user._id,
+
+      { $push:{ history:{
+        wpm: wpm,
+        rawwpm: rawWPM,
+        textLength:textLength,
+        incorrect:incorrects,
+        accuracy: accuracy,
+        time: time
+    
+  } }}, { new: true });
+    // User.findOneAndUpdate({username : req.user.username} , {
+    //     history:{
+    //       wpm: wpm,
+    //       rawwpm: rawWPM,
+    //       textLength:textLength,
+    //       incorrect:incorrects,
+    //       accuracy: accuracy,
+    //       time: time}
+      
+    // }, { returnDocument: 'after'})
+   res.send(201)
   }
 
 

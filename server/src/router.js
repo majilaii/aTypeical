@@ -8,5 +8,5 @@ router.post('/login', login);
 router.get('/profile', profile);
 router.post('/logout', logout);
 router.delete('/deleteAll' , deleteAll )
-router.get('/update', putHistory)
+router.post('/update', putHistory)
 module.exports = router

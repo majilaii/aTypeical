@@ -87,7 +87,7 @@ APIservice.profile = () => {
 APIservice.update = (user) => {
   // REMOVE-START
   return fetch(`http://localhost:4000/update`, {
-    method: 'PUT',
+    method: 'POST',
     credentials: 'include',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },

@@ -11,8 +11,27 @@ export default function Bar({ changeWordAmount, setCheckInput }) {
   const { author, setAuthor } = useOutletContext();
   const { reset, setReset } = useOutletContext();
 
+
+  // useEffect(() => {
+  //   if(wordAmount > 5){
+  //     localStorage.setItem('wordAmount', JSON.stringify(wordAmount))
+  //     localStorage.setItem('typingMode', JSON.stringify(typingMode))
+  //     localStorage.setItem('KEnglish', JSON.stringify(KEnglish))
+  //   }
+  // }, [KEnglish, typingMode, wordAmount])
+
+
+  // useEffect(() => {
+  //   if(localStorage.getItem('typingMode') !== null) {
+  //     setWordAmount(JSON.parse(localStorage.getItem('wordAmount')))
+  //     setKEnglish(JSON.parse(localStorage.getItem('KEnglish')))
+  //     setTypingMode(JSON.parse(localStorage.getItem('typingMode')))
+  //   }
+  // },[])
+
+
   useEffect(() => {
-    wordOrQuote(30);
+    wordOrQuote(5);
   }, [typingMode, KEnglish]);
 
   async function getQuotes(length) {

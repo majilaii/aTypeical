@@ -22,10 +22,16 @@ export default function Main() {
   let interval;
 
   useEffect(() => {
-    (async function logout () {
+    async function isLoggedIn() {
       const res = await APIservice.profile()
-      if(res) setIsAuthenticated(true)
-  })()
+      console.log(res)
+      if(!res) {
+          localStorage.removeItem('userData')
+          setIsAuthenticated(false)
+      }else setIsAuthenticated(true)
+    } 
+
+    isLoggedIn()
   }, [])
 
 
@@ -81,6 +87,7 @@ export default function Main() {
 
     if (e.target.value.length === text.length) {
       const currentTime = new Date();
+      setIncorrect(0)
       for (let obj of text) {
 
         for (let key in obj) {

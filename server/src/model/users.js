@@ -20,26 +20,27 @@ const userSchema = new Schema({
   },
   history:[{
     date: {
-        type:Date
+        type:Date,
+        default: Date.now()
     },
     wpm: {
-        type:String,
+        type:Number,
    
     },
     accuracy: {
-        type:String,
+        type:Number,
     },
     rawwpm: {
-        type:String,
+        type:Number,
     },
     time: {
-        type:String,
+        type:Number,
     },
-    length:{
-        type:String
+    textLength:{
+        type:Number
     },
-    incorrects: {
-        type:String
+    incorrect: {
+        type:Number
     }
   }]
 });

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext, useNavigate, Link } from "react-router-dom";
 
 import Data from "./data";
+import APIservice from "../APIService";
 
 export function CalculateRawWPM(text, speed) {
   return Math.round(text.length / 5 / (speed / 1000 / 60));
@@ -11,7 +12,44 @@ export function CalculateRawWPM(text, speed) {
 export default function Stats() {
   const { text, setText } = useOutletContext();
   const { speed, setSpeed } = useOutletContext();
-  const { incorrect, setIncorrect } = useOutletContext();
+  const { incorrect, setIncorrect, setIsAuthenticated, isAuthenticated, KEnglish, wordAmount, typingMode} = useOutletContext();
+
+  // useEffect(() => {
+  //   if(text.length && incorrect >= 0) {
+  //     localStorage.setItem('text', JSON.stringify(text))
+  //     localStorage.setItem('incorrect', JSON.stringify(incorrect))
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   if(localStorage.getItem('text') !== null && localStorage.getItem('incorrect') !== null) {
+  //     const incorrects = JSON.parse(localStorage.getItem('incorrect'))
+  //     const textLength = JSON.parse(localStorage.getItem('text'))
+   
+  //     setText(textLength)
+  //     setIncorrect(incorrects)
+  //   }
+  //   if(localStorage.getItem('userData') !== null) setIsAuthenticated(true)
+  // }, [])
+
+  useEffect(() => {
+    console.log(wordAmount, typingMode, KEnglish)
+    if(localStorage.getItem('userData') !== null){
+      setIsAuthenticated(true)
+    } 
+  }, [])
+
+  useEffect(() => {
+    if(isAuthenticated) {
+      (async function update() {
+        const user = {text: text.length, speed: speed , incorrect: incorrect}
+        const res = await APIservice.update(user)
+      })()
+    }
+  }, [])
+
+
+
   const linkTarget = {
     pathname: "/",
     key: Math.random(), 
@@ -21,15 +59,12 @@ export default function Stats() {
 }
 const LoginTarget = {
   pathname: "/register",
-  key: Math.random(), // we could use Math.random, but that's not guaranteed unique.
+  key: Math.random(),
   state: {
     applied: true
   }
 }
-console.log(text)
-console.log(incorrect)
-console.log(((text.length - (incorrect/ 5))) / (speed / 1000 / 60))
-  const adjustedWPM = CalculateRawWPM(text, speed) - ((incorrect) / speed/1000/60)
+  const adjustedWPM =  Math.round(((text.length - incorrect) / 5) / (speed / 1000 / 60))
   ;
 
   return (
@@ -60,7 +95,7 @@ console.log(((text.length - (incorrect/ 5))) / (speed / 1000 / 60))
       <img className="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"></img>
       </Link>
       
-      <p className="loginMessage"> <Link to={LoginTarget} className="linkLogin">log in  </Link> to save results </p>
+     {isAuthenticated ? null : <p className="loginMessage"> <Link to={LoginTarget} className="linkLogin">log in  </Link> to save results </p>}
  
     </>
   );
