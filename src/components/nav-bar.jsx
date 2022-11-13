@@ -29,6 +29,12 @@ export default function NavBar({isAuthenticated, setIsAuthenticated}) {
             <Link to={linkTarget} reloadDocument className='link'>
             aTYPEical
             </Link>
+            <div className="wrapper">
+            <div className="tagline">
+            This is a typing app.
+            </div>
+            </div>
+           
             <div className='buttons'>
             {isAuthenticated ? <Link to='/profile' className="linkLogin"><button className='profile'>PROFILE</button> </Link> : null}
             <button className='raceButton' > RACE </button>

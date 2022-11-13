@@ -1,6 +1,6 @@
 
 .forms-container{
-    height: 1700px;
+    height: 80%;
     width: auto;
     display: flex;
     flex-direction: row;
@@ -39,7 +39,7 @@ input, .submit {
     padding: 5px;
     margin: 5px;
     background-color: #101212;
-    font-size: 1.25em;
+    font-size: 0.6em;
     /* font-family: 'Aldrich', sans-serif; */
     font-weight: normal;
     color: rgb(162, 162, 162);
@@ -51,9 +51,9 @@ input{
 }
 
 .submit{
-    height: 60px;
+    height: 40px;
     color: #101212;
-    font-size: 1.5rem;
+    font-size: 1rem;
     background-color:  rgba(208, 139, 1, 0.742)
 }
 

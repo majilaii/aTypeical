@@ -90,11 +90,11 @@ export default function Profile() {
 
          <div className="averageWPM groupedStats"> 
             <div className="title">Average WPM:</div>
-            <div className="val"> {(totalWPM/history.length).toFixed(2)} </div>
+            <div className="val"> {(totalWPM/history.length).toFixed(1)} </div>
          </div>
           <div className="averageRaw groupedStats">
           <div className="title"> Average Raw:</div>
-            <div className="val"> {(totalRawWPM/history.length).toFixed(2)} </div>
+            <div className="val"> {(totalRawWPM/history.length).toFixed(1)} </div>
              </div>
           <div className="averageAccuracy groupedStats">
           <div className="title">Average Accuracy:</div>

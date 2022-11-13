@@ -120,7 +120,6 @@ export default function Main() {
           />
           <div
             className="typing-container"
-            // onClick={focus}/
             id="typingContainer"
           >
             <p
