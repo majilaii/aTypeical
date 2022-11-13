@@ -7,8 +7,11 @@ const socket = io.connect('http://localhost:3001')
 
 export default function SocketMain() {
     const {text, setText} = useOutletContext()
+    const [socketid, setSocketId] = useState(null)
 
 
+    socket.emit('joinroom', window.location.pathname);
+ 
 
 
     function sendMessage() {

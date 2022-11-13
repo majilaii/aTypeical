@@ -1,25 +1,32 @@
-import './css/choicePage.css'
-import APIservice from '../APIService'
-import { useState } from 'react'
-
+import "./css/choicePage.css";
+import APIservice from "../APIService";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ChoicePage() {
-    const [socketKEng, setSocketKEng] = useState(5)
-    // APIservice.fetchEnglishWords()
-    return (
-        <div className="choiceContainer">
-            <div className="joinRoom">
+    const navigate = useNavigate()
+  const [socketKEng, setSocketKEng] = useState(5);
+  // APIservice.fetchEnglishWords()
 
+  function makeRoom() {
+    navigate('/socket')
+  }
 
-            </div>
-            <div className="spacer">
-                
-            </div>
-            <div className="inviteFriend">
-
-
-
-            </div>
+  
+  return (
+    <div className="choiceContainer">
+      <div className="joinRoom">
+        <div className="roomContainer">
+          <input type="text" className="email" />
+          <button className="submit"> JOIN ROOM</button>
         </div>
-    )
+      </div>
+        <div className="spacer raceSpacer"></div>
+      <div className="inviteFriend">
+        <div className="makeRoom">
+        <button className="submit" onClick={makeRoom} > MAKE ROOM </button>
+        </div>
+      </div>
+    </div>
+  );
 }

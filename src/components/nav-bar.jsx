@@ -19,6 +19,7 @@ export default function NavBar({isAuthenticated, setIsAuthenticated}) {
     function toRace() {
         navigate('/race')
     }
+
     const linkTarget = {
         pathname: "/",
         key: Math.random(), // we could use Math.random, but that's not guaranteed unique.
@@ -40,7 +41,7 @@ export default function NavBar({isAuthenticated, setIsAuthenticated}) {
            
             <div className='buttons'>
             {isAuthenticated ? <Link to='/profile' reloadDocument className="linkLogin"><button className='profile'>PROFILE</button> </Link> : null}
-            <button className='raceButton' onClick={() => toRace()} > RACE </button>
+            {window.location.pathname !== '/race' ? <button className='raceButton' onClick={() => toRace()} > RACE </button> : null}
             { isAuthenticated === false ? <Link to='/register' className="linkLogin"><button className='logIn'>LOGIN</button> </Link> : <button className='logIn' onClick={logout}>LOGOUT</button> }
             </div>
         </div>

@@ -17,15 +17,7 @@ APIservice.fetchEnglishK = async (num, wordAmount) => {
   return final;
 };
 
-APIservice.fetchEnglishWords = async (num = 5, wordAmount = 30) => {
-  let Words = await fetch(`http://localhost:3000/${num}k.txt`);
-  let final = await Words.text();
-  final = APIservice.Shuffle(final.split(" "))
-    .slice(0, wordAmount)
-   
-  console.log(final)
-  return final;
-};
+
 
 APIservice.Shuffle = (array) => {
   let currentIndex = array.length,
@@ -44,10 +36,10 @@ APIservice.Shuffle = (array) => {
   return array;
 };
 
-APIservice.FetchQuotes = async (length, lengthMax) => {
+APIservice.FetchQuotes = async (length , lengthMax ) => {
   const URL = `api.quotable.io/random`;
   const response = await fetch(
-    `https://api.quotable.io/random?minLength=${length}&maxLength=#{lengthMax}`
+    `https://api.quotable.io/random?minLength=${length}&maxLength=${lengthMax}`
   );
   const data = await response.json();
   return data;

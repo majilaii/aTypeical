@@ -42,14 +42,10 @@ const router = createBrowserRouter([
         },
         {path:'/race', 
         element:<ChoicePage/>,
-        children:[
-          {
-            path: '/race/socket',
-            element: <SocketMain/>
-          }
-        ]
-      
-      
+      },
+      {
+        path: '/socket',
+        element: <SocketMain/>
       }
     ]
   },

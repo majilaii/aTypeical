@@ -36,13 +36,6 @@ const io = new Server(server, {
   }
 })
 
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`)
-
-  socket.on("send_message", (data) => {
-    console.log(data)
-  })
-})
 
 server.listen(3001, () => {
   console.log('listening on 3001')

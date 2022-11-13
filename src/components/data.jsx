@@ -65,6 +65,7 @@ export default function Data() {
     );
   }
   const options = {
+    
     layout: {
         padding: {
           right: 0
@@ -132,6 +133,7 @@ export default function Data() {
         data: finalDataArr,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
+        lineTension: 0.4
       },
     ],
   };
