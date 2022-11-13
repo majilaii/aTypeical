@@ -77,7 +77,7 @@ span{
 }
 
 #textArea .active::after {
-    position:absolute;
+    position:relative;
     display: inline-block;
     content: "";
     height: 40px;
@@ -86,7 +86,7 @@ span{
     opacity: 1;
     border-radius: 5px;
     background: #d1d0c5;
-    animation: blink 1s ease-in-out infinite;
+    animation: blink 1.25s ease-in-out infinite;
   }
 
 @keyframes blink {

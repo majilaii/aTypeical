@@ -5,6 +5,7 @@ import Register from './components/register'
 import MainPage from './components/main-page'
 import Stats from './components/stats-page'
 import Profile from './components/profile'
+import SocketMain from './socket-components/socketMain';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -13,6 +14,7 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
+import ChoicePage from './socket-components/choicePage';
 
 
 const router = createBrowserRouter([
@@ -37,7 +39,18 @@ const router = createBrowserRouter([
         {
           path:'/profile',
           element:<Profile/>
-        }
+        },
+        {path:'/race', 
+        element:<ChoicePage/>,
+        children:[
+          {
+            path: '/race/socket',
+            element: <SocketMain/>
+          }
+        ]
+      
+      
+      }
     ]
   },
 ]);

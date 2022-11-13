@@ -17,6 +17,16 @@ APIservice.fetchEnglishK = async (num, wordAmount) => {
   return final;
 };
 
+APIservice.fetchEnglishWords = async (num = 5, wordAmount = 30) => {
+  let Words = await fetch(`http://localhost:3000/${num}k.txt`);
+  let final = await Words.text();
+  final = APIservice.Shuffle(final.split(" "))
+    .slice(0, wordAmount)
+   
+  console.log(final)
+  return final;
+};
+
 APIservice.Shuffle = (array) => {
   let currentIndex = array.length,
     randomIndex;
