@@ -8,8 +8,9 @@
     justify-content: space-evenly;
 }
 
-h1{
+.formTitle{
     color: rgb(162, 162, 162);
+    margin-left: 13px;
 }
 
 .register{

@@ -38,10 +38,9 @@ h1{
     border-right: .1em solid orange;
     color: #d1d0c5;
     white-space: nowrap;
-    font-size: 3rem;
     width: 0;
     animation: typing 5s forwards;
-    font-size: 125px;
+    font-size: 85px;
 }
 
 .trainingHistory{

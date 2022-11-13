@@ -53,18 +53,18 @@
 }
 
 .wrapper {
-    height: 50%;
+    height: 48%;
     display: grid;
     place-items: center;
     margin-left: 7%;
   }
 
 .tagline{
-        width: 22ch;
-        animation: typing 10s steps(22), blink .5s step-end infinite alternate;
+        width: 21.5ch;
+        animation: typing 10s steps(22), blink2 .5s step-end infinite alternate;
         white-space: nowrap;
         overflow: hidden;
-        border-right: 3px solid;
+        border-right: 2px solid;
         font-family: monospace;
         font-size: 20px;
     
@@ -76,7 +76,7 @@
     }
   }
       
-  @keyframes blink {
+  @keyframes blink2 {
     50% {
       border-color: transparent
     }

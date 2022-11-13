@@ -85,6 +85,16 @@ export default function Main() {
 
     if (text[e.target.value.length + 1]) {
       text[e.target.value.length].correct = "neutral";
+      text[e.target.value.length].active = 'false'
+    }
+
+    for(let  i = 0 ; i <e.target.value.length ; i++) {
+      if(text[i+1] && text[i + 1].correct === 'neutral') {
+        text[i].active = 'true'
+        break
+      }
+      let current = text[i]
+      current.active = 'false'
     }
  
     setText([...text]);
@@ -131,16 +141,15 @@ export default function Main() {
               {text.map((el, i) => {
                 return (
                   <span
-                    className={
-                      el.correct === "neutral"
+                    className= {`${el.correct === "neutral"
                         ? "neutral"
                         : el.correct === "correct"
                         ? "correct"
-                        : "incorrect"
+                        : "incorrect"} ${el.active === 'true' ? 'active' : ''}` 
                     }
                     key={i}
                     id={i}
-                    maxLength="10"
+                    
                   >
                     {el.letter}
                   </span>

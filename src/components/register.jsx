@@ -11,7 +11,7 @@ export default function Register() {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const {isAuthenticated, setIsAuthenticated} = useOutletContext()
-  const [alertMessage, setAlertMessage] = useState(null)
+  const [alertMessage, setAlertMessage] = useState('your Email sucks ass btw')
 
   useEffect(() => {
     if(localStorage.getItem('userData') !== null) navigate('/profile')
@@ -23,7 +23,6 @@ export default function Register() {
       setRegisterEmail(registerEmail => registerEmail = '')
       setRegisterUsername('')
       setRegisterPassword('')
-      setAlertMessage('Email sucks ass btw')
       alert(alertMessage)
       return
     }
@@ -59,7 +58,7 @@ export default function Register() {
   return (
     <div className="forms-container">
       <div className="register">
-        <h1>Register</h1>
+        <h1 className="formTitle">Register</h1>
         <input
           placeholder="email"
           value = {registerEmail}
@@ -81,7 +80,7 @@ export default function Register() {
       </div>
 
       <div className="login">
-        <h1>Login</h1>
+        <h1 className="formTitle">Login</h1>
         <input
           placeholder="username"
           value = {loginUsername}
