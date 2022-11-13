@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "../css/profile.css";
 import { useOutletContext, useNavigate } from "react-router-dom";
+import moment from 'moment'
 import APIservice from "../APIService";
 import Session from "../profile-components/training-history";
 
@@ -11,6 +12,10 @@ export default function Profile() {
   const { isAuthenticated, setIsAuthenticated } = useOutletContext();
   const [totalTime, setTotalTIme] = useState(0)
   const [totalLetters, setTotalLetters] = useState(0)
+  const [totalWPM , setTotalWPM] = useState(0)
+  const [totalRawWPM , setTotalRawWPM] = useState(0)
+  const [totalAccuracy, setTotalAccuracy] = useState(0)
+
 
  
 
@@ -18,22 +23,30 @@ export default function Profile() {
     const getProfile = async () => {
       const userInfo = await APIservice.profile();
       if (userInfo) {
-        const { username, password, createdAt, history } = userInfo;
+        const { username, password, created, history } = userInfo;
         setUsername(username);
         setIsAuthenticated(true);
         setHistory(history);
         let counter = 0 
         let timeCounter = 0
+        let rawWPM = 0 
+        let wpm = 0
+        let accuracy = 0
         if(history.length){
           history.forEach((el) => {
-            console.log(el.time)
             counter += el.textLength
             timeCounter += el.time
+            rawWPM += el.rawwpm
+            wpm += el.wpm
+            accuracy += el.accuracy
           })
         }
         console.log(timeCounter)
         setTotalTIme(timeCounter)
         setTotalLetters(counter)
+        setTotalRawWPM(rawWPM)
+        setTotalWPM(wpm)
+        setTotalAccuracy(accuracy)
       } else {
         navigate("/register");
       }
@@ -46,18 +59,57 @@ export default function Profile() {
     <div className="profileContainer">
       <div className="userInfo">
         <h1> Welcome Back, </h1>
+
+
         <div className="names">
           <div className="typed-out"> {username} </div>
         </div>
+
+
         <div className="totalStats">
-          <p className="totalTimeTyped">Total Typing Time: {totalTime.toFixed(2)}</p>
-          <p className="totalLettersTyped"> Total Letters Typed: {totalLetters} </p>
-          <p className="timecreated"> created at: June 4th 2022 </p>
+
+
+          <div className="totalTests groupedStats">
+
+            <div className="title"> Total Tests Completed:  </div>
+            <div className="val">     {history.length} </div>
+
+             </div>
+          <div className="totalTimeTyped groupedStats">
+
+          <div className="title"> Total Typing Time: </div>
+            <div className="val"> {totalTime.toFixed(2)}s </div>
+
+           </div>
+          <div className="totalLettersTyped groupedStats"> 
+
+          <div className="title">Total Letters Typed: </div>
+            <div className="val">  {totalLetters} </div>
+
+          </div>
+
+         <div className="averageWPM groupedStats"> 
+            <div className="title">Average WPM:</div>
+            <div className="val"> {(totalWPM/history.length).toFixed(2)} </div>
+         </div>
+          <div className="averageRaw groupedStats">
+          <div className="title"> Average Raw:</div>
+            <div className="val"> {(totalRawWPM/history.length).toFixed(2)} </div>
+             </div>
+          <div className="averageAccuracy groupedStats">
+          <div className="title">Average Accuracy:</div>
+            <div className="val">  {(totalAccuracy/history.length).toFixed(1)}%</div>
+          </div>
+
         </div>
+
+        <div className="bottomSpacer"> </div>
+
+
       </div>
       {history.length > 0 ? (
         <div className="trainingHistory">
-
+          <p className="history"> History </p>
           <table className="tablelol">
             <thead>
             <tr>
@@ -79,7 +131,7 @@ export default function Profile() {
           </table>
         </div>
       ) : (
-        <div className="NoMatches"> PLAY A GAME MORON </div>
+        <div className="NoMatches"> PLAY A GAME </div>
       )}
     </div>
   );

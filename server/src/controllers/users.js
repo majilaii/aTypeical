@@ -66,6 +66,7 @@ const create = async (req, res, next) => {
     let updatedModel = await User.findByIdAndUpdate(req.user._id,
 
       { $push:{ history:{
+        $each: [{
         date,
         wpm: wpm,
         rawwpm: rawWPM,
@@ -75,8 +76,8 @@ const create = async (req, res, next) => {
         time: time,
         wordAmount,
         KEnglish,
-        typingMode
-    
+        typingMode}],
+        $position: 0 
   } }}, { new: true });
    res.sendStatus(201)
   }

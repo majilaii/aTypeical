@@ -46,7 +46,9 @@ export default function Session({ element }) {
         </td>
 
         <td>
-        {moment(element.date).format("MMMM Do YYYY, h:mm:ss a")}
+        {moment(element.date).format("MMM Do YY")}
+        <br />
+        {moment(element.date).format("h:mm:ss")}
         </td>
       </tr>
     </>
