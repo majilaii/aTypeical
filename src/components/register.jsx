@@ -11,12 +11,23 @@ export default function Register() {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const {isAuthenticated, setIsAuthenticated} = useOutletContext()
+  const [alertMessage, setAlertMessage] = useState(null)
 
   useEffect(() => {
     if(localStorage.getItem('userData') !== null) navigate('/profile')
   }, [])
 
   const register = async (e) => {
+    const regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    if (regex.test(registerEmail) === false) {
+      setRegisterEmail(registerEmail => registerEmail = '')
+      setRegisterUsername('')
+      setRegisterPassword('')
+      setAlertMessage('Email sucks ass btw')
+      alert(alertMessage)
+      return
+    }
+      
     const user = {email: registerEmail, username: registerUsername, password: registerPassword} 
     const res = await APIservice.register(user)
     if(res.error) {
@@ -40,7 +51,6 @@ export default function Register() {
         setLoginPassword('')
       } else {
         setIsAuthenticated(true);
-        console.log(res)
         localStorage.setItem('userData', JSON.stringify(res))
         navigate('/profile')
       }
@@ -52,15 +62,20 @@ export default function Register() {
         <h1>Register</h1>
         <input
           placeholder="email"
+          value = {registerEmail}
           onChange={(e) => setRegisterEmail(e.target.value)}
         />
         <input
           placeholder="username"
+          value = {registerUsername}
           onChange={(e) => setRegisterUsername(e.target.value)}
         />
         <input
           placeholder="password"
+          value = {registerPassword}
           onChange={(e) => setRegisterPassword(e.target.value)}
+          onKeyUp={(e) => {
+            if(e.key === 'Enter') register()}}
         />
         <button onClick={register} className="submit">Register</button>
       </div>
@@ -69,11 +84,15 @@ export default function Register() {
         <h1>Login</h1>
         <input
           placeholder="username"
+          value = {loginUsername}
           onChange={(e) => setLoginUsername(e.target.value)}
         />
         <input
           placeholder="password"
+          value = {loginPassword}
           onChange={(e) => setLoginPassword(e.target.value)}
+          onKeyUp={(e) => {
+            if(e.key === 'Enter') login()}}
         />
         <button onClick={login} className="submit">Login</button>
       </div>

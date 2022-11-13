@@ -24,7 +24,6 @@ export default function Main() {
   useEffect(() => {
     async function isLoggedIn() {
       const res = await APIservice.profile()
-      console.log(res)
       if(!res) {
           localStorage.removeItem('userData')
           setIsAuthenticated(false)
@@ -38,9 +37,14 @@ export default function Main() {
  useEffect(() => {
     if (checkFirstInput !== 0) {
        interval = setInterval(() => {
-        if(inputRef.current.value.length){
+        try {
+          if(inputRef.current.value.length){
             setPrevInputLength(arr => [...arr, inputRef.current.value.length])
         }
+        } catch (err) {
+          clearInterval(interval)
+        }
+       
     }, 1000);}
  }, [checkFirstInput])
 

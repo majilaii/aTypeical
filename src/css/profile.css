@@ -1,3 +1,122 @@
-.details{
+.profileContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* overflow-y: scroll; */
+}
+.NoMatches{
+    margin-top: 100px;
     color: white;
 }
+.names {
+    display: inline-block;
+    margin-left: 200px;
+    margin-top: 25px;
+  }
+
+h1{
+    margin-left: 30px;
+    margin-top: 5px;
+    font-weight: 100;
+    background-color: inherit;
+  }
+
+.userInfo{
+    width: 100%;
+    height: max-content;
+    background-color: inherit;
+    border-radius: 1.5rem;
+    padding: 20px;
+}
+
+.typed-out{
+    background-color: inherit;
+    overflow: hidden;
+    border-right: .1em solid orange;
+    color: white;
+    white-space: nowrap;
+    font-size: 3rem;
+    width: 0;
+    animation: typing 5s forwards;
+}
+
+.trainingHistory{
+    margin-top: 100px;
+    padding-left: 100px;
+    width: 100%;
+    height: max-content;
+    display: block;
+}
+
+
+.totalStats{
+    margin-top: 40px;
+    background-color: inherit;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+@keyframes typing {
+    0% { width: 0
+    }
+    10% { 
+        width: 100%;
+    }
+    100% {
+        width: 100%;
+        border-right: .1em solid #1A1A1A;
+    }
+  }
+
+.totalTimeTyped, .totalLettersTyped, .timecreated{
+    background-color: inherit;
+    font-size: 40px;
+}
+
+
+
+ .tablelol{
+    height: max-content;
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: black;
+    border-spacing: 0;
+    color: white;
+}
+/* 
+.tablelol td, .tablelol th {
+    border: 1px solid white;
+    padding: 8px;
+}
+
+.tablelol tr td{
+    color: white;
+    width: 9px !important;
+    height: 9px !important;
+    padding: 0.5rem;
+}
+
+.tablelol tr:nth-child(even) td{
+    background-color: black;
+    color: white;
+}
+
+.tablelol tr:hover td{
+    background-color: black;
+    color: white;
+}
+
+.tablelol th {
+    border: none;
+    padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: inherit;
+  color: white;
+}
+  */

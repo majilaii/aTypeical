@@ -46,10 +46,15 @@ input, .submit {
     outline: none;
 }
 
+input{
+    padding-left: 15px;
+}
+
 .submit{
     height: 60px;
-    color: rgb(162, 162, 162);
+    color: #101212;
     font-size: 1.5rem;
+    background-color:  rgba(208, 139, 1, 0.742)
 }
 
 .submit:hover{

@@ -1,50 +1,63 @@
-'use strict';
-require('dotenv').config();
+"use strict";
+require("dotenv").config();
 
-const mongoose = require('./index.js');
+const mongoose = require("./index.js");
 
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+  created: {
+    type:Date,
+    default:Date.now()
+  },
   username: {
     type: String,
-    required:true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
     required: true,
   },
-  history:[{
-    date: {
-        type:Date,
-        default: Date.now()
+  history: [
+    {
+      date: {
+        type: Date,
+      },
+      wpm: {
+        type: Number,
+      },
+      accuracy: {
+        type: Number,
+      },
+      rawwpm: {
+        type: Number,
+      },
+      time: {
+        type: Number,
+      },
+      textLength: {
+        type: Number,
+      },
+      incorrect: {
+        type: Number,
+      },
+      wordAmount: {
+        type: Number,
+      },
+      KEnglish: {
+        type: Number,
+      },
+      typingMode: {
+        type: Number,
+      },
     },
-    wpm: {
-        type:Number,
-   
-    },
-    accuracy: {
-        type:Number,
-    },
-    rawwpm: {
-        type:Number,
-    },
-    time: {
-        type:Number,
-    },
-    textLength:{
-        type:Number
-    },
-    incorrect: {
-        type:Number
-    }
-  }]
+  ],
 });
 
-const User = mongoose.model('Users', userSchema);
+const User = mongoose.model("Users", userSchema);
 
 module.exports = User;

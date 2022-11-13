@@ -10,6 +10,7 @@ const create = async (req, res, next) => {
         if(!doc){
             const hashedPass = await bcrypt.hash(req.body.password, 10)
             const newUser = new User({
+              created:Date.now(),
                 email: req.body.email,
                 username: req.body.username,
                 password: hashedPass
@@ -55,6 +56,7 @@ const create = async (req, res, next) => {
   };
   
   const putHistory = async(req, res) => {
+    ({wordAmount, KEnglish, typingMode, date} = req.body);
     const time = req.body.speed/1000
     const incorrects= req.body.incorrect
     const textLength = req.body.text
@@ -64,25 +66,19 @@ const create = async (req, res, next) => {
     let updatedModel = await User.findByIdAndUpdate(req.user._id,
 
       { $push:{ history:{
+        date,
         wpm: wpm,
         rawwpm: rawWPM,
         textLength:textLength,
         incorrect:incorrects,
         accuracy: accuracy,
-        time: time
+        time: time,
+        wordAmount,
+        KEnglish,
+        typingMode
     
   } }}, { new: true });
-    // User.findOneAndUpdate({username : req.user.username} , {
-    //     history:{
-    //       wpm: wpm,
-    //       rawwpm: rawWPM,
-    //       textLength:textLength,
-    //       incorrect:incorrects,
-    //       accuracy: accuracy,
-    //       time: time}
-      
-    // }, { returnDocument: 'after'})
-   res.send(201)
+   res.sendStatus(201)
   }
 
 

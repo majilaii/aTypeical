@@ -33,7 +33,6 @@ export default function Stats() {
   // }, [])
 
   useEffect(() => {
-    console.log(wordAmount, typingMode, KEnglish)
     if(localStorage.getItem('userData') !== null){
       setIsAuthenticated(true)
     } 
@@ -42,7 +41,7 @@ export default function Stats() {
   useEffect(() => {
     if(isAuthenticated) {
       (async function update() {
-        const user = {text: text.length, speed: speed , incorrect: incorrect}
+        const user = {date: Date.now(), text: text.length, speed: speed , incorrect: incorrect, wordAmount, typingMode, KEnglish}
         const res = await APIservice.update(user)
       })()
     }

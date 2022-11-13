@@ -58,11 +58,6 @@ export default function Bar({ changeWordAmount, setCheckInput }) {
       getQuotes(num2, num3);
     }
 
-    if (typingMode === 2) {
-      setWordAmount(num);
-      getWords(num);
-    }
-
     setCheckInput(0);
     setReset((num) => (num = num + 1));
   }
