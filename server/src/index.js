@@ -11,6 +11,8 @@ const router = require('./router')
 const app = express()
 const http = require("http")
 const {Server} = require("socket.io")
+const Game = require("./model/game")
+const FetchQuotes = require('./quotesAPI')
 
 
 
@@ -34,6 +36,29 @@ const io = new Server(server, {
     origin: "http://localhost:3000",
     methods:["GET, POST"]
   }
+})
+
+io.on("connect", (socket) => {
+  socket.emit("test", "youre a cunt lol")
+  socket.on("createRoom", async(nickname) => {
+    try{
+      const quote = await FetchQuotes()
+      let game = new Game()
+      game.words = quote
+      let player = {
+        nickname,
+        PartyLeader: true,
+        socketID: socket.id
+      }
+      game.players.push(player)
+       game = await game.save()
+       const Game_id = game._id
+       socket.join(Game_id)
+       io.to(Game_id).emit("createdGame", game)
+    } catch (err) {
+      console.log(err)
+    }
+  })
 })
 
 

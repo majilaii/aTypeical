@@ -79,6 +79,7 @@ const create = async (req, res, next) => {
         typingMode}],
         $position: 0 
   } }}, { new: true });
+  
    res.sendStatus(201)
   }
 
