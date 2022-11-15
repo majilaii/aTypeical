@@ -24,7 +24,7 @@ export default function ProgressBar({player, gameState, text,setGameState}) {
                        <p className="imbored"> {el.nickname} {gameState.gameOver === true ? el.WPM+"WPM" : null } </p> 
                        <div className='bodyProgress'>
                             <div className='currentProgress' style= {{"width":`${100*(el.index/text.length)}%`,'height':`30px`}} > </div>
-                            {el.index ? <p className="imbored">{(100*(el.index/text.length)).toFixed(2)}%</p> : null}
+                            {el.index ? <p className="imbored">{(100*(el.index/text.length)).toFixed(1)}%</p> : null}
                        </div>
                     </>
                

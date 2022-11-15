@@ -61,7 +61,6 @@ async function startGameClock(gameID) {
         } else {
           el.WPM = WPMcalc(el.index+1, (Number(currentTime) - Number(game.startTime)))}})
       game = await game.save()
-      console.log(game)
       io.to((gameID)).emit("gameFinished", game)
      
     }

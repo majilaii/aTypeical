@@ -83,7 +83,7 @@ export default function SocketMain() {
   return (
     
     <div className="SocketContainer">
-        <div className="roomCode">Room Code: {gameState._id} </div>
+       {isHost && !gameStart  ? <div className="roomCode">Room Code: {gameState._id} </div> : null}
       <div className="typing-container socket-typing">
         {text.length > 0
           ? text.map((element, index) => {
@@ -109,9 +109,10 @@ export default function SocketMain() {
         <StartButton gameState={gameState} isHost ={isHost} player={player} gameStart={gameStart} setGameStart={setGameStart}></StartButton>
         <CountDown setGameStart={setGameStart}/>
         <GameTimer player={player} gameState={gameState} gameOver/>
-        {
+        
         <ProgressBar gameState={gameState} player={player} gameStart text={text} setGameState={setGameState}></ProgressBar>
-        }
+        
+        {gameOver ? <button> Start Again </button> : null}
       </div>
     </div>
   );

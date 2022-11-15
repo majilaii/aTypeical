@@ -1,6 +1,6 @@
 .gameTimerMessage{
 
-color: orange;
+color: rgba(208, 139, 1, 0.742);
 font-size: 50px;
 }
 
@@ -9,6 +9,6 @@ font-size: 50px;
     top: 30%;
 left: 50%;
 transform: translate(-50%, -50%);
-color: orange;
+color: rgba(208, 139, 1, 0.742);
 z-index: 100;
 }
