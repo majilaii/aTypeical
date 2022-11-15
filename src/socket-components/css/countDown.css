@@ -1,0 +1,6 @@
+.countdownMessage{
+    color: orange;
+    position: absolute;
+    left: 20px;
+    font-size: 35px;
+}

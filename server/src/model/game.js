@@ -36,14 +36,14 @@ const gameSchema = new Schema({
         type: Boolean,
         default:true
     },
-    roomClosed: {
-        type: Boolean,
+    gameOver:{
+        type:Boolean,
         default: false
     },
     players:[
         playerSchema
     ],
-    Timer: {
+    startTime: {
         type:Number
     }
 
@@ -53,4 +53,4 @@ const gameSchema = new Schema({
 
 const Game = mongoose.model("Games", gameSchema );
 
-module.exports = Game;
+module.exports = {Game};

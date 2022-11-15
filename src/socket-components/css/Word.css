@@ -1,0 +1,17 @@
+.word{
+    width: max-content;
+    height: 55px;
+    margin: 0px;
+    color: white;
+    background-color: inherit;
+}
+
+.current{
+    background: rgb(34, 34, 34);
+    color: #eee;
+}
+
+.wrong{
+    background-color: red;
+}
+

@@ -31,7 +31,7 @@ export default function Bar({ changeWordAmount, setCheckInput }) {
 
 
   useEffect(() => {
-    wordOrQuote(5);
+    wordOrQuote(15);
   }, [typingMode, KEnglish]);
 
   async function getQuotes(length) {

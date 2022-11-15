@@ -17,11 +17,15 @@ function App() {
   const [prevInputLength, setPrevInputLength] = useState([])
   const [adjustedWPM, setAdjustedWPM] = useState([])
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [gameState, setGameState] = useState(null)
+  const [socketState, setSocketState] = useState('')
+
+
 
   return (
     <div className='wholeContainer'>
     <NavBar isAuthenticated= {isAuthenticated} setIsAuthenticated = {setIsAuthenticated}/>
-    <Outlet context={{wordAmount, setWordAmount, speed, setSpeed, text, setText,  incorrect, setIncorrect, KEnglish, setKEnglish ,typingMode, setTypingMode , author, setAuthor, reset, setReset,prevInputLength, setPrevInputLength, adjustedWPM, setAdjustedWPM, isAuthenticated, setIsAuthenticated}}/>
+    <Outlet context={{ gameState, setGameState, wordAmount, setWordAmount, speed, setSpeed, text, setText,  incorrect, setIncorrect, KEnglish, setKEnglish ,typingMode, setTypingMode , author, setAuthor, reset, setReset,prevInputLength, setPrevInputLength, adjustedWPM, setAdjustedWPM, isAuthenticated, setIsAuthenticated}}/>
     </div>
   )
 }

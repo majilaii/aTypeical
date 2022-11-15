@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element:<ChoicePage/>,
       },
       {
-        path: '/socket',
+        path: '/socket/:id',
         element: <SocketMain/>
       }
     ]

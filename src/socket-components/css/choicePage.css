@@ -32,4 +32,13 @@
     justify-content: center;
     align-items: center;
 }
+.makeSubmit:disabled {
+    background-color: #cccccc;
+    color: #666666;
+}
 
+.makeSubmit:disabled:hover{
+    background-color: #cccccc;
+    color: #666666;
+    cursor: default;
+}

@@ -39,9 +39,10 @@ export default function NavBar({isAuthenticated, setIsAuthenticated}) {
             </div>
             </div>
            
+           
             <div className='buttons'>
             {isAuthenticated ? <Link to='/profile' reloadDocument className="linkLogin"><button className='profile'>PROFILE</button> </Link> : null}
-            {window.location.pathname !== '/race' ? <button className='raceButton' onClick={() => toRace()} > RACE </button> : null}
+            {window.location.href !== 'http://localhost:3000/race'   ? <button className='raceButton' onClick={() => toRace()} > RACE </button> : null}
             { isAuthenticated === false ? <Link to='/register' className="linkLogin"><button className='logIn'>LOGIN</button> </Link> : <button className='logIn' onClick={logout}>LOGOUT</button> }
             </div>
         </div>

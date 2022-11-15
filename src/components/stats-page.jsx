@@ -94,7 +94,7 @@ const LoginTarget = {
       <img className="icon" src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"></img>
       </Link>
       
-     {isAuthenticated ? null : <p className="loginMessage"> <Link to={LoginTarget} className="linkLogin">log in  </Link> to save results </p>}
+     {isAuthenticated ? null : <p className="loginMessage"> <Link to={LoginTarget} className="linkLogin">log in</Link> to save results </p>}
  
     </>
   );
