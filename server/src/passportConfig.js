@@ -1,6 +1,5 @@
 const User = require('./model/users');
 const bcrypt = require('bcrypt');
-const { useReducer } = require('react');
 const localStrategy = require('passport-local').Strategy
 
 module.exports = function(passport) {
