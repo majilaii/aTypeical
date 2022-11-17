@@ -1,61 +1,60 @@
-.statsContainer{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+.statsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
-.stats{
-    /* width: 150px; */
-    background-color: rgb(26,26,26);
-    font-size: 70px;
-    color: rgb(208, 139, 1);
-    position: relative;
-}
-
-.description{
-    color: grey;
-    font-size: 30px;
-    background-color: inherit;
+.stats {
+  /* width: 150px; */
+  background-color: rgb(26, 26, 26);
+  font-size: 70px;
+  color: rgb(208, 139, 1);
+  position: relative;
 }
 
-.otherTime{
-   font-size: 15px;
-   color: grey;
-   background-color: rgb(26,26,26);
-   position:absolute;
-   right: 0;
+.description {
+  color: grey;
+  font-size: 30px;
+  background-color: inherit;
 }
 
-img{
-    position: absolute;
-    top: 1050px;
-    left: 970px;
-    width: 29px;
-    transition: transform 0.4s ease-in-out;
+.otherTime {
+  font-size: 15px;
+  color: grey;
+  background-color: rgb(26, 26, 26);
+  position: absolute;
+  right: 0;
+}
 
+img {
+  position: absolute;
+  top: 1050px;
+  left: 970px;
+  width: 29px;
+  transition: transform 0.4s ease-in-out;
 }
 
 img:hover {
-    cursor: pointer;
-     transform: rotate(360deg) scale(1.2);
+  cursor: pointer;
+  transform: rotate(360deg) scale(1.2);
 }
 
-.loginMessage{
-    position: absolute;
-    top: 1200px;
-    left: 800px;
-    color: grey;
-    font-size: 30px;
-    background-color: inherit;
+.loginMessage {
+  position: absolute;
+  top: 1200px;
+  left: 800px;
+  color: grey;
+  font-size: 30px;
+  background-color: inherit;
 }
 
-.linkLogin{
-    text-decoration:underline;
-    font-size: 30px;
-    color: rgb(208, 139, 1);
+.linkLogin {
+  text-decoration: underline;
+  font-size: 30px;
+  color: rgb(208, 139, 1);
 }
 
-.linkLogin:visited { 
-    text-decoration: none; 
+.linkLogin:visited {
+  text-decoration: none;
 
-    color: rgb(208, 139, 1); 
-   }
+  color: rgb(208, 139, 1);
+}

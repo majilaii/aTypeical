@@ -1,23 +1,21 @@
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useOutletContext, useNavigate } from 'react-router-dom';
 
 const APIservice = {};
 
 APIservice.fetchEnglishK = async (num, wordAmount) => {
   let Words = await fetch(`http://localhost:3000/${num}k.txt`);
   let final = await Words.text();
-  final = APIservice.Shuffle(final.split(" "))
+  final = APIservice.Shuffle(final.split(' '))
     .slice(0, wordAmount)
-    .join(" ")
-    .split("");
+    .join(' ')
+    .split('');
 
   final = final.map((letter) => {
-    return { letter: letter, correct: "neutral", active: "false" };
+    return { letter: letter, correct: 'neutral', active: 'false' };
   });
 
   return final;
 };
-
-
 
 APIservice.Shuffle = (array) => {
   let currentIndex = array.length,
@@ -36,7 +34,7 @@ APIservice.Shuffle = (array) => {
   return array;
 };
 
-APIservice.FetchQuotes = async (length , lengthMax ) => {
+APIservice.FetchQuotes = async (length, lengthMax) => {
   const URL = `api.quotable.io/random`;
   const response = await fetch(
     `https://api.quotable.io/random?minLength=${length}&maxLength=${lengthMax}`
@@ -70,7 +68,6 @@ APIservice.login = (user) => {
     .catch((err) => console.log(err));
 };
 
-
 APIservice.profile = () => {
   // REMOVE-START
   return fetch(`http://localhost:4000/profile`, {
@@ -80,7 +77,7 @@ APIservice.profile = () => {
     headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => {
-      return res.json()
+      return res.json();
     })
     .catch((err) => console.log(err));
   // REMOVE-END
@@ -96,7 +93,7 @@ APIservice.update = (user) => {
     body: JSON.stringify(user),
   })
     .then((res) => {
-      return res.json()
+      return res.json();
     })
     .catch((err) => console.log(err));
   // REMOVE-END
@@ -110,9 +107,8 @@ APIservice.logout = () => {
     headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => {
-      return res.json()
-    }
-    )
+      return res.json();
+    })
     .catch((err) => console.log(err));
   // REMOVE-END
 };

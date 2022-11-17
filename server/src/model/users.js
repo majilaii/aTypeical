@@ -1,14 +1,16 @@
-"use strict";
-require("dotenv").config();
+'use strict';
+// TODO we shouldn't need dotenv here, as we're using it in the main index.js already
+require('dotenv').config();
 
-const mongoose = require("./index.js");
+const mongoose = require('./index.js');
 
 const Schema = mongoose.Schema;
 
+// TODO do we need to add some required/default, etc.?
 const userSchema = new Schema({
   created: {
-    type:Date,
-    default:Date.now()
+    type: Date,
+    default: Date.now(),
   },
   username: {
     type: String,
@@ -58,6 +60,6 @@ const userSchema = new Schema({
   ],
 });
 
-const User = mongoose.model("Users", userSchema);
+const User = mongoose.model('Users', userSchema);
 
 module.exports = User;

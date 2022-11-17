@@ -1,147 +1,147 @@
-.profileContainer{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
+.profileContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
-.NoMatches{
-    margin-top: 100px;
-    color: #d1d0c5;
+.NoMatches {
+  margin-top: 100px;
+  color: #d1d0c5;
 }
 .names {
-    display: inline-block;
-    margin-left: 200px;
-    margin-top: 25px;
-  }
-
-h1{
-    margin-left: 30px;
-    margin-top: 5px;
-    font-weight: 100;
-    background-color: inherit;
-    color: #646669;
-  }
-
-.userInfo{
-    width: 100%;
-    height: max-content;
-    background-color: inherit;
-    border-radius: 1.5rem;
-    padding: 20px;
+  display: inline-block;
+  margin-left: 200px;
+  margin-top: 25px;
 }
 
-.typed-out{
-    background-color: inherit;
-    overflow: hidden;
-    border-right: .1em solid orange;
-    color: #d1d0c5;
-    white-space: nowrap;
-    width: 0;
-    animation: typing 5s forwards;
-    font-size: 85px;
+h1 {
+  margin-left: 30px;
+  margin-top: 5px;
+  font-weight: 100;
+  background-color: inherit;
+  color: #646669;
 }
 
-.trainingHistory{
-    margin-top: 100px;
-    width: 100%;
-    height: max-content;
-    display: block;
+.userInfo {
+  width: 100%;
+  height: max-content;
+  background-color: inherit;
+  border-radius: 1.5rem;
+  padding: 20px;
 }
 
-
-.totalStats{
-    margin-top: 150px;
-    background-color: inherit;
-    color: #d1d0c5 ;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 1em;
-    width: 100%;
-    min-height: 200px;
-    height: max-content;
-   
+.typed-out {
+  background-color: inherit;
+  overflow: hidden;
+  border-right: 0.1em solid orange;
+  color: #d1d0c5;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 5s forwards;
+  font-size: 85px;
 }
 
-.bottomSpacer{
-    margin-top: 20px;
-    width: 100%;
-    border-bottom: 5px solid #646669;
+.trainingHistory {
+  margin-top: 100px;
+  width: 100%;
+  height: max-content;
+  display: block;
+}
+
+.totalStats {
+  margin-top: 150px;
+  background-color: inherit;
+  color: #d1d0c5;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1em;
+  width: 100%;
+  min-height: 200px;
+  height: max-content;
+}
+
+.bottomSpacer {
+  margin-top: 20px;
+  width: 100%;
+  border-bottom: 5px solid #646669;
 }
 
 @keyframes typing {
-    0% { width: 0
-    }
-    10% { 
-        width: 100%;
-    }
-    100% {
-        width: 100%;
-        border-right: .1em solid #1A1A1A;
-    }
+  0% {
+    width: 0;
   }
-
-.totalTimeTyped, .totalLettersTyped, .totalTests, .averageWPM, .averageRaw, .averageAccuracy, .history{
-    background-color: inherit;
-    font-size: 40px;
-    color: #d1d0c5;
-}
-
-.groupedStats{
-    display: flex;
-    justify-content: flex-start;
-    gap: 5px;
-    flex-direction: column;
-}
-
-.title{
-    font-size: 30px;
-    color: #646669;
-}
-
-.val{
-    font-size: 2em;
-    line-height: 3.5rem;
-}
-
-.history{
-    font-size: 50px;
-    margin-top: -90px;
-    margin-bottom: 20px;
-    width: max-content;  
-}
-
- .tablelol{
+  10% {
     width: 100%;
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.5em;
+  }
+  100% {
+    width: 100%;
+    border-right: 0.1em solid #1a1a1a;
+  }
 }
 
-.tablelol thead tr th{
-    text-align: left;
-    font-size: 30px;
-    color: #646669;
-    font-weight: light;
-   
-
-
-
+.totalTimeTyped,
+.totalLettersTyped,
+.totalTests,
+.averageWPM,
+.averageRaw,
+.averageAccuracy,
+.history {
+  background-color: inherit;
+  font-size: 40px;
+  color: #d1d0c5;
 }
 
-.tablelol th, .tablelol td {
-    padding: 1px 30px 10px;
+.groupedStats {
+  display: flex;
+  justify-content: flex-start;
+  gap: 5px;
+  flex-direction: column;
 }
 
+.title {
+  font-size: 30px;
+  color: #646669;
+}
+
+.val {
+  font-size: 2em;
+  line-height: 3.5rem;
+}
+
+.history {
+  font-size: 50px;
+  margin-top: -90px;
+  margin-bottom: 20px;
+  width: max-content;
+}
+
+.tablelol {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.5em;
+}
+
+.tablelol thead tr th {
+  text-align: left;
+  font-size: 30px;
+  color: #646669;
+  font-weight: light;
+}
+
+.tablelol th,
+.tablelol td {
+  padding: 1px 30px 10px;
+}
 
 .tablelol tbody td {
-    color: #d1d0c5;
-    font-size: 30px;   
+  color: #d1d0c5;
+  font-size: 30px;
 }
 
- .tablelol tbody tr:nth-of-type(even) td{
-    background-color: rgb(37, 37, 37);
- }
+.tablelol tbody tr:nth-of-type(even) td {
+  background-color: rgb(37, 37, 37);
+}

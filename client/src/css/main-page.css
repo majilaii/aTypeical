@@ -1,130 +1,123 @@
-body{
-    background-color: #373639;
+body {
+  background-color: #373639;
 }
-.Main-container{
-    display: flex;
-    flex-direction: column;
-    width: inherit;
-    height: inherit ;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: rgb(26,26,26);
-}
-
-
-
-.typing-container{
-    position: relative;
-    padding: 5px;
-    padding-left: 10px;
-    width: 100%;
-    min-height: 156.773px;
-    height: max-content;
-    overflow:hidden;
-    border: 1px black;
-    border-radius: 2px;
-    z-index: 999;
-    background-color: #373639;
-    margin-top: 30px;
-    margin-bottom: 20px;
-  
+.Main-container {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(26, 26, 26);
 }
 
-span{
-    background-color: #373639 ;
+.typing-container {
+  position: relative;
+  padding: 5px;
+  padding-left: 10px;
+  width: 100%;
+  min-height: 156.773px;
+  height: max-content;
+  overflow: hidden;
+  border: 1px black;
+  border-radius: 2px;
+  z-index: 999;
+  background-color: #373639;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
-p{
-    background-color: #373639;
-    color: white;
-    position: relative;
+span {
+  background-color: #373639;
 }
 
-.resetButton{
-    width: max-content;
-    height: 70px;
-    margin: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+p {
+  background-color: #373639;
+  color: white;
+  position: relative;
 }
 
-.inputBar{
-    color: white;
-    background-color: rgb(18, 17, 17);
-    margin-top: 10px;
-    width: 94%;
-    height: 100%;
-    border-color: white;
-    font-size: 30px;
-    padding-left: 10px;
+.resetButton {
+  width: max-content;
+  height: 70px;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.correct{
-    color:green
+.inputBar {
+  color: white;
+  background-color: rgb(18, 17, 17);
+  margin-top: 10px;
+  width: 94%;
+  height: 100%;
+  border-color: white;
+  font-size: 30px;
+  padding-left: 10px;
+}
+
+.correct {
+  color: green;
 }
 
 .incorrect {
-    color:red
+  color: red;
 }
 
 .neutral {
-    color: rgb(169, 169, 169);
+  color: rgb(169, 169, 169);
 }
 
-span{
-    flex-direction: row;
-    gap:1px
+span {
+  flex-direction: row;
+  gap: 1px;
 }
 
 #textArea .active::after {
-    position:relative;
-    display: inline-block;
-    content: "";
-    height: 40px;
-    width: 3px;
-    top: 5px;
-    opacity: 1;
-    border-radius: 5px;
-    background: #d1d0c5;
-    animation: blink 1.25s ease-in-out infinite;
-  }
+  position: relative;
+  display: inline-block;
+  content: '';
+  height: 40px;
+  width: 3px;
+  top: 5px;
+  opacity: 1;
+  border-radius: 5px;
+  background: #d1d0c5;
+  animation: blink 1.25s ease-in-out infinite;
+}
 
 @keyframes blink {
-    50% {
-       opacity: 0;
-      }
-    
+  50% {
+    opacity: 0;
+  }
 }
 
 .author {
-    width: max-content;
-    height: auto;
-    position: absolute;
-    height: 20px;
-    font-size: 20px;
-    color: rgb(140, 140, 140);
-    bottom:4px;
-    right:4px;
-    
-
+  width: max-content;
+  height: auto;
+  position: absolute;
+  height: 20px;
+  font-size: 20px;
+  color: rgb(140, 140, 140);
+  bottom: 4px;
+  right: 4px;
 }
 
-.inputDiv{
-    display: flex;
-    width: 100%;
-    height: 80px;
-    margin-top: 20px;
-    align-items: center;
-    gap: 20px;
+.inputDiv {
+  display: flex;
+  width: 100%;
+  height: 80px;
+  margin-top: 20px;
+  align-items: center;
+  gap: 20px;
 }
 
 .timer {
-    color:  white;
-    align-self: flex-start;
-    margin-bottom: -10px;
+  color: white;
+  align-self: flex-start;
+  margin-bottom: -10px;
 }
 
 a {
-    width: 100px;
+  width: 100px;
 }
-
