@@ -22,7 +22,6 @@ export default function Profile() {
       if (userInfo) {
         const { username, password, created, history } = userInfo;
         setUsername(username);
-        // setUsername('Hell');
         setIsAuthenticated(true);
         setHistory(history);
         let counter = 0;

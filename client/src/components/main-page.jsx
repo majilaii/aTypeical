@@ -184,6 +184,7 @@ export default function Main() {
         <div className='inputDiv'>
           <input
             ref={inputRef}
+            id='mainPageInput'
             type='text'
             className='inputBar'
             onChange={textValidate}

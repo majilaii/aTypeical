@@ -56,7 +56,7 @@ APIservice.register = (user) => {
 };
 
 APIservice.login = (user) => {
-  // REMOVE-START
+  // TODO REMOVE-START
   return fetch(`http://localhost:4000/login`, {
     method: 'POST',
     credentials: 'include',
@@ -69,7 +69,7 @@ APIservice.login = (user) => {
 };
 
 APIservice.profile = () => {
-  // REMOVE-START
+  // TODO REMOVE-START
   return fetch(`http://localhost:4000/profile`, {
     method: 'GET',
     credentials: 'include',
