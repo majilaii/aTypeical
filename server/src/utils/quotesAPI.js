@@ -1,4 +1,3 @@
-// TODO we might put this file in its own utils folder
 // TODO do we need this fetch thingy?
 const fetch = require('cross-fetch');
 

@@ -68,12 +68,6 @@
   font-size: 20px;
 }
 
-@keyframes typing {
-  from {
-    width: 0;
-  }
-}
-
 @keyframes blink2 {
   50% {
     border-color: transparent;
