@@ -65,16 +65,19 @@ export default function Register() {
       <div className='register'>
         <h1 className='formTitle'>Register</h1>
         <input
+          id='email'
           placeholder='email'
-          value={registerEmail}
+          value={registerEmail} 
           onChange={(e) => setRegisterEmail(e.target.value)}
         />
         <input
+          id='username'
           placeholder='username'
           value={registerUsername}
           onChange={(e) => setRegisterUsername(e.target.value)}
         />
         <input
+          id='password'
           placeholder='password'
           value={registerPassword}
           onChange={(e) => setRegisterPassword(e.target.value)}
@@ -82,7 +85,7 @@ export default function Register() {
             if (e.key === 'Enter') register();
           }}
         />
-        <button onClick={register} className='submit'>
+        <button id='buttonRegister' onClick={register} className='submit'>
           Register
         </button>
       </div>
@@ -90,11 +93,13 @@ export default function Register() {
       <div className='login'>
         <h1 className='formTitle'>Login</h1>
         <input
+          id='usernameLogin'
           placeholder='username'
           value={loginUsername}
           onChange={(e) => setLoginUsername(e.target.value)}
         />
         <input
+          id='passwordLogin'
           placeholder='password'
           value={loginPassword}
           onChange={(e) => setLoginPassword(e.target.value)}
@@ -102,7 +107,7 @@ export default function Register() {
             if (e.key === 'Enter') login();
           }}
         />
-        <button onClick={login} className='submit'>
+        <button id='buttonLogin'onClick={login} className='submit'>
           Login
         </button>
       </div>
