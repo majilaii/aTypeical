@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './css/progressBar.css';
 import socket from './socketConfig';
 
-export default function ProgressBar({ player, gameState, text, setGameState }) {
-  // TODO This doesn't seem to be in use, please check
-  const [perc, setPerc] = useState('0%');
+export default function ProgressBar({ gameState, text, setGameState }) {
   useEffect(() => {
     socket.on('gameUpdate', (data) => {
       setGameState(data);
@@ -12,19 +10,17 @@ export default function ProgressBar({ player, gameState, text, setGameState }) {
     socket.on('gameFinished', (data) => {
       setGameState(data);
     });
-  }, [gameState]);
+  });
 
   return (
     <div className='progress'>
       {gameState.players.map((el) => {
         return (
           <>
-          {/* TODO rename the class */}
-            <p className='imbored'>
+            <p className='playerName'>
               {' '}
               {el.nickname}{' '}
-              {/* TODO && */}
-              {gameState.gameOver === true ? el.WPM + 'WPM' : null}{' '}
+              {gameState.gameOver === true && el.WPM + 'WPM'}{' '}
             </p>
             <div className='bodyProgress'>
               <div
@@ -36,12 +32,11 @@ export default function ProgressBar({ player, gameState, text, setGameState }) {
               >
                 {' '}
               </div>
-              {el.index ? (
-                <p className='imbored'>
-                  {/* TODO && */}
+              {el.index && (
+                <p className='playerName'>
                   {(100 * (el.index / text.length)).toFixed(1)}%
                 </p>
-              ) : null}
+              )}
             </div>
           </>
         );
