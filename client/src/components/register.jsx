@@ -107,7 +107,7 @@ export default function Register() {
             if (e.key === 'Enter') login();
           }}
         />
-        <button id='buttonLogin'onClick={login} className='submit'>
+        <button id='buttonLogin' onClick={login} className='submit'>
           Login
         </button>
       </div>

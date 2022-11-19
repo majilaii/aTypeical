@@ -57,7 +57,7 @@ export default function Profile() {
         <h1> Welcome Back, </h1>
 
         <div className='names'>
-          <div className='typed-out'> {username} </div>
+          <div id='welcomeUsername' className='typed-out'> {username} </div>
         </div>
 
         <div className='totalStats'>

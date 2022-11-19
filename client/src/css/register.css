@@ -15,8 +15,6 @@
 .register {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
-
   justify-content: center;
   gap: 7px;
   width: max-content;
@@ -34,14 +32,12 @@
 
 input,
 .submit {
-  /* display: block; */
   border-radius: 5px;
   border-style: none;
   padding: 5px;
   margin: 5px;
   background-color: #101212;
   font-size: 0.6em;
-  /* font-family: 'Aldrich', sans-serif; */
   font-weight: normal;
   color: rgb(162, 162, 162);
   outline: none;
