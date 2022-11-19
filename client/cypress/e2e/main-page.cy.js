@@ -93,13 +93,6 @@ describe('Main page tests', () => {
       })
       .url()
       .should('equal', 'http://localhost:3000/stats');
-      // cy.get('.stats').each((el, index) => {
-      //   console.log(el.text());
-      //   console.log(index);
-      //   if (index === 3) {
-      //     cy.contains('Accuracy: 100.00%');
-      //   }
-      // });
   });
 
   it('displays "Accuracy: 100.00%" when type the right text', () => {
