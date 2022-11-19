@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe('Main page tests', () => {
   it('loads the main page if click the "aTYPEical" in the navbar', () => {
     cy.visit('http://localhost:3000/');

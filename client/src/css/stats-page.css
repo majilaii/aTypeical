@@ -4,7 +4,6 @@
   align-items: center;
 }
 .stats {
-  /* width: 150px; */
   background-color: rgb(26, 26, 26);
   font-size: 70px;
   color: rgb(208, 139, 1);
@@ -55,6 +54,5 @@ img:hover {
 
 .linkLogin:visited {
   text-decoration: none;
-
   color: rgb(208, 139, 1);
 }

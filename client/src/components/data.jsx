@@ -1,7 +1,5 @@
 import '../css/data.css';
-import { useEffect, useState, useRef } from 'react';
-import { useOutletContext, useNavigate } from 'react-router-dom';
-import { CalculateRawWPM } from './stats-page';
+import { useOutletContext } from 'react-router-dom';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,8 +10,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Line, Scatter } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
+import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -28,19 +25,9 @@ ChartJS.register(
 export default function Data() {
   const {
     speed,
-    setSpeed,
     prevInputLength,
-    setPrevInputLength,
-    text,
-    incorrect,
-    adjustedWPM,
-    isAuthenticated,
-    setIsAuthenticated,
-    setIncorrect,
-    setText,
   } = useOutletContext();
 
-  // TODO remove the unused variables and code
   // TODO LOCAL STORAGE
   // useEffect(() => {
   //   console.log(prevInputLength, speed, 'hello')
@@ -57,7 +44,6 @@ export default function Data() {
   // }, [])
 
   const eachInterval = [];
-  const textLength = [];
   const finalDataArr = [];
 
   let lastVal = prevInputLength.pop();
