@@ -2,15 +2,14 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const User = require('./../model/users');
 
-// TODO rename create to register
-const create = async (req, res, next) => {
+const register = async (req, res, next) => {
   User.findOne({ username: req.body.username }, async (err, doc) => {
     if (err) throw new err();
     if (doc) res.send({ error: '409', message: 'User already exists' });
     if (!doc) {
       const hashedPass = await bcrypt.hash(req.body.password, 10);
       const newUser = new User({
-        created: Date.now(),
+        registerd: Date.now(),
         email: req.body.email,
         username: req.body.username,
         password: hashedPass,
@@ -34,9 +33,8 @@ const create = async (req, res, next) => {
   });
 };
 
-// TODO info below is not used (in the params)
 const login = async (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', (err, user) => {
     if (err) throw err;
     if (!user)
       res.send({ error: '401', message: 'Username or password is incorrect' });
@@ -62,4 +60,4 @@ const logout = (req, res) => {
   });
 };
 
-module.exports = { create, login, profile, logout };
+module.exports = { register, login, profile, logout };

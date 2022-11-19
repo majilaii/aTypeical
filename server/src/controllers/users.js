@@ -1,4 +1,3 @@
-// const jwt = require('jsonwebtoken');
 const User = require('./../model/users');
 
 const putHistory = async (req, res) => {
@@ -12,25 +11,19 @@ const putHistory = async (req, res) => {
   const rawWPM = Math.round(textLength / 5 / (time / 60));
   await User.findByIdAndUpdate(
     req.user._id,
-
     {
       $push: {
         history: {
-          $each: [
-            // TODO remove $each
-            {
-              date,
-              wpm: wpm,
-              rawwpm: rawWPM,
-              textLength: textLength,
-              incorrect: incorrects,
-              accuracy: accuracy,
-              time: time,
-              wordAmount,
-              KEnglish,
-              typingMode,
-            },
-          ],
+          date,
+          wpm: wpm,
+          rawwpm: rawWPM,
+          textLength: textLength,
+          incorrect: incorrects,
+          accuracy: accuracy,
+          time: time,
+          wordAmount,
+          KEnglish,
+          typingMode,
           $position: 0,
         },
       },

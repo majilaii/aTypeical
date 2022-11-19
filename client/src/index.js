@@ -28,7 +28,6 @@ const router = createBrowserRouter([
         path: '/register',
         element: <Register />,
       },
-      // TODO add login route
       {
         path: '/profile',
         element: <Profile />,
