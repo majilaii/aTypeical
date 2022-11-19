@@ -1,27 +1,13 @@
-import '../css/training-history.css';
-// TODO replace moment with Luxon or JS Date
-import moment from 'moment';
+import { DateTime } from 'luxon';
 
 export default function Session({ element }) {
   function whatMode(typing, english) {
-    // TODO typing could be a boolean (needs a better name as well)
-    if (typing === 0) {
-      return 'Word';
-    }
-    if (typing === 1) {
-      return 'Quotes';
-    }
+    if (typing === false) return 'Word';
+    if (typing === true) return 'Quotes';
 
-    // TODO string intepolation
-    if (english === 1) {
-      return '1K';
-    }
-    if (english === 5) {
-      return '5K';
-    }
-    if (english === 10) {
-      return '10K';
-    }
+    if (english === 1) return '1K';
+    if (english === 5) return '5K';
+    if (english === 10) return '10K';
   }
   return (
     <>
@@ -41,9 +27,9 @@ export default function Session({ element }) {
         </td>
 
         <td>
-          {moment(element.date).format('MMM Do YY')}
+          {DateTime.fromISO(element.date).toLocaleString(DateTime.DATE_MED)}
           <br />
-          {moment(element.date).format('h:mm:ss')}
+          {DateTime.fromISO(element.date).toLocaleString(DateTime.TIME_24_WITH_SECONDS)}
         </td>
       </tr>
     </>
