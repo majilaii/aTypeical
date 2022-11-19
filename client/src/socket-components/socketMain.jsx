@@ -28,11 +28,8 @@ export default function SocketMain() {
     });
   }, []);
 
-  // TODO just focus()
   useEffect(() => {
-    if (gameStart) {
-      raceInputRef.current.focus();
-    }
+    if (gameStart) focus();
   }, [gameStart]);
 
   useEffect(() => {
@@ -48,7 +45,7 @@ export default function SocketMain() {
         gameID: gameState._id,
       });
     }
-  }, [activeWordIndex]);
+  });
 
   function focus() {
     raceInputRef.current.focus();
@@ -83,14 +80,12 @@ export default function SocketMain() {
 
   return (
     <div className='SocketContainer'>
-      {/* TODO && */}
-      {isHost && !gameStart ? (
+      {isHost && !gameStart && (
         <div className='roomCode'>Room Code: {gameState._id} </div>
-      ) : null}
+      )}
       <div className='typing-container socket-typing'>
-        {/* TODO && */}
-        {text.length > 0
-          ? text.map((element, index) => {
+        {text.length > 0 && 
+          text.map((element, index) => {
               return (
                 <Word
                   element={element}
@@ -101,8 +96,7 @@ export default function SocketMain() {
                   wrong={wrong}
                 />
               );
-            })
-          : null}
+            })}
       </div>
 
       <div className='inputDiv'>
@@ -111,8 +105,7 @@ export default function SocketMain() {
           type='text'
           className='inputBar'
           disabled={
-            // TODO This or parentheses &&
-            gameStart === false || gameOver === true ? 'disabled' : null
+            (gameStart === false) || ((gameOver === true) && 'disabled')
           }
           onChange={(e) => {
             processInput(e.target.value);
@@ -129,7 +122,6 @@ export default function SocketMain() {
         />
         <CountDown setGameStart={setGameStart} />
         <GameTimer player={player} gameState={gameState} gameOver />
-
         <ProgressBar
           gameState={gameState}
           player={player}
@@ -137,8 +129,7 @@ export default function SocketMain() {
           text={text}
           setGameState={setGameState}
         />
-      {/* TODO && */}
-        {gameOver ? <button> Start Again </button> : null}
+        {gameOver && <button> Start Again </button>}
       </div>
     </div>
   );

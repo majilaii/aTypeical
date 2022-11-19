@@ -15,17 +15,16 @@ export default function CountDown({ setGameStart }) {
     if (countDown.time === 0) {
       setGameStart(true);
     }
-  }, [countDown]);
+  });
 
   return (
     <>
-    {/*  TODO && */}
-      {countDown.time !== 0 ? (
+      {countDown.time !== 0 && (
         <div className='countdownMessage'>
           {countDown.message}
           {countDown.time}
         </div>
-      ) : null}
+      )}
     </>
   );
 }

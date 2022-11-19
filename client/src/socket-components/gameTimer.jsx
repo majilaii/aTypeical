@@ -2,7 +2,6 @@ import './css/gameTimer.css';
 import { useEffect, useState } from 'react';
 import socket from './socketConfig';
 //  TODO implement context (or Redux)
-import { useOutletContext } from 'react-router-dom';
 
 export default function GameTimer({ gameOver, player }) {
   const [gameTimer, setGameTimer] = useState({ timer: '', message: '' });
@@ -21,13 +20,12 @@ export default function GameTimer({ gameOver, player }) {
 
   return (
     <>
-    {/* TODO && */}
-      {gameTimer.timer !== 0 || !gameOver ? (
+      {gameTimer.timer !== 0 || !gameOver && (
         <div className='gameTimerMessage'>
           {gameTimer.timer}
           {gameTimer.message}
         </div>
-      ) : null}
+      )}
     </>
   );
 }

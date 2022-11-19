@@ -6,28 +6,19 @@ import socket from './socketConfig';
 export default function ChoicePage() {
   const navigate = useNavigate();
   const [roomInfo, setRoomInfo] = useState({ gameID: '', nickname: '' });
-  //  TODO unused variables?
-  const { gameState, setGameState, setSocketState, socketState } =
+  const { gameState, setGameState } =
     useOutletContext();
 
   useEffect(() => {
     socket.on('createdGame', (game, id) => {
       console.log(game, id);
-      //  TODO change to one line
-      if (game) {
-        setGameState(game);
-      }
+      if (game) setGameState(game);
     });
 
     socket.on('joinGame', (game) => {
-      // TODO do we need this console.log?
-      console.log(game, 'a user joined');
-      //  TODO change to one line
-      if (game) {
-        setGameState(game);
-      }
+      if (game) setGameState(game);
     });
-  }, []);
+  });
 
   function saveData(e) {
     setRoomInfo({ ...roomInfo, [e.target.name]: e.target.value });
@@ -42,11 +33,8 @@ export default function ChoicePage() {
   }
 
   useEffect(() => {
-    // TODO check gameState / also one-liner
-    if (gameState !== null) {
-      navigate(`/socket/${gameState._id}`);
-    }
-  }, [gameState]);
+    if (gameState !== null) navigate(`/socket/${gameState._id}`);
+  });
 
   return (
     <div className='choiceContainer'>
@@ -86,8 +74,7 @@ export default function ChoicePage() {
           />
           <button
             className='submit makeSubmit'
-            // TODO &&
-            disabled={roomInfo.nickname === '' ? 'disabled' : null}
+            disabled={roomInfo.nickname === '' && 'disabled'}
             onClick={makeRoom}
           >
             {' '}
