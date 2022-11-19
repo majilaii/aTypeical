@@ -6,6 +6,7 @@ const putHistory = async (req, res) => {
   const time = req.body.speed / 1000;
   const incorrects = req.body.incorrect;
   const textLength = req.body.text;
+  // TODO: Use WPMCalc util
   const wpm = Math.round((textLength - incorrects) / 5 / (time / 60));
   const accuracy = (100 * (textLength - incorrects)) / textLength;
   const rawWPM = Math.round(textLength / 5 / (time / 60));
