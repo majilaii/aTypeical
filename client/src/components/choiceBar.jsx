@@ -16,25 +16,24 @@ export default function Bar({ setCheckInput }) {
     setReset,
   } = useOutletContext();
 
-  // TODO review these LOCAL STORAGE
-  // useEffect(() => {
-  //   if(wordAmount > 5){
-  //     localStorage.setItem('wordAmount', JSON.stringify(wordAmount))
-  //     localStorage.setItem('typingMode', JSON.stringify(typingMode))
-  //     localStorage.setItem('KEnglish', JSON.stringify(KEnglish))
-  //   }
-  // }, [KEnglish, typingMode, wordAmount])
-
-  // useEffect(() => {
-  //   if(localStorage.getItem('typingMode') !== null) {
-  //     setWordAmount(JSON.parse(localStorage.getItem('wordAmount')))
-  //     setKEnglish(JSON.parse(localStorage.getItem('KEnglish')))
-  //     setTypingMode(JSON.parse(localStorage.getItem('typingMode')))
-  //   }
-  // },[])
+  useEffect(() => {
+    if(wordAmount > 5){
+      localStorage.setItem('wordAmount', JSON.stringify(wordAmount))
+      localStorage.setItem('typingMode', JSON.stringify(typingMode))
+      localStorage.setItem('KEnglish', JSON.stringify(KEnglish))
+    }
+  }, [KEnglish, typingMode, wordAmount])
 
   useEffect(() => {
-    wordOrQuote(15);
+    if(localStorage.getItem('typingMode') !== null) {
+      setWordAmount(JSON.parse(localStorage.getItem('wordAmount')))
+      setKEnglish(JSON.parse(localStorage.getItem('KEnglish')))
+      setTypingMode(JSON.parse(localStorage.getItem('typingMode')))
+    }
+  })
+
+  useEffect(() => {
+    wordOrQuote(localStorage.getItem('wordAmount') !== null ? JSON.parse(localStorage.getItem('wordAmount')) : 15, typingMode);
   }, [typingMode, KEnglish]);
 
   async function getQuotes(length) {
@@ -53,6 +52,7 @@ export default function Bar({ setCheckInput }) {
   }
 
   async function wordOrQuote(chars, quote = false) {
+    console.log({quote, typingMode});
     if (quote) {
       getQuotes(chars);
     } else {
