@@ -25,5 +25,20 @@ module.exports = {
     'is',          'why',        'almost',
     'no',          'technology', 'ever',
     'works.'
-  ]
+  ],
+  reqBodyPutHistory : {body: {wordAmount:10, KEnglish:true, typingMode:1, date:1668850932460, speed: 14000, incorrect: 7, text: 200}, user:{_id:1}},
+  putHistoryOut: {
+    date: 1668850932460,
+    wpm: 165,
+    rawwpm: 171,
+    textLength: 200,
+    incorrect: 7,
+    accuracy: 96.5,
+    time: 14,
+    wordAmount: 10,
+    KEnglish: true,
+    typingMode: 1
+  },
+  // password is 'secureHashedPassword'
+  mockUser : {id: 1, created: 1658850932460, username: 'Vadim', email: 'vadim@cw.com', password: '$2b$10$l9dWatoW11OC.bBAVe1XTe4QGjbyo9dSpQSgNgjf5Bv4vMI41V44C', history: [], },
 }
