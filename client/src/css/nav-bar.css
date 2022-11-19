@@ -15,8 +15,6 @@
 }
 
 .logIn {
-  height: 20px;
-  width: 40px;
   justify-self: flex-start;
   flex-grow: 5;
   background-color: rgb(26, 26, 26);
@@ -45,7 +43,6 @@
 }
 
 .profile {
-  position: absolute;
   background-color: rgb(26, 26, 26);
   left: 84%;
   top: 34.6px;
