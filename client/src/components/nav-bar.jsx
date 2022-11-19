@@ -28,7 +28,17 @@ export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div className='navContainer'>
-      {/* TODO look into reload document and see what we can do with hooks */}
+      {/* 
+      TODO look into reload document and see what we can do with hooks 
+        const [value,setValue] = useState();
+
+        const refresh = ()=>{
+          // it re-renders the component
+          setValue({});
+        }
+
+        then use it in the function onClick={refresh}
+      */}
       <Link to={linkTarget} reloadDocument className='link'>
         aTYPEical
       </Link>
@@ -37,19 +47,17 @@ export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
       </div>
 
       <div className='buttons'>
-        {/* TODO Use && instead of ? (twice) */}
-        {isAuthenticated ? (
+        {isAuthenticated && (
           <Link to='/profile' reloadDocument className='linkLogin'>
             <button className='profile'>PROFILE</button>{' '}
           </Link>
-        ) : null}
-        {window.location.href !== 'http://localhost:3000/race' ? (
-          //  TODO onclick toRace
-          <button className='raceButton' onClick={() => toRace()}>
+        )}
+        {window.location.href !== 'http://localhost:3000/race' && (
+          <button className='raceButton' onClick={toRace}>
             {' '}
             RACE{' '}
           </button>
-        ) : null}
+        )}
         {isAuthenticated === false ? (
           <Link to='/register' className='linkLogin'>
             <button className='logIn'>LOGIN</button>{' '}

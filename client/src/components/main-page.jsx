@@ -13,7 +13,6 @@ export default function Main() {
       applied: true,
     },
   };
-  // TODO remove the unused variables
   const {
     setWordAmount,
     setIncorrect,
@@ -23,18 +22,13 @@ export default function Main() {
     setText,
     author,
     reset,
-    setReset,
-    prevInputLength,
     setPrevInputLength,
-    adjustedWPM,
-    incorrect,
-    setAdjustedWPM,
     setIsAuthenticated,
   } = useOutletContext();
 
   // TODO potentially move to context (or to Redux, if we use)
-  // TODO setCheckInput to a boolean instead of 0-1
-  const [checkFirstInput, setCheckInput] = useState(0);
+
+  const [checkFirstInput, setCheckInput] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const inputRef = useRef(null);
@@ -49,12 +43,11 @@ export default function Main() {
         setIsAuthenticated(false);
       } else setIsAuthenticated(true);
     }
-
     isLoggedIn();
-  }, []);
+  });
 
   useEffect(() => {
-    if (checkFirstInput !== 0) {
+    if (checkFirstInput !== false) {
       // TODO replace setInterval function
       interval = setInterval(() => {
         try {
@@ -75,7 +68,7 @@ export default function Main() {
     // TODO double-check that this only adds one event listener
     window.addEventListener('keydown', focus);
     inputRef.current.value = '';
-    setCheckInput(0);
+    setCheckInput(false);
     setLoading(false);
   }, [reset]);
 
@@ -95,29 +88,30 @@ export default function Main() {
 
   // TODO move into a separate file (separate into smaller functions)
   function textValidate(e) {
-    if (checkFirstInput === 0) {
-      setCheckInput(1);
+
+    let value = e.target.value;
+
+    if (checkFirstInput === false) {
+      setCheckInput(true);
       setSpeed(Date.now());
     }
-    // TODO crate a variable to store e.target.value
-    for (let i = 0; i < e.target.value.length; i++) {
+
+    for (let i = 0; i < value.length; i++) {
       const current = text[i];
-      if (current.letter === e.target.value[i]) {
+      if (current.letter === value[i]) {
         current.correct = 'correct';
-      } else if (current.letter !== e.target.value[i]) {
-        // TODO change else if to just else
+      } else {
         current.correct = 'incorrect';
-        // setErrors(errors => errors+1)
       }
     }
 
-    if (text[e.target.value.length + 1]) {
-      text[e.target.value.length].correct = 'neutral';
-      text[e.target.value.length].active = 'false';
+    if (text[value.length + 1]) {
+      text[value.length].correct = 'neutral';
+      text[value.length].active = 'false';
     }
 
     // TODO remove for-loop and use length instead
-    for (let i = 0; i < e.target.value.length; i++) {
+    for (let i = 0; i < value.length; i++) {
       if (text[i + 1] && text[i + 1].correct === 'neutral') {
         text[i].active = 'true';
         break;
@@ -128,10 +122,10 @@ export default function Main() {
 
     setText([...text]);
 
-    if (e.target.value.length === text.length) {
+    if (value.length === text.length) {
       const currentTime = new Date();
       // TODO try moving the line below to the reset function
-      setIncorrect(0);
+      setIncorrect(false);
       for (let obj of text) {
         for (let key in obj) {
           if (obj[key] === 'incorrect') {
@@ -140,7 +134,7 @@ export default function Main() {
         }
       }
       setSpeed((time) => currentTime - time);
-      setPrevInputLength((arr) => [...arr, e.target.value.length]);
+      setPrevInputLength((arr) => [...arr, value.length]);
       clearInterval(interval);
       navigate('/stats');
     }
@@ -148,17 +142,17 @@ export default function Main() {
 
   return (
     <>
-      <div className='Main-container'>
+      <div className="Main-container">
         <Bar
           changeWordAmount={changeWordAmount}
           setCheckInput={setCheckInput}
         />
-        <div className='typing-container' id='typingContainer'>
+        <div className="typing-container" id="typingContainer">
           <p
             onCopy={(e) => preventCopyPaste(e)}
             onPaste={(e) => preventCopyPaste(e)}
             onCut={(e) => preventCopyPaste(e)}
-            id='textArea'
+            id="textArea"
           >
             {text.map((el, i) => {
               return (
@@ -178,19 +172,18 @@ export default function Main() {
               );
             })}
           </p>
-          {/* TODO && instead of ? */}
-          {typingMode === 1 ? <span className='author'>- {author}</span> : null}
+          {typingMode === 1 && <span className="author">- {author}</span>}
         </div>
-        <div className='inputDiv'>
+        <div className="inputDiv">
           <input
             ref={inputRef}
-            id='mainPageInput'
-            type='text'
-            className='inputBar'
+            id="mainPageInput"
+            type="text"
+            className="inputBar"
             onChange={textValidate}
           />
-          <Link to={linkTarget} reloadDocument className='linkReset'>
-            <button className='resetButton'>Reset</button>
+          <Link to={linkTarget} reloadDocument className="linkReset">
+            <button className="resetButton">Reset</button>
           </Link>
         </div>
       </div>

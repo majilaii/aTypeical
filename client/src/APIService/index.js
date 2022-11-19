@@ -1,5 +1,3 @@
-import { useOutletContext, useNavigate } from 'react-router-dom';
-
 const APIservice = {};
 
 APIservice.fetchEnglishK = async (num, wordAmount) => {
@@ -21,7 +19,7 @@ APIservice.Shuffle = (array) => {
   let currentIndex = array.length,
     randomIndex;
 
-  while (currentIndex != 0) {
+  while (currentIndex !== 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
 
@@ -35,9 +33,9 @@ APIservice.Shuffle = (array) => {
 };
 
 APIservice.FetchQuotes = async (length, lengthMax) => {
-  const URL = `api.quotable.io/random`;
+  const URL = `https://api.quotable.io/random`;
   const response = await fetch(
-    `https://api.quotable.io/random?minLength=${length}&maxLength=${lengthMax}`
+    `${URL}?minLength=${length}&maxLength=${lengthMax}`
   );
   const data = await response.json();
   return data;
@@ -56,7 +54,6 @@ APIservice.register = (user) => {
 };
 
 APIservice.login = (user) => {
-  // TODO REMOVE-START
   return fetch(`http://localhost:4000/login`, {
     method: 'POST',
     credentials: 'include',
@@ -69,7 +66,6 @@ APIservice.login = (user) => {
 };
 
 APIservice.profile = () => {
-  // TODO REMOVE-START
   return fetch(`http://localhost:4000/profile`, {
     method: 'GET',
     credentials: 'include',
@@ -79,8 +75,7 @@ APIservice.profile = () => {
     .then((res) => {
       return res.json();
     })
-    .catch((err) => console.log(err));
-  // REMOVE-END
+    .catch((err) => console.log(err));  
 };
 
 APIservice.update = (user) => {
@@ -96,7 +91,6 @@ APIservice.update = (user) => {
       return res.json();
     })
     .catch((err) => console.log(err));
-  // REMOVE-END
 };
 
 APIservice.logout = () => {
@@ -110,7 +104,6 @@ APIservice.logout = () => {
       return res.json();
     })
     .catch((err) => console.log(err));
-  // REMOVE-END
 };
 
 export default APIservice;
