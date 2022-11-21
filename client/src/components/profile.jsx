@@ -9,7 +9,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const [username, setUsername] = useState(null);
   const [history, setHistory] = useState([]);
-  const { isAuthenticated, setIsAuthenticated } = useOutletContext();
+  const { setIsAuthenticated } = useOutletContext();
   const [totalTime, setTotalTIme] = useState(0);
   const [totalLetters, setTotalLetters] = useState(0);
   const [totalWPM, setTotalWPM] = useState(0);

@@ -1,7 +1,7 @@
 const mocks = require('../__mocks__/mocks')
 const FetchQuotes = require('../../utils/quotesAPI')
 
-jest.mock('cross-fetch', () => {
+jest.mock('fetch', () => {
   return jest.fn((url) => {
       const urlObj = new URL(url);
       const urlParams = new URLSearchParams(urlObj.searchParams);

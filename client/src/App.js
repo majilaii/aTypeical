@@ -6,8 +6,6 @@ import NavBar from './components/nav-bar';
 // TODO refactor to Redux (if have time)
 function App() {
   // TODO replace 0-1 with booleans
-  console.log('Typing Mode:', localStorage.getItem('typingMode'));
-  console.log('Word Amount:', localStorage.getItem('wordAmount'));
   const [wordAmount, setWordAmount] = useState(localStorage.getItem('wordAmount') !== null ? JSON.parse(localStorage.getItem('wordAmount')) : 15);
   const [speed, setSpeed] = useState(0);
   const [text, setText] = useState([]);

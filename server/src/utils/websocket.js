@@ -4,16 +4,9 @@ const { Game } = require('../model/game');
 const FetchQuotes = require('./quotesAPI');
 const WPMcalc = require('./WPMcalc');
 
-function websocketing(app) {
+function websocketing(app, corsConfig) {
   const server = http.createServer(app);
-  // ? Do we need the line above as well?
-  // TODO can we reuse the cors config in the code below?
-  const io = new Server(server, {
-    cors: {
-      origin: 'http://localhost:3000', // TODO Or is it 3001?
-      methods: ['GET, POST'],
-    },
-  });
+  const io = new Server(server, {cors: corsConfig});
 
   let gameTimer;
 

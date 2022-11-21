@@ -28,18 +28,7 @@ export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div className='navContainer'>
-      {/*
-      TODO look into reload document and see what we can do with hooks
-        const [value,setValue] = useState();
-
-        const refresh = ()=>{
-          // it re-renders the component
-          setValue({});
-        }
-
-        then use it in the function onClick={refresh}
-      */}
-      <Link to={linkTarget} reloadDocument className='link'>
+      <Link to={linkTarget} className='link'>
         aTYPEical
       </Link>
       <div className='wrapper'>
@@ -48,7 +37,7 @@ export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
 
       <div className='buttons'>
         {isAuthenticated && (
-          <Link to='/profile' reloadDocument className='linkLogin'>
+          <Link to='/profile' className='linkLogin'>
             <button className='profile'>PROFILE</button>{' '}
           </Link>
         )}

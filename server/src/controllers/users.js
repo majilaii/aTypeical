@@ -1,14 +1,13 @@
+const WPMcalc = require('../utils/WPMcalc');
 const User = require('./../model/users');
 
 const putHistory = async (req, res) => {
   ({ wordAmount, KEnglish, typingMode, date } = req.body);
-  const time = req.body.speed / 1000;
   const incorrects = req.body.incorrect;
   const textLength = req.body.text;
-  // TODO: Use WPMCalc util
-  const wpm = Math.round((textLength - incorrects) / 5 / (time / 60));
+  const wpm = WPMcalc((textLength-incorrects)/5, req.body.speed)
   const accuracy = (100 * (textLength - incorrects)) / textLength;
-  const rawWPM = Math.round(textLength / 5 / (time / 60));
+  const rawWPM = WPMcalc(textLength/5, req.body.speed)
   await User.findByIdAndUpdate(
     req.user._id,
     {
@@ -20,12 +19,12 @@ const putHistory = async (req, res) => {
           textLength: textLength,
           incorrect: incorrects,
           accuracy: accuracy,
-          time: time,
+          time: req.body.speed/1000,
           wordAmount,
           KEnglish,
           typingMode,
-          $position: 0,
         },
+        $position: 0
       },
     },
     { new: true }
@@ -34,10 +33,4 @@ const putHistory = async (req, res) => {
   res.sendStatus(201);
 };
 
-// TODO use just in Postman
-const deleteAll = async (req, res) => {
-  await User.deleteMany({});
-  res.send('deleted all users');
-};
-
-module.exports = { deleteAll, putHistory };
+module.exports = { putHistory };

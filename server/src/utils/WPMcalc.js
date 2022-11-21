@@ -1,6 +1,5 @@
-// TODO: rename length to be numWords
-function WPMcalc(length, time) {
-  return Math.round(length / (time / 1000 / 60));
+function WPMcalc(numWords, time) {
+  return Math.round(numWords / (time / 1000 / 60));
 }
 
 module.exports = WPMcalc;

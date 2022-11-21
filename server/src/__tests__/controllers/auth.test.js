@@ -4,7 +4,6 @@ const passport = require('passport');
 
 let mockDB = [{id: 1, created: 1658850932460, username: 'Vadim', email: 'vadim@cw.com', password: 'secureHashedPassword', history: [], }]
 
-// TODO: Make less implementation specific
 jest.mock('../../model/users', () => {
   return {
     findByIdAndUpdate: (id, obj) => {
@@ -14,7 +13,6 @@ jest.mock('../../model/users', () => {
           const pushingTo = key;
           let toPush = obj['$push'][key];
           if (toPush['$each']) {
-            // TODO: make use of $position
             for (let each of (toPush['$each'])) {
               entry[pushingTo].push(each);
             }

@@ -45,7 +45,7 @@ export default function SocketMain() {
         gameID: gameState._id,
       });
     }
-  });
+  }, [activeWordIndex]);
 
   function focus() {
     raceInputRef.current.focus();
