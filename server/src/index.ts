@@ -1,16 +1,15 @@
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
-const cors = require('cors');
-const express = require('express');
-const session = require('express-session');
-const passport = require('passport');
-const router = require('./routers/router');
+import cors from 'cors';
+import express from 'express';
+import session from 'express-session';
+import passport from 'passport';
+import router from './routers/router';
+import websocketing from './utils/websocket';
 const app = express();
-const websocketing = require('./utils/websocket');
 
 const corsConfig = {
   origin: 'http://localhost:3000',
-  origin: true,
   methods: 'GET, POST, PUT, DELETE',
   credentials: true,
   maxAge: 3600,

@@ -20,7 +20,7 @@ export default function GameTimer({ gameOver, player }) {
 
   return (
     <>
-      {gameTimer.timer !== 0 || !gameOver && (
+      {(gameTimer.timer !== 0 || !gameOver) && (
         <div className='gameTimerMessage'>
           {gameTimer.timer}
           {gameTimer.message}
