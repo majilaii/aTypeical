@@ -59,3 +59,35 @@ input {
   background-color: white;
   transition: all 0.3s ease;
 }
+
+p {
+  font-size: 14px;
+  text-align: center;
+  /* text-decoration: none; */
+}
+
+.linkLogin, .linkRegister {
+  background-color: inherit;
+  width: auto;
+}
+
+.have-account-register {
+  background-color: inherit;
+  margin-top: 15px;
+  margin-bottom: 7px;
+  text-decoration: none;
+}
+
+.login-register-link {
+  transition: 0.5s;
+  font-weight: bold;
+  background-color: inherit;
+  color: rgb(208, 139, 1);
+  font-size: 17px;
+}
+
+.login-register-link:hover {
+  transition: 0.5s;
+  background-color: inherit;
+  color: green;
+}

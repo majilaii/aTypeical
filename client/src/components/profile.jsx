@@ -38,7 +38,6 @@ export default function Profile() {
             accuracy += el.accuracy;
           });
         }
-        console.log(timeCounter); // TODO remove
         setTotalTIme(timeCounter);
         setTotalLetters(counter);
         setTotalRawWPM(rawWPM);

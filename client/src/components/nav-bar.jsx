@@ -28,8 +28,8 @@ export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
 
   return (
     <div className='navContainer'>
-      {/* 
-      TODO look into reload document and see what we can do with hooks 
+      {/*
+      TODO look into reload document and see what we can do with hooks
         const [value,setValue] = useState();
 
         const refresh = ()=>{
@@ -59,7 +59,7 @@ export default function NavBar({ isAuthenticated, setIsAuthenticated }) {
           </button>
         )}
         {isAuthenticated === false ? (
-          <Link to='/register' className='linkLogin'>
+          <Link to='/login' className='linkLogin'>
             <button className='logIn'>LOGIN</button>{' '}
           </Link>
         ) : (

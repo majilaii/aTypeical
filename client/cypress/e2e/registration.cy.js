@@ -4,7 +4,6 @@ describe('Registration', () => {
   it('Loads the page', () => {
     cy.visit('http://localhost:3000/register');
     cy.contains('Register').click();
-    cy.contains('Login').click();
     cy.url().should('equal', 'http://localhost:3000/register');
   });
 
@@ -22,36 +21,10 @@ describe('Registration', () => {
       .get('#username').type('email')
       .get('#password').type('email')
       .get('#buttonRegister').click()
-    
+
     cy.request('POST', 'http://localhost:3000/register', { email: 'email@email.email', username: 'email', password: 'email' }).then(
       (response) => {
         expect(response.body).to.have.property('email')
-      })
-    cy.url().should('equal', 'http://localhost:3000/profile');
-    cy.getCookie('sid').should('exist')
-    cy.get('#welcomeUsername').should('contain', 'email')
-  });
-  
-  it('Username or password is incorrect', () => {
-    cy.visit('http://localhost:3000/register')
-    cy.get('#usernameLogin').type('incorrect')
-      .get('#passwordLogin').type('incorrect')
-      .get('#buttonLogin').click();
-    cy.on('window:alert', (alert) => {
-      expect(alert).to.contains('Username or password is incorrect');
-    });
-  });
-
-  it('Login sends the correct request, loads the /profile page, gets the cookie', () => {
-    cy.visit('http://localhost:3000/register')
-
-    cy.get('#usernameLogin').type('email')
-      .get('#passwordLogin').type('email')
-      .get('#buttonLogin').click()
-    
-    cy.request('POST', 'http://localhost:3000/register', { username: 'email', password: 'email' }).then(
-      (response) => {
-        expect(response.body).to.have.property('message')
       })
     cy.url().should('equal', 'http://localhost:3000/profile');
     cy.getCookie('sid').should('exist')

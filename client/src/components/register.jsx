@@ -1,8 +1,8 @@
 // TODO Separate login and register
-import '../css/register.css';
+import '../css/register-login.css';
 import React, { useState, useEffect } from 'react';
 import APIservice from '../APIService/index';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext, Link } from 'react-router-dom';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -10,8 +10,6 @@ export default function Register() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
-  const [loginUsername, setLoginUsername] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
   const { isAuthenticated, setIsAuthenticated } = useOutletContext();
   const [alertMessage, setAlertMessage] = useState('your Email sucks ass btw');
 
@@ -35,6 +33,7 @@ export default function Register() {
       username: registerUsername,
       password: registerPassword,
     };
+
     const res = await APIservice.register(user);
     if (res.error) {
       alert('user already exists');
@@ -46,19 +45,6 @@ export default function Register() {
       navigate('/profile');
     }
   };
-  const login = async (e) => {
-    const user = { username: loginUsername, password: loginPassword };
-    const res = await APIservice.login(user);
-    if (res.error) {
-      alert(`${res.message}`);
-      setLoginUsername('');
-      setLoginPassword('');
-    } else {
-      setIsAuthenticated(true);
-      localStorage.setItem('userData', JSON.stringify(res));
-      navigate('/profile');
-    }
-  };
 
   return (
     <div className='forms-container'>
@@ -67,7 +53,7 @@ export default function Register() {
         <input
           id='email'
           placeholder='email'
-          value={registerEmail} 
+          value={registerEmail}
           onChange={(e) => setRegisterEmail(e.target.value)}
         />
         <input
@@ -88,28 +74,10 @@ export default function Register() {
         <button id='buttonRegister' onClick={register} className='submit'>
           Register
         </button>
-      </div>
-
-      <div className='login'>
-        <h1 className='formTitle'>Login</h1>
-        <input
-          id='usernameLogin'
-          placeholder='username'
-          value={loginUsername}
-          onChange={(e) => setLoginUsername(e.target.value)}
-        />
-        <input
-          id='passwordLogin'
-          placeholder='password'
-          value={loginPassword}
-          onChange={(e) => setLoginPassword(e.target.value)}
-          onKeyUp={(e) => {
-            if (e.key === 'Enter') login();
-          }}
-        />
-        <button id='buttonLogin' onClick={login} className='submit'>
-          Login
-        </button>
+        <Link to='/login' reloadDocument className='linkLogin'>
+          <p className='have-account-register'>Already have an account?</p>
+          <p className='login-register-link'>Log in</p>
+        </Link>
       </div>
     </div>
   );

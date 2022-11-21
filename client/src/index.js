@@ -10,6 +10,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ChoicePage from './socket-components/choicePage';
+import Login from './components/login';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
       },
       {
         path: '/profile',
