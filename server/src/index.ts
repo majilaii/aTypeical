@@ -4,7 +4,8 @@ import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
-import router from './routers/router';
+// import router from './routers/router';
+const router = require('./routers/router');
 import websocketing from './utils/websocket';
 const app = express();
 

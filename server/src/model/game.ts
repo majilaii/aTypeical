@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('./index.js');
+import mongoose from './index.js';
 
 const Schema = mongoose.Schema;
 
@@ -46,4 +46,4 @@ const gameSchema = new Schema({
 
 const Game = mongoose.model('Games', gameSchema);
 
-module.exports = { Game };
+export default Game;

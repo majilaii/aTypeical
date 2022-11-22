@@ -1,16 +1,19 @@
-const http = require('http');
-const { Server } = require('socket.io');
-const { Game } = require('../model/game');
-const FetchQuotes = require('./quotesAPI');
-const WPMcalc = require('./WPMcalc');
+import http from 'http';
+import { Server } from 'socket.io';
+import { Express } from 'express';
+import Game from '../model/game';
+import FetchQuotes from './quotesAPI';
+import WPMcalc from './WPMcalc';
+import { CorsOptions } from 'cors';
+import { Types } from 'mongoose';
 
-function websocketing(app, corsConfig) {
+function websocketing(app: Express, corsConfig: CorsOptions) {
   const server = http.createServer(app);
   const io = new Server(server, {cors: corsConfig});
 
-  let gameTimer;
+  let gameTimer: NodeJS.Timer;
 
-  async function startGameClock(gameID) {
+  async function startGameClock(gameID: string) {
     let timer = 30;
     console.log(gameID);
     let game = await Game.findOne({ _id: gameID });
@@ -138,7 +141,13 @@ function websocketing(app, corsConfig) {
                 return { ...element, index: element.index + 1 };
               }
               return element;
-            });
+            }) as Types.DocumentArray<{
+              index: number;
+              WPM: number;
+              nickname?: string;
+              PartyLeader?: boolean;
+              socketID?: string;
+          }>;
             game = await game.save();
             io.to(gameID).emit('gameUpdate', game);
           }
@@ -158,4 +167,4 @@ function websocketing(app, corsConfig) {
   });
 }
 
-module.exports = websocketing;
+export default websocketing;

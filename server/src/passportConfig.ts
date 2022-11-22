@@ -1,11 +1,13 @@
-const User = require('./model/users');
-const bcrypt = require('bcrypt');
+import passport, { PassportStatic } from "passport";
+
+import User from './model/users';
+import bcrypt from 'bcrypt';
 const localStrategy = require('passport-local').Strategy;
 
-module.exports = function (passport) {
+module.exports = function (passport: PassportStatic) {
   passport.use(
-    new localStrategy((username, password, done) => {
-      User.findOne({ username: username }, (err, user) => {
+    new localStrategy((username: string, password: string, done: Function) => {
+      User.findOne({ username: username }, (err: any, user: any) => {
         if (err) throw err;
         if (!user) return done(null, false);
         bcrypt.compare(password, user.password, (err, result) => {
@@ -20,12 +22,12 @@ module.exports = function (passport) {
     })
   );
 
-  passport.serializeUser((user, cb) => {
+  passport.serializeUser((user: any, cb) => {
     cb(null, user.id);
   });
 
   passport.deserializeUser((id, cb) => {
-    User.findOne({ _id: id }, (err, user) => {
+    User.findOne({ _id: id }, (err: any, user: any) => {
       cb(err, user);
     });
   });

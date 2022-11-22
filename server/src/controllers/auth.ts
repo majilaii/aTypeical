@@ -1,9 +1,11 @@
-const bcrypt = require('bcrypt');
-const passport = require('passport');
-const User = require('./../model/users');
+import bcrypt from 'bcrypt';
+import { NextFunction, Request, Response } from 'express';
+import passport from 'passport';
+import User from './../model/users';
 
-const register = async (req, res, next) => {
-  User.findOne({ username: req.body.username }, async (err, doc) => {
+const register = async (req: Request, res: Response, next: NextFunction) => {
+  // TODO print out those anys and change them maybe?
+  User.findOne({ username: req.body.username }, async (err: any, doc: any) => {
     if (err) throw new err();
     if (doc) res.send({ error: '409', message: 'User already exists' });
     if (!doc) {
@@ -33,7 +35,7 @@ const register = async (req, res, next) => {
   });
 };
 
-const login = async (req, res, next) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
   passport.authenticate('local', (err, user) => {
     if (err) throw err;
     if (!user)
@@ -47,11 +49,11 @@ const login = async (req, res, next) => {
   })(req, res, next);
 };
 
-const profile = async (req, res) => {
+const profile = async (req: Request, res: Response) => {
   res.send(req.user);
 };
 
-const logout = (req, res) => {
+const logout = (req: Request, res: Response, next: NextFunction) => {
   req.logout(function (err) {
     if (err) {
       return next(err);
@@ -60,4 +62,4 @@ const logout = (req, res) => {
   });
 };
 
-module.exports = { register, login, profile, logout };
+export { register, login, profile, logout };
