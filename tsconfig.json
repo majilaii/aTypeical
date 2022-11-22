@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",                                /* Specify what module code is generated. */
-    "outDir": "server/build",
+    "outDir": "build",
     "target": "es2020",                                 /* Specify an output folder for all emitted files. */
     "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
@@ -16,6 +16,6 @@
   "noImplicitThis": false,
   "strictNullChecks": false
   },
-  "include": ["./server/"],
+  "include": ["."],
   "lib": ["es2021"],
 }

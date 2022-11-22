@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import React from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -26,7 +27,7 @@ export default function Data() {
   const {
     speed,
     prevInputLength,
-  } = useOutletContext();
+  } = useOutletContext() as any;
 
   // TODO LOCAL STORAGE
   // useEffect(() => {
@@ -140,7 +141,7 @@ export default function Data() {
     <div className='chartContainer'>
       <Line
         className='chart'
-        options={options}
+        options={options as any}
         data={data}
         height={30}
         width={100}
