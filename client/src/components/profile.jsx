@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../css/profile.css';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useOutletContext, useNavigate, Link } from 'react-router-dom';
 import APIservice from '../APIService';
 import Session from '../profile-components/training-history';
 
@@ -121,7 +121,7 @@ export default function Profile() {
           </table>
         </div>
       ) : (
-        <div className='NoMatches'> PLAY A GAME </div>
+        <div className='NoMatches'> <Link class='link' to='/'>PLAY A GAME</Link> </div>
       )}
     </div>
   );
