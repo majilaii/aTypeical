@@ -12,7 +12,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     if (!doc) {
       const hashedPass = await bcrypt.hash(req.body.password, 10);
       const newUser = new User({
-        registerd: Date.now(),
+        created: Date.now(),
         email: req.body.email,
         username: req.body.username,
         password: hashedPass,
