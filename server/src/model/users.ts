@@ -51,7 +51,7 @@ const userSchema = new Schema({
         type: Number,
       },
       typingMode: {
-        type: Number,
+        type: Boolean,
       },
     },
   ],
@@ -72,7 +72,7 @@ export interface user extends mongoose.Document {
         incorrect?: number;
         wordAmount?: number;
         KEnglish?: number;
-        typingMode?: number;
+        typingMode?: boolean;
     }[];
 }
 

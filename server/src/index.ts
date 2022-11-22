@@ -47,6 +47,7 @@ app.get('*', (req, res) => {
   res.status(404).send('Sorry, route not found');
 });
 
+// TODO: Combine this port with the socket port
 app.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
 });
