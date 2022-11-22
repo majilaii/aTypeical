@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import WPMcalc from '../utils/WPMcalc';
 import User from './../model/users';
 
-const putHistory = async (req: Request, res: Response) => {
+export const putHistory = async (req: Request, res: Response) => {
   const { wordAmount, KEnglish, typingMode, date }: { wordAmount: number, KEnglish: string, typingMode: boolean, date: Date } = req.body;
   const incorrects = req.body.incorrect;
   const textLength = req.body.text;
@@ -33,5 +33,3 @@ const putHistory = async (req: Request, res: Response) => {
 
   res.sendStatus(201);
 };
-
-export default putHistory;

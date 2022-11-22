@@ -1,4 +1,4 @@
-const authController = require('../../controllers/auth')
+const authController = require('../../../build/controllers/auth')
 const mocks = require('../__mocks__/mocks')
 const passport = require('passport');
 

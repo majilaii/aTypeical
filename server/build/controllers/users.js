@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.putHistory = void 0;
 const WPMcalc_1 = __importDefault(require("../utils/WPMcalc"));
 const users_1 = __importDefault(require("./../model/users"));
 const putHistory = async (req, res) => {
@@ -31,4 +32,4 @@ const putHistory = async (req, res) => {
     }, { new: true });
     res.sendStatus(201);
 };
-exports.default = putHistory;
+exports.putHistory = putHistory;

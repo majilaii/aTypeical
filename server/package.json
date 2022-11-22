@@ -40,6 +40,11 @@
     "socketio": "^1.0.0"
   },
   "devDependencies": {
-    "jest": "^29.3.1"
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "@types/jest": "^29.2.3",
+    "babel-jest": "^29.3.1",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3"
   }
 }

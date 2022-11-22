@@ -73,7 +73,7 @@ export default function Bar({ setCheckInput }: { setCheckInput: any }) {
       <button onClick={() => typingMode ? wordOrQuote(150, true) : wordOrQuote(50)}> LONG </button>
       <button onClick={() => typingMode ? wordOrQuote(30, true) : wordOrQuote(20)}> SHORT </button>
 
-      {typingMode === 0 && (
+      {!typingMode && (
         <>
           <div className="spacer"></div>
           <div className="fadeIn">

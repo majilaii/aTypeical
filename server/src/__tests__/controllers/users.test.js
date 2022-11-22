@@ -1,4 +1,4 @@
-const userController = require('../../controllers/users');
+const { putHistory } = require('../../controllers/users');
 const { mockUser } = require('../__mocks__/mocks');
 const mocks = require('../__mocks__/mocks')
 
@@ -39,12 +39,12 @@ describe('Users', () => {
 
   describe('putHistory', () => {
     test('Stores in database', () => {
-      userController.putHistory(mocks.reqBodyPutHistory, {sendStatus:() => {}})
+      putHistory(mocks.reqBodyPutHistory, {sendStatus:() => {}})
       expect(mockDB[0].history.length).toBe(1)
     })
 
     test('Has the correct values', () => {
-      userController.putHistory(mocks.reqBodyPutHistory, {sendStatus:() => {}})
+      putHistory(mocks.reqBodyPutHistory, {sendStatus:() => {}})
       expect(mockDB[0].history[0]).toStrictEqual(mocks.putHistoryOut)
     })
   })
