@@ -1,29 +1,9 @@
 import passport, { PassportStatic } from "passport";
 
-import User from './model/users';
+import User, {user} from './model/users';
 import bcrypt from 'bcrypt';
-import { CallbackError, Document } from "mongoose";
+import { CallbackError } from "mongoose";
 const localStrategy = require('passport-local').Strategy;
-
-interface user extends Document {
-  created: Date;
-  username: string;
-  email: string;
-  password: string;
-  history: {
-      date?: Date;
-      wpm?: number;
-      accuracy?: number;
-      rawwpm?: number;
-      time?: number;
-        textLength?: number;
-        incorrect?: number;
-        wordAmount?: number;
-        KEnglish?: number;
-        typingMode?: number;
-    }[];
-}
-
 
 module.exports = function (passport: PassportStatic) {
   passport.use(

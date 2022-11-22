@@ -1,12 +1,13 @@
 import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
+import { CallbackError } from 'mongoose';
 import passport from 'passport';
-import User from './../model/users';
+import User, {user} from './../model/users';
+
 
 const register = async (req: Request, res: Response, next: NextFunction) => {
-  // TODO print out those anys and change them maybe?
-  User.findOne({ username: req.body.username }, async (err: any, doc: any) => {
-    if (err) throw new err();
+  User.findOne({ username: req.body.username }, async (err: CallbackError, doc: user) => {
+    if (err) throw err;
     if (doc) res.send({ error: '409', message: 'User already exists' });
     if (!doc) {
       const hashedPass = await bcrypt.hash(req.body.password, 10);

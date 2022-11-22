@@ -57,6 +57,26 @@ const userSchema = new Schema({
   ],
 });
 
+export interface user extends mongoose.Document {
+  created: Date;
+  username: string;
+  email: string;
+  password: string;
+  history: {
+      date?: Date;
+      wpm?: number;
+      accuracy?: number;
+      rawwpm?: number;
+      time?: number;
+        textLength?: number;
+        incorrect?: number;
+        wordAmount?: number;
+        KEnglish?: number;
+        typingMode?: number;
+    }[];
+}
+
+
 const User = mongoose.model('Users', userSchema);
 
 export default User;
