@@ -16,6 +16,6 @@
   "noImplicitThis": false,
   "strictNullChecks": false
   },
-  "include": ["./client/*", "./server/"],
+  "include": ["./server/"],
   "lib": ["es2021"],
 }
