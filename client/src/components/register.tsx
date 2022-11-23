@@ -1,15 +1,18 @@
 import '../css/register-login.css';
 import React, { useState, useEffect } from 'react';
 import APIservice from '../APIService/index';
-import { useNavigate, useOutletContext, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAppDispatch } from '../redux/hooks';
+import authenticated from '../redux/actions/authenticated'
+
 
 export default function Register() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   // TODO context or Redux
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
-  const { setIsAuthenticated } = useOutletContext() as any;
   const [alertMessage] = useState('your Email sucks ass btw');
 
   useEffect(() => {
@@ -40,7 +43,7 @@ export default function Register() {
       setRegisterEmail('');
       setRegisterPassword('');
       setRegisterEmail('');
-      setIsAuthenticated(true);
+      dispatch(authenticated.login());
       navigate('/profile');
     }
   };

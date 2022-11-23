@@ -2,21 +2,23 @@ import '../css/nav-bar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import APIservice from '../APIService';
 import React from 'react';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import authenticated from '../redux/actions/authenticated'
 
-export default function NavBar({ isAuthenticated, setIsAuthenticated }: { isAuthenticated: boolean, setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>> }) {
+
+
+export default function NavBar() {
   const navigate = useNavigate();
+  const isAuthenticated = useAppSelector((state) => state.authenticatedReducer.isAuthenticated);
+  const dispatch = useAppDispatch();
 
   async function logout() {
     const res = await APIservice.logout();
     if (res.message) {
       localStorage.removeItem('userData');
-      setIsAuthenticated(false);
+      dispatch(authenticated.logout());
       navigate('/');
     }
-  }
-
-  function toRace() {
-    navigate('/race');
   }
 
   const linkTarget = {
@@ -43,7 +45,7 @@ export default function NavBar({ isAuthenticated, setIsAuthenticated }: { isAuth
           </Link>
         )}
         {window.location.href !== 'http://localhost:3000/race' && (
-          <button className='raceButton' onClick={toRace}>
+          <button className='raceButton' onClick={()=>{navigate('/race')}}>
             {' '}
             RACE{' '}
           </button>

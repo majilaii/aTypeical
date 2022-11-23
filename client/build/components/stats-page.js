@@ -32,15 +32,19 @@ const react_1 = __importStar(require("react"));
 const react_router_dom_1 = require("react-router-dom");
 const data_1 = __importDefault(require("./data"));
 const APIService_1 = __importDefault(require("../APIService"));
+const hooks_1 = require("../redux/hooks");
+const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
 function CalculateRawWPM(text, speed) {
     return Math.round(text.length / 5 / (speed / 1000 / 60));
 }
 exports.CalculateRawWPM = CalculateRawWPM;
 function Stats() {
-    const { text, speed, incorrect, setIsAuthenticated, isAuthenticated, KEnglish, wordAmount, typingMode, } = (0, react_router_dom_1.useOutletContext)();
+    const isAuthenticated = (0, hooks_1.useAppSelector)((state) => state.authenticatedReducer.isAuthenticated);
+    const dispatch = (0, hooks_1.useAppDispatch)();
+    const { text, speed, incorrect, KEnglish, wordAmount, typingMode, } = (0, react_router_dom_1.useOutletContext)();
     (0, react_1.useEffect)(() => {
         if (localStorage.getItem('userData') !== null) {
-            setIsAuthenticated(true);
+            dispatch(authenticated_1.default.login());
         }
     }, []);
     (0, react_1.useEffect)(() => {

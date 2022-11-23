@@ -16,15 +16,12 @@ function App() {
   const [reset, setReset] = useState(true);
   const [prevInputLength, setPrevInputLength] = useState([]);
   const [adjustedWPM, setAdjustedWPM] = useState([]);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [gameState, setGameState] = useState(null);
+
 
   return (
     <div className='wholeContainer'>
-      <NavBar
-        isAuthenticated={isAuthenticated}
-        setIsAuthenticated={setIsAuthenticated}
-      />
+      <NavBar/>
       <Outlet
         context={{
           gameState,
@@ -49,8 +46,6 @@ function App() {
           setPrevInputLength,
           adjustedWPM,
           setAdjustedWPM,
-          isAuthenticated,
-          setIsAuthenticated,
         }}
       />
     </div>

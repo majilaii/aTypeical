@@ -81,7 +81,7 @@ function Bar({ setCheckInput }) {
         react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(250, true) : wordOrQuote(100) }, " THICC "),
         react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(150, true) : wordOrQuote(50) }, " LONG "),
         react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(30, true) : wordOrQuote(20) }, " SHORT "),
-        typingMode === 0 && (react_1.default.createElement(react_1.default.Fragment, null,
+        !typingMode && (react_1.default.createElement(react_1.default.Fragment, null,
             react_1.default.createElement("div", { className: "spacer" }),
             react_1.default.createElement("div", { className: "fadeIn" },
                 react_1.default.createElement("button", { onClick: () => setKEnglish(10) }, " HARD "),

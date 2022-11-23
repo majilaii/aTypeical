@@ -9,12 +9,14 @@ const react_router_dom_1 = require("react-router-dom");
 const APIService_1 = __importDefault(require("../APIService"));
 const training_history_1 = __importDefault(require("../profile-components/training-history"));
 const react_2 = __importDefault(require("react"));
+const hooks_1 = require("../redux/hooks");
+const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
 function Profile() {
     // TODO move to context (or Redux)
     const navigate = (0, react_router_dom_1.useNavigate)();
+    const dispatch = (0, hooks_1.useAppDispatch)();
     const [username, setUsername] = (0, react_1.useState)(null);
     const [history, setHistory] = (0, react_1.useState)([]);
-    const { setIsAuthenticated } = (0, react_router_dom_1.useOutletContext)();
     const [totalTime, setTotalTIme] = (0, react_1.useState)(0);
     const [totalLetters, setTotalLetters] = (0, react_1.useState)(0);
     const [totalWPM, setTotalWPM] = (0, react_1.useState)(0);
@@ -26,7 +28,7 @@ function Profile() {
             if (userInfo) {
                 const { username, history } = userInfo;
                 setUsername(username);
-                setIsAuthenticated(true);
+                dispatch(authenticated_1.default.login());
                 setHistory(history);
                 let counter = 0;
                 let timeCounter = 0;

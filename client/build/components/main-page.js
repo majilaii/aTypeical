@@ -31,8 +31,11 @@ const react_1 = __importStar(require("react"));
 const react_router_dom_1 = require("react-router-dom");
 const index_1 = __importDefault(require("../APIService/index"));
 const choiceBar_1 = __importDefault(require("./choiceBar"));
+const hooks_1 = require("../redux/hooks");
+const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
 function Main() {
     const navigate = (0, react_router_dom_1.useNavigate)();
+    const dispatch = (0, hooks_1.useAppDispatch)();
     const linkTarget = {
         pathname: '/',
         key: Math.random(),
@@ -40,7 +43,7 @@ function Main() {
             applied: true,
         },
     };
-    const { setWordAmount, setIncorrect, setSpeed, typingMode, text, setText, author, reset, setPrevInputLength, setIsAuthenticated, } = (0, react_router_dom_1.useOutletContext)();
+    const { setWordAmount, setIncorrect, setSpeed, typingMode, text, setText, author, reset, setPrevInputLength, } = (0, react_router_dom_1.useOutletContext)();
     // TODO potentially move to context (or to Redux, if we use)
     const [checkFirstInput, setCheckInput] = (0, react_1.useState)(false);
     const [loading, setLoading] = (0, react_1.useState)(true);
@@ -52,10 +55,10 @@ function Main() {
             if (!res) {
                 // TODO check where else we're using local storage
                 localStorage.removeItem('userData');
-                setIsAuthenticated(false);
+                dispatch(authenticated_1.default.logout());
             }
             else
-                setIsAuthenticated(true);
+                dispatch(authenticated_1.default.login());
         }
         isLoggedIn();
     });

@@ -31,12 +31,13 @@ require("../css/register-login.css");
 const react_1 = __importStar(require("react"));
 const index_1 = __importDefault(require("../APIService/index"));
 const react_router_dom_1 = require("react-router-dom");
+const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
+const hooks_1 = require("../redux/hooks");
 function Login() {
     const navigate = (0, react_router_dom_1.useNavigate)();
-    // TODO context or Redux
+    const dispatch = (0, hooks_1.useAppDispatch)();
     const [loginUsername, setLoginUsername] = (0, react_1.useState)('');
     const [loginPassword, setLoginPassword] = (0, react_1.useState)('');
-    const { setIsAuthenticated } = (0, react_router_dom_1.useOutletContext)();
     (0, react_1.useEffect)(() => {
         if (localStorage.getItem('userData') !== null)
             navigate('/profile');
@@ -50,7 +51,7 @@ function Login() {
             setLoginPassword('');
         }
         else {
-            setIsAuthenticated(true);
+            dispatch(authenticated_1.default.login());
             localStorage.setItem('userData', JSON.stringify(res));
             navigate('/profile');
         }

@@ -43,10 +43,9 @@ function App() {
     const [reset, setReset] = (0, react_1.useState)(true);
     const [prevInputLength, setPrevInputLength] = (0, react_1.useState)([]);
     const [adjustedWPM, setAdjustedWPM] = (0, react_1.useState)([]);
-    const [isAuthenticated, setIsAuthenticated] = (0, react_1.useState)(false);
     const [gameState, setGameState] = (0, react_1.useState)(null);
     return (react_1.default.createElement("div", { className: 'wholeContainer' },
-        react_1.default.createElement(nav_bar_1.default, { isAuthenticated: isAuthenticated, setIsAuthenticated: setIsAuthenticated }),
+        react_1.default.createElement(nav_bar_1.default, null),
         react_1.default.createElement(react_router_dom_1.Outlet, { context: {
                 gameState,
                 setGameState,
@@ -70,8 +69,6 @@ function App() {
                 setPrevInputLength,
                 adjustedWPM,
                 setAdjustedWPM,
-                isAuthenticated,
-                setIsAuthenticated,
             } })));
 }
 exports.default = App;

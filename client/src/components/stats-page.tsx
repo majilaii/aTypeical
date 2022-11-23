@@ -1,21 +1,23 @@
 import '../css/stats-page.css';
 import React, { useEffect } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
-
 import Data from './data';
 import APIservice from '../APIService';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import authenticated from '../redux/actions/authenticated'
+
 
 export function CalculateRawWPM(text: string[], speed: number) {
   return Math.round(text.length / 5 / (speed / 1000 / 60));
 }
 
 export default function Stats() {
+  const isAuthenticated = useAppSelector((state) => state.authenticatedReducer.isAuthenticated);
+  const dispatch = useAppDispatch();
   const {
     text,
     speed,
     incorrect,
-    setIsAuthenticated,
-    isAuthenticated,
     KEnglish,
     wordAmount,
     typingMode,
@@ -23,7 +25,7 @@ export default function Stats() {
 
   useEffect(() => {
     if (localStorage.getItem('userData') !== null) {
-      setIsAuthenticated(true);
+      dispatch(authenticated.login());
     }
   }, []);
 

@@ -3,9 +3,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useOutletContext, useNavigate, Link } from 'react-router-dom';
 import APIservice from '../APIService/index';
 import Bar from './choiceBar';
+import { useAppDispatch } from '../redux/hooks';
+import authenticated from '../redux/actions/authenticated'
+
 
 export default function Main() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const linkTarget = {
     pathname: '/',
     key: Math.random(), // we could use Math.random, but that's not guaranteed unique.
@@ -23,7 +27,6 @@ export default function Main() {
     author,
     reset,
     setPrevInputLength,
-    setIsAuthenticated,
   } = useOutletContext() as any;
 
   // TODO potentially move to context (or to Redux, if we use)
@@ -40,8 +43,9 @@ export default function Main() {
       if (!res) {
         // TODO check where else we're using local storage
         localStorage.removeItem('userData');
-        setIsAuthenticated(false);
-      } else setIsAuthenticated(true);
+        dispatch(authenticated.logout());
+      } else dispatch(authenticated.login());
+
     }
     isLoggedIn();
   });

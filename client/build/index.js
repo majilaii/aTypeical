@@ -15,6 +15,8 @@ const App_1 = __importDefault(require("./App"));
 const react_router_dom_1 = require("react-router-dom");
 const choicePage_1 = __importDefault(require("./socket-components/choicePage"));
 const login_1 = __importDefault(require("./components/login"));
+const react_redux_1 = require("react-redux");
+const store_1 = require("./redux/store");
 const router = (0, react_router_dom_1.createBrowserRouter)([
     {
         path: '/',
@@ -53,8 +55,8 @@ const router = (0, react_router_dom_1.createBrowserRouter)([
 ]);
 const root = client_1.default.createRoot(document.getElementById('root'));
 root.render(
-// TODO React.StrictMode ??
 // <React.StrictMode>
-react_1.default.createElement(react_router_dom_1.RouterProvider, { router: router })
+react_1.default.createElement(react_redux_1.Provider, { store: store_1.store },
+    react_1.default.createElement(react_router_dom_1.RouterProvider, { router: router }))
 // </React.StrictMode>
 );
