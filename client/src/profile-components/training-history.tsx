@@ -1,18 +1,19 @@
 import { DateTime } from 'luxon';
 import React from 'react';
 import { updateUser } from '../APIService';
+import { useAppSelector } from '../redux/hooks';
 
 export default function Session({ element }: { element: updateUser & {
   wpm: number,
   rawwpm: number,
   accuracy: number,
   textLength: number,
-  typingMode: boolean,
+  typingMode: 'WORDS' | 'QUOTES',
   date: string
 }}) {
-  function whatMode(typing: boolean, english: number) {
-    if (typing === false) return 'Word';
-    if (typing === true) return 'Quotes';
+  function whatMode(typing: 'WORDS' | 'QUOTES', english: number) {
+    if (typing === 'WORDS') return 'Word';
+    if (typing === 'QUOTES') return 'Quotes';
 
     if (english === 1) return '1K';
     if (english === 5) return '5K';

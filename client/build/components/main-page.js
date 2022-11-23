@@ -33,9 +33,16 @@ const index_1 = __importDefault(require("../APIService/index"));
 const choiceBar_1 = __importDefault(require("./choiceBar"));
 const hooks_1 = require("../redux/hooks");
 const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
+const reset_1 = __importDefault(require("../redux/actions/reset"));
 function Main() {
     const navigate = (0, react_router_dom_1.useNavigate)();
     const dispatch = (0, hooks_1.useAppDispatch)();
+    const { reset, typingMode } = (0, hooks_1.useAppSelector)((state) => {
+        return {
+            reset: state.resetReducer.reset,
+            typingMode: state.typingModeReducer.typingMode
+        };
+    });
     const linkTarget = {
         pathname: '/',
         key: Math.random(),
@@ -43,7 +50,9 @@ function Main() {
             applied: true,
         },
     };
-    const { setWordAmount, setIncorrect, setSpeed, typingMode, text, setText, author, reset, setPrevInputLength, } = (0, react_router_dom_1.useOutletContext)();
+    const { setWordAmount, setIncorrect, setSpeed, 
+    // typingMode,
+    text, setText, author, setPrevInputLength, } = (0, react_router_dom_1.useOutletContext)();
     // TODO potentially move to context (or to Redux, if we use)
     const [checkFirstInput, setCheckInput] = (0, react_1.useState)(false);
     const [loading, setLoading] = (0, react_1.useState)(true);
@@ -61,7 +70,7 @@ function Main() {
                 dispatch(authenticated_1.default.login());
         }
         isLoggedIn();
-    });
+    }, [dispatch]);
     (0, react_1.useEffect)(() => {
         if (checkFirstInput !== false) {
             // TODO replace setInterval function
@@ -156,12 +165,14 @@ function Main() {
                                 ? 'correct'
                                 : 'incorrect'} ${el.active === 'true' ? 'active' : ''}`, key: i, id: i }, el.letter));
                 })),
-                typingMode === true && react_1.default.createElement("span", { className: "author" },
+                typingMode === 'QUOTES' && react_1.default.createElement("span", { className: "author" },
                     "- ",
                     author)),
             react_1.default.createElement("div", { className: "inputDiv" },
                 react_1.default.createElement("input", { ref: inputRef, id: "mainPageInput", type: "text", className: "inputBar", onChange: textValidate }),
-                react_1.default.createElement(react_router_dom_1.Link, { to: linkTarget, reloadDocument: true, className: "linkReset" },
-                    react_1.default.createElement("button", { className: "resetButton" }, "Reset"))))));
+                react_1.default.createElement(react_router_dom_1.Link, { to: linkTarget, className: "linkReset" },
+                    react_1.default.createElement("button", { className: "resetButton", onClick: () => {
+                            (dispatch((0, reset_1.default)()));
+                        } }, "Reset"))))));
 }
 exports.default = Main;

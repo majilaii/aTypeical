@@ -51,7 +51,7 @@ const userSchema = new Schema({
         type: Number,
       },
       typingMode: {
-        type: Boolean,
+        type: {type: String, enum: ['WORDS', 'QUOTES']},
       },
     },
   ],
@@ -72,7 +72,7 @@ export interface user extends mongoose.Document {
         incorrect?: number;
         wordAmount?: number;
         KEnglish?: number;
-        typingMode?: boolean;
+        typingMode?: 'WORDS' | 'QUOTES';
     }[];
 }
 

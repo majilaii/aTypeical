@@ -38,9 +38,8 @@ function App() {
     const [text, setText] = (0, react_1.useState)([]);
     const [incorrect, setIncorrect] = (0, react_1.useState)(0);
     const [KEnglish, setKEnglish] = (0, react_1.useState)(1);
-    const [typingMode, setTypingMode] = (0, react_1.useState)(localStorage.getItem('typingMode') !== null ? JSON.parse(localStorage.getItem('typingMode')) : false);
+    // const [typingMode, setTypingMode] = useState(localStorage.getItem('typingMode') !== null ? JSON.parse(localStorage.getItem('typingMode')) : false);
     const [author, setAuthor] = (0, react_1.useState)(null);
-    const [reset, setReset] = (0, react_1.useState)(true);
     const [prevInputLength, setPrevInputLength] = (0, react_1.useState)([]);
     const [adjustedWPM, setAdjustedWPM] = (0, react_1.useState)([]);
     const [gameState, setGameState] = (0, react_1.useState)(null);
@@ -59,16 +58,14 @@ function App() {
                 setIncorrect,
                 KEnglish,
                 setKEnglish,
-                typingMode,
-                setTypingMode,
+                // typingMode,
+                // setTypingMode,
                 author,
                 setAuthor,
-                reset,
-                setReset,
                 prevInputLength,
                 setPrevInputLength,
                 adjustedWPM,
-                setAdjustedWPM,
+                setAdjustedWPM
             } })));
 }
 exports.default = App;

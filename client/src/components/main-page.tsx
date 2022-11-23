@@ -3,13 +3,20 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useOutletContext, useNavigate, Link } from 'react-router-dom';
 import APIservice from '../APIService/index';
 import Bar from './choiceBar';
-import { useAppDispatch } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import authenticated from '../redux/actions/authenticated'
+import resetToggle from '../redux/actions/reset';
 
 
 export default function Main() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const {reset, typingMode} = useAppSelector<{reset: boolean, typingMode: 'QUOTES' | 'WORDS'}>( (state) => {
+    return {
+      reset: state.resetReducer.reset,
+      typingMode: state.typingModeReducer.typingMode
+    }
+  }); 
   const linkTarget = {
     pathname: '/',
     key: Math.random(), // we could use Math.random, but that's not guaranteed unique.
@@ -21,11 +28,10 @@ export default function Main() {
     setWordAmount,
     setIncorrect,
     setSpeed,
-    typingMode,
+    // typingMode,
     text,
     setText,
     author,
-    reset,
     setPrevInputLength,
   } = useOutletContext() as any;
 
@@ -48,7 +54,7 @@ export default function Main() {
 
     }
     isLoggedIn();
-  });
+  }, [dispatch]);
 
   useEffect(() => {
     if (checkFirstInput !== false) {
@@ -175,7 +181,7 @@ export default function Main() {
               );
             })}
           </p>
-          {typingMode === true && <span className="author">- {author}</span>}
+          {typingMode === 'QUOTES' && <span className="author">- {author}</span>}
         </div>
         <div className="inputDiv">
           <input
@@ -185,8 +191,10 @@ export default function Main() {
             className="inputBar"
             onChange={textValidate}
           />
-          <Link to={linkTarget} reloadDocument className="linkReset">
-            <button className="resetButton">Reset</button>
+          <Link to={linkTarget}  className="linkReset">
+            <button className="resetButton" onClick = {() => {
+               (dispatch(resetToggle()))
+            }}>Reset</button>
           </Link>
         </div>
       </div>

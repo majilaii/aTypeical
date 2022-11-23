@@ -30,8 +30,20 @@ require("../css/choiceBar.css");
 const react_1 = __importStar(require("react"));
 const react_router_dom_1 = require("react-router-dom");
 const index_1 = __importDefault(require("../APIService/index"));
+const hooks_1 = require("../redux/hooks");
+const typingMode_1 = __importDefault(require("../redux/actions/typingMode"));
 function Bar({ setCheckInput }) {
-    const { wordAmount, setWordAmount, KEnglish, setKEnglish, typingMode, setTypingMode, setText, setAuthor, setReset, } = (0, react_router_dom_1.useOutletContext)();
+    const { reset, typingMode } = (0, hooks_1.useAppSelector)((state) => {
+        return {
+            reset: state.resetReducer.reset,
+            typingMode: state.typingModeReducer.typingMode
+        };
+    });
+    const dispatch = (0, hooks_1.useAppDispatch)();
+    const { wordAmount, setWordAmount, KEnglish, setKEnglish, 
+    // typingMode,
+    // setTypingMode,
+    setText, setAuthor, } = (0, react_router_dom_1.useOutletContext)();
     (0, react_1.useEffect)(() => {
         if (wordAmount > 5) {
             localStorage.setItem('wordAmount', JSON.stringify(wordAmount));
@@ -43,12 +55,12 @@ function Bar({ setCheckInput }) {
         if (localStorage.getItem('typingMode') !== null) {
             setWordAmount(JSON.parse(localStorage.getItem('wordAmount')));
             setKEnglish(JSON.parse(localStorage.getItem('KEnglish')));
-            setTypingMode(JSON.parse(localStorage.getItem('typingMode')));
+            dispatch(typingMode_1.default.setTypingMode(JSON.parse(localStorage.getItem('typingMode'))));
         }
-    });
+    }, [dispatch, setKEnglish, setWordAmount]);
     (0, react_1.useEffect)(() => {
-        wordOrQuote(localStorage.getItem('wordAmount') !== null ? JSON.parse(localStorage.getItem('wordAmount')) : 15, typingMode);
-    }, [typingMode, KEnglish]);
+        wordOrQuote(localStorage.getItem('wordAmount') ? JSON.parse(localStorage.getItem('wordAmount')) : 15, typingMode);
+    }, [typingMode, KEnglish, reset]);
     async function getQuotes(length) {
         const data = await index_1.default.FetchQuotes(length);
         let quote = data.content.split('');
@@ -62,9 +74,8 @@ function Bar({ setCheckInput }) {
         const data = await index_1.default.fetchEnglishK(KEnglish, num);
         setText(data);
     }
-    async function wordOrQuote(chars, quote = false) {
-        console.log({ quote, typingMode });
-        if (quote) {
+    async function wordOrQuote(chars, quote = 'WORDS') {
+        if (quote === 'QUOTES') {
             getQuotes(chars);
         }
         else {
@@ -72,16 +83,15 @@ function Bar({ setCheckInput }) {
             getWords(chars);
         }
         setCheckInput(0);
-        setReset((num) => (num = num + 1));
     }
     return (react_1.default.createElement("div", { className: "choiceBar" },
-        react_1.default.createElement("button", { onClick: () => setTypingMode(false) }, " WORDS "),
-        react_1.default.createElement("button", { onClick: () => setTypingMode(true) }, " QUOTE "),
+        react_1.default.createElement("button", { onClick: () => dispatch(typingMode_1.default.words()) }, " WORDS "),
+        react_1.default.createElement("button", { onClick: () => dispatch(typingMode_1.default.quotes()) }, " QUOTE "),
         react_1.default.createElement("div", { className: "spacer" }),
-        react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(250, true) : wordOrQuote(100) }, " THICC "),
-        react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(150, true) : wordOrQuote(50) }, " LONG "),
-        react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(30, true) : wordOrQuote(20) }, " SHORT "),
-        !typingMode && (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(250, 'QUOTES') : wordOrQuote(100) }, " THICC "),
+        react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(150, 'QUOTES') : wordOrQuote(50) }, " LONG "),
+        react_1.default.createElement("button", { onClick: () => typingMode ? wordOrQuote(30, 'QUOTES') : wordOrQuote(20) }, " SHORT "),
+        typingMode === 'WORDS' && (react_1.default.createElement(react_1.default.Fragment, null,
             react_1.default.createElement("div", { className: "spacer" }),
             react_1.default.createElement("div", { className: "fadeIn" },
                 react_1.default.createElement("button", { onClick: () => setKEnglish(10) }, " HARD "),

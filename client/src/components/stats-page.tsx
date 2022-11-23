@@ -12,7 +12,12 @@ export function CalculateRawWPM(text: string[], speed: number) {
 }
 
 export default function Stats() {
-  const isAuthenticated = useAppSelector((state) => state.authenticatedReducer.isAuthenticated);
+  const {isAuthenticated, typingMode} = useAppSelector<{isAuthenticated: boolean, typingMode: 'QUOTES' | 'WORDS'}>((state) => {
+    return {
+      isAuthenticated: state.authenticatedReducer.isAuthenticated,
+      typingMode: state.typingModeReducer.typingMode
+    }
+  }); 
   const dispatch = useAppDispatch();
   const {
     text,
@@ -20,7 +25,6 @@ export default function Stats() {
     incorrect,
     KEnglish,
     wordAmount,
-    typingMode,
   } = useOutletContext() as any;
 
   useEffect(() => {

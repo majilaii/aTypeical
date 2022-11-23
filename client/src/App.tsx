@@ -11,9 +11,8 @@ function App() {
   const [text, setText] = useState([]);
   const [incorrect, setIncorrect] = useState(0);
   const [KEnglish, setKEnglish] = useState(1);
-  const [typingMode, setTypingMode] = useState(localStorage.getItem('typingMode') !== null ? JSON.parse(localStorage.getItem('typingMode')) : false);
+  // const [typingMode, setTypingMode] = useState(localStorage.getItem('typingMode') !== null ? JSON.parse(localStorage.getItem('typingMode')) : false);
   const [author, setAuthor] = useState(null);
-  const [reset, setReset] = useState(true);
   const [prevInputLength, setPrevInputLength] = useState([]);
   const [adjustedWPM, setAdjustedWPM] = useState([]);
   const [gameState, setGameState] = useState(null);
@@ -36,16 +35,14 @@ function App() {
           setIncorrect,
           KEnglish,
           setKEnglish,
-          typingMode,
-          setTypingMode,
+          // typingMode,
+          // setTypingMode,
           author,
           setAuthor,
-          reset,
-          setReset,
           prevInputLength,
           setPrevInputLength,
           adjustedWPM,
-          setAdjustedWPM,
+          setAdjustedWPM
         }}
       />
     </div>

@@ -1,7 +1,10 @@
 import { createStore, combineReducers } from 'redux'
 import authenticatedReducer from './reducers/authenticated';
+import resetReducer from './reducers/reset';
+import typingModeReducer from './reducers/typingMode';
 
-const reducers = combineReducers({authenticatedReducer});
+
+const reducers = combineReducers({authenticatedReducer, resetReducer, typingModeReducer});
 
 export const store = createStore(reducers);
 

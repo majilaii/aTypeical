@@ -50,7 +50,7 @@ export interface updateUser {
   speed: number,
   incorrect: number,
   wordAmount: number,
-  typingMode: boolean,
+  typingMode: 'WORDS' | 'QUOTES',
   KEnglish: number,
 };
 

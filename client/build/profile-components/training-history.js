@@ -7,9 +7,9 @@ const luxon_1 = require("luxon");
 const react_1 = __importDefault(require("react"));
 function Session({ element }) {
     function whatMode(typing, english) {
-        if (typing === false)
+        if (typing === 'WORDS')
             return 'Word';
-        if (typing === true)
+        if (typing === 'QUOTES')
             return 'Quotes';
         if (english === 1)
             return '1K';
