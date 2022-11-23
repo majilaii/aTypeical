@@ -28,7 +28,6 @@ export default function Main() {
     setWordAmount,
     setIncorrect,
     setSpeed,
-    // typingMode,
     text,
     setText,
     author,

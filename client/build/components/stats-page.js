@@ -53,7 +53,9 @@ function Stats() {
         }
     }, []);
     (0, react_1.useEffect)(() => {
+        console.log('USEEFFECT!!!!!!!!');
         if (isAuthenticated) {
+            console.log('SECOND!!!!!');
             (async function update() {
                 const user = {
                     date: Date.now(),

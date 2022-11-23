@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const initialState = {
-    typingMode: 'WORDS' // localStorage.getItem('typingMode') !== 'null' ? JSON.parse(localStorage.getItem('typingMode')) : 'QUOTES',
+    typingMode: localStorage.getItem('typingMode') ? JSON.parse(localStorage.getItem('typingMode')) : 'QUOTES',
 };
 const typingModeReducer = (state = initialState, action) => {
     switch (action.type) {

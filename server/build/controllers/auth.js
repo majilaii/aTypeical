@@ -43,6 +43,7 @@ const register = async (req, res, next) => {
 };
 exports.register = register;
 const login = async (req, res, next) => {
+    console.log('logged in');
     passport_1.default.authenticate('local', (err, user) => {
         if (err)
             throw err;

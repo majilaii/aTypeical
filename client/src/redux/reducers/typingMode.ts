@@ -1,7 +1,7 @@
 import Action from "../actions/actionType";
 
 const initialState: {typingMode: 'WORDS'|'QUOTES'} = {
-    typingMode: 'WORDS' // localStorage.getItem('typingMode') !== 'null' ? JSON.parse(localStorage.getItem('typingMode')) : 'QUOTES',
+    typingMode: localStorage.getItem('typingMode') ? JSON.parse(localStorage.getItem('typingMode')) : 'QUOTES',
 };
 
 const typingModeReducer = (state = initialState, action: Action<null | 'WORDS' | 'QUOTES'>): {typingMode: 'WORDS'|'QUOTES'} => {

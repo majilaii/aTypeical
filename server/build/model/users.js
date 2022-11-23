@@ -52,7 +52,7 @@ const userSchema = new Schema({
                 type: Number,
             },
             typingMode: {
-                type: Boolean,
+                type: String,
             },
         },
     ],

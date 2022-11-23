@@ -21,7 +21,11 @@ app.use(cors(corsConfig));
 websocketing(app, corsConfig);
 
 app.use(express.json());
-
+app.use((req, res, next) => {
+  console.log('updating');
+  console.log(req.body);
+  next();
+});
 app.use(
   session({
     name: 'sid',

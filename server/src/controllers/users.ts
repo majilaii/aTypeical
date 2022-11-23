@@ -3,7 +3,8 @@ import WPMcalc from '../utils/WPMcalc';
 import User from './../model/users';
 
 export const putHistory = async (req: Request, res: Response) => {
-  const { wordAmount, KEnglish, typingMode, date }: { wordAmount: number, KEnglish: string, typingMode: ('WORDS' | 'QUOTES'), date: Date } = req.body;
+  console.log('HELOOOO');
+  const { wordAmount, KEnglish, typingMode, date }: { wordAmount: number, KEnglish: string, typingMode: 'WORDS' | 'QUOTES', date: Date } = req.body;
   const incorrects = req.body.incorrect;
   const textLength = req.body.text;
   const wpm = WPMcalc((textLength-incorrects)/5, req.body.speed)

@@ -50,9 +50,7 @@ function Main() {
             applied: true,
         },
     };
-    const { setWordAmount, setIncorrect, setSpeed, 
-    // typingMode,
-    text, setText, author, setPrevInputLength, } = (0, react_router_dom_1.useOutletContext)();
+    const { setWordAmount, setIncorrect, setSpeed, text, setText, author, setPrevInputLength, } = (0, react_router_dom_1.useOutletContext)();
     // TODO potentially move to context (or to Redux, if we use)
     const [checkFirstInput, setCheckInput] = (0, react_1.useState)(false);
     const [loading, setLoading] = (0, react_1.useState)(true);

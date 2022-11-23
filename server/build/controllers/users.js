@@ -7,6 +7,7 @@ exports.putHistory = void 0;
 const WPMcalc_1 = __importDefault(require("../utils/WPMcalc"));
 const users_1 = __importDefault(require("./../model/users"));
 const putHistory = async (req, res) => {
+    console.log('HELOOOO');
     const { wordAmount, KEnglish, typingMode, date } = req.body;
     const incorrects = req.body.incorrect;
     const textLength = req.body.text;

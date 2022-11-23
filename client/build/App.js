@@ -32,16 +32,13 @@ const react_router_dom_1 = require("react-router-dom");
 const nav_bar_1 = __importDefault(require("./components/nav-bar"));
 // TODO refactor to Redux (if have time)
 function App() {
-    // TODO replace 0-1 with booleans
     const [wordAmount, setWordAmount] = (0, react_1.useState)(localStorage.getItem('wordAmount') !== null ? JSON.parse(localStorage.getItem('wordAmount')) : 15);
     const [speed, setSpeed] = (0, react_1.useState)(0);
     const [text, setText] = (0, react_1.useState)([]);
     const [incorrect, setIncorrect] = (0, react_1.useState)(0);
     const [KEnglish, setKEnglish] = (0, react_1.useState)(1);
-    // const [typingMode, setTypingMode] = useState(localStorage.getItem('typingMode') !== null ? JSON.parse(localStorage.getItem('typingMode')) : false);
     const [author, setAuthor] = (0, react_1.useState)(null);
     const [prevInputLength, setPrevInputLength] = (0, react_1.useState)([]);
-    const [adjustedWPM, setAdjustedWPM] = (0, react_1.useState)([]);
     const [gameState, setGameState] = (0, react_1.useState)(null);
     return (react_1.default.createElement("div", { className: 'wholeContainer' },
         react_1.default.createElement(nav_bar_1.default, null),
@@ -58,14 +55,10 @@ function App() {
                 setIncorrect,
                 KEnglish,
                 setKEnglish,
-                // typingMode,
-                // setTypingMode,
                 author,
                 setAuthor,
                 prevInputLength,
                 setPrevInputLength,
-                adjustedWPM,
-                setAdjustedWPM
             } })));
 }
 exports.default = App;
