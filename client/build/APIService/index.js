@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fetchEnglishK = async (num, wordAmount) => {
-    let Words = await fetch(`http://localhost:3000/${num}k.txt`);
+const fetchEnglishK = async (difficulty, wordAmount) => {
+    let Words = await fetch(`http://localhost:3000/${difficulty}.txt`);
     let temp = await Words.text();
     let words = APIservice.Shuffle(temp.split(' '))
         .slice(0, wordAmount)

@@ -39,23 +39,22 @@ function CalculateRawWPM(text, speed) {
 }
 exports.CalculateRawWPM = CalculateRawWPM;
 function Stats() {
-    const { isAuthenticated, typingMode } = (0, hooks_1.useAppSelector)((state) => {
+    const { isAuthenticated, typingMode, difficulty } = (0, hooks_1.useAppSelector)((state) => {
         return {
             isAuthenticated: state.authenticatedReducer.isAuthenticated,
-            typingMode: state.typingModeReducer.typingMode
+            typingMode: state.typingModeReducer.typingMode,
+            difficulty: state.difficultyReducer.difficulty
         };
     });
     const dispatch = (0, hooks_1.useAppDispatch)();
-    const { text, speed, incorrect, KEnglish, wordAmount, } = (0, react_router_dom_1.useOutletContext)();
+    const { text, speed, incorrect, wordAmount, } = (0, react_router_dom_1.useOutletContext)();
     (0, react_1.useEffect)(() => {
         if (localStorage.getItem('userData') !== null) {
             dispatch(authenticated_1.default.login());
         }
     }, []);
     (0, react_1.useEffect)(() => {
-        console.log('USEEFFECT!!!!!!!!');
         if (isAuthenticated) {
-            console.log('SECOND!!!!!');
             (async function update() {
                 const user = {
                     date: Date.now(),
@@ -64,7 +63,7 @@ function Stats() {
                     incorrect: incorrect,
                     wordAmount,
                     typingMode,
-                    KEnglish,
+                    difficulty,
                 };
                 await APIService_1.default.update(user);
             })();

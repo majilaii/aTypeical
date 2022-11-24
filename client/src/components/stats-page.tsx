@@ -12,10 +12,11 @@ export function CalculateRawWPM(text: string[], speed: number) {
 }
 
 export default function Stats() {
-  const {isAuthenticated, typingMode} = useAppSelector<{isAuthenticated: boolean, typingMode: 'QUOTES' | 'WORDS'}>((state) => {
+  const {isAuthenticated, typingMode, difficulty} = useAppSelector<{isAuthenticated: boolean, typingMode: 'QUOTES' | 'WORDS', difficulty: 'EASY' | 'MEDIUM' | 'HARD'}>((state) => {
     return {
       isAuthenticated: state.authenticatedReducer.isAuthenticated,
-      typingMode: state.typingModeReducer.typingMode
+      typingMode: state.typingModeReducer.typingMode,
+      difficulty: state.difficultyReducer.difficulty
     }
   }); 
   const dispatch = useAppDispatch();
@@ -23,7 +24,6 @@ export default function Stats() {
     text,
     speed,
     incorrect,
-    KEnglish,
     wordAmount,
   } = useOutletContext() as any;
 
@@ -34,9 +34,7 @@ export default function Stats() {
   }, []);
 
   useEffect(() => {
-    console.log('USEEFFECT!!!!!!!!');
     if (isAuthenticated) {
-      console.log('SECOND!!!!!');
       (async function update() {
         const user = {
           date: Date.now(),
@@ -45,7 +43,7 @@ export default function Stats() {
           incorrect: incorrect,
           wordAmount,
           typingMode,
-          KEnglish,
+          difficulty,
         };
         await APIservice.update(user);
       })();

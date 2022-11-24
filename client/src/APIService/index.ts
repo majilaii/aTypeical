@@ -1,5 +1,5 @@
-const fetchEnglishK = async (num: number, wordAmount: number) => {
-  let Words = await fetch(`http://localhost:3000/${num}k.txt`);
+const fetchEnglishK = async (difficulty: 'EASY' | 'MEDIUM' | 'HARD', wordAmount: number) => {
+  let Words = await fetch(`http://localhost:3000/${difficulty}.txt`);
   let temp = await Words.text();
   let words = APIservice.Shuffle(temp.split(' '))
     .slice(0, wordAmount)
@@ -51,7 +51,7 @@ export interface updateUser {
   incorrect: number,
   wordAmount: number,
   typingMode: 'WORDS' | 'QUOTES',
-  KEnglish: number,
+  difficulty: 'EASY' | 'MEDIUM' | 'HARD',
 };
 
 const register = (user: loginUser & {email: string}) => {

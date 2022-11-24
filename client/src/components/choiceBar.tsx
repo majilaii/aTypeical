@@ -4,22 +4,20 @@ import { useOutletContext } from 'react-router-dom';
 import APIservice from '../APIService/index';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import typing from '../redux/actions/typingMode';
+import difficultyActions from '../redux/actions/difficulty';
 
 export default function Bar({ setCheckInput }: { setCheckInput: any }) {
-  const {reset, typingMode} = useAppSelector<{reset: boolean, typingMode: 'QUOTES' | 'WORDS'}>((state) => {
+  const {reset, typingMode, difficulty} = useAppSelector<{reset: boolean, typingMode: 'QUOTES' | 'WORDS', difficulty: 'EASY' | 'MEDIUM' | 'HARD'}>((state) => {
     return {
       reset: state.resetReducer.reset,
-      typingMode: state.typingModeReducer.typingMode
+      typingMode: state.typingModeReducer.typingMode,
+      difficulty: state.difficultyReducer.difficulty
     }
   }); 
   const dispatch = useAppDispatch();
   const {
     wordAmount,
     setWordAmount,
-    KEnglish,
-    setKEnglish,
-    // typingMode,
-    // setTypingMode,
     setText,
     setAuthor,
   } = useOutletContext() as any;
@@ -28,21 +26,21 @@ export default function Bar({ setCheckInput }: { setCheckInput: any }) {
     if(wordAmount > 5){
       localStorage.setItem('wordAmount', JSON.stringify(wordAmount))
       localStorage.setItem('typingMode', JSON.stringify(typingMode))
-      localStorage.setItem('KEnglish', JSON.stringify(KEnglish))
+      localStorage.setItem('difficulty', JSON.stringify(difficulty))
     }
-  }, [KEnglish, typingMode, wordAmount])
+  }, [difficulty, typingMode, wordAmount])
 
   useEffect(() => {
     if(localStorage.getItem('typingMode') !== null) {
       setWordAmount(JSON.parse(localStorage.getItem('wordAmount')))
-      setKEnglish(JSON.parse(localStorage.getItem('KEnglish')))
+      dispatch(difficultyActions.setDifficulty(JSON.parse(localStorage.getItem('difficulty'))))
       dispatch(typing.setTypingMode(JSON.parse(localStorage.getItem('typingMode'))))
     }
-  }, [dispatch, setKEnglish, setWordAmount])
+  }, [dispatch, setWordAmount])
 
   useEffect(() => {
     wordOrQuote(localStorage.getItem('wordAmount') ? JSON.parse(localStorage.getItem('wordAmount')) : 15, typingMode);
-  }, [typingMode, KEnglish, reset]);
+  }, [typingMode, difficulty, reset]);
 
   async function getQuotes(length: number) {
     const data = await APIservice.FetchQuotes(length);
@@ -55,7 +53,7 @@ export default function Bar({ setCheckInput }: { setCheckInput: any }) {
   }
 
   async function getWords(num: number) {
-    const data = await APIservice.fetchEnglishK(KEnglish, num);
+    const data = await APIservice.fetchEnglishK(difficulty, num);
     setText(data);
   }
 
@@ -83,9 +81,9 @@ export default function Bar({ setCheckInput }: { setCheckInput: any }) {
         <>
           <div className="spacer"></div>
           <div className="fadeIn">
-            <button onClick={() => setKEnglish(10)}> HARD </button>
-            <button onClick={() => setKEnglish(5)}> MEDIUM </button>
-            <button onClick={() => setKEnglish(1)}> EASY </button>
+            <button onClick={() => dispatch(difficultyActions.hard())}> HARD </button>
+            <button onClick={() => dispatch(difficultyActions.medium())}> MEDIUM </button>
+            <button onClick={() => dispatch(difficultyActions.easy())}> EASY </button>
           </div>
         </>
       )}

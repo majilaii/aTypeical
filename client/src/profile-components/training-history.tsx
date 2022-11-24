@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon';
 import React from 'react';
 import { updateUser } from '../APIService';
-import { useAppSelector } from '../redux/hooks';
 
 export default function Session({ element }: { element: updateUser & {
   wpm: number,
@@ -11,13 +10,11 @@ export default function Session({ element }: { element: updateUser & {
   typingMode: 'WORDS' | 'QUOTES',
   date: string
 }}) {
-  function whatMode(typing: 'WORDS' | 'QUOTES', english: number) {
+  function whatMode(typing: 'WORDS' | 'QUOTES', difficultyLevel: 'EASY' | 'MEDIUM' | 'HARD') {
     if (typing === 'WORDS') return 'Word';
     if (typing === 'QUOTES') return 'Quotes';
-
-    if (english === 1) return '1K';
-    if (english === 5) return '5K';
-    if (english === 10) return '10K';
+    
+    return difficultyLevel;
   }
   return (
     <>
@@ -32,8 +29,8 @@ export default function Session({ element }: { element: updateUser & {
         </td>
 
         <td>
-          {whatMode(element.typingMode, element.KEnglish)}/{element.wordAmount}/
-          {whatMode(null, element.KEnglish)}
+          {whatMode(element.typingMode, element.difficulty)}/{element.wordAmount}/
+          {whatMode(null, element.difficulty)}
         </td>
 
         <td>

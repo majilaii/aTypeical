@@ -9,7 +9,6 @@ import authenticated from '../redux/actions/authenticated'
 
 
 export default function Profile() {
-  // TODO move to context (or Redux)
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [username, setUsername] = useState(null);

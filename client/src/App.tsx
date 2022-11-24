@@ -9,11 +9,9 @@ function App() {
   const [speed, setSpeed] = useState(0);
   const [text, setText] = useState([]);
   const [incorrect, setIncorrect] = useState(0);
-  const [KEnglish, setKEnglish] = useState(1);
   const [author, setAuthor] = useState(null);
   const [prevInputLength, setPrevInputLength] = useState([]);
   const [gameState, setGameState] = useState(null);
-
 
   return (
     <div className='wholeContainer'>
@@ -30,8 +28,6 @@ function App() {
           setText,
           incorrect,
           setIncorrect,
-          KEnglish,
-          setKEnglish,
           author,
           setAuthor,
           prevInputLength,

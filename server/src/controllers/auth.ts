@@ -37,8 +37,6 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
-  console.log('logged in');
-  
   passport.authenticate('local', (err, user) => {
     if (err) throw err;
     if (!user)

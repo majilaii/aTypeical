@@ -29,21 +29,6 @@ export default function Data() {
     prevInputLength,
   } = useOutletContext() as any;
 
-  // TODO LOCAL STORAGE
-  // useEffect(() => {
-  //   console.log(prevInputLength, speed, 'hello')
-  //   if(prevInputLength.length) {
-  //     localStorage.setItem('arr', JSON.stringify(prevInputLength))
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   if(localStorage.getItem('arr') !== null && localStorage.getItem('speed') !== null) {
-  //     const stats = JSON.parse(localStorage.getItem('arr'))
-  //     setPrevInputLength(stats)
-  //   }
-  // }, [])
-
   const eachInterval = [];
   const finalDataArr = [];
 

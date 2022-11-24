@@ -32,35 +32,34 @@ const react_router_dom_1 = require("react-router-dom");
 const index_1 = __importDefault(require("../APIService/index"));
 const hooks_1 = require("../redux/hooks");
 const typingMode_1 = __importDefault(require("../redux/actions/typingMode"));
+const difficulty_1 = __importDefault(require("../redux/actions/difficulty"));
 function Bar({ setCheckInput }) {
-    const { reset, typingMode } = (0, hooks_1.useAppSelector)((state) => {
+    const { reset, typingMode, difficulty } = (0, hooks_1.useAppSelector)((state) => {
         return {
             reset: state.resetReducer.reset,
-            typingMode: state.typingModeReducer.typingMode
+            typingMode: state.typingModeReducer.typingMode,
+            difficulty: state.difficultyReducer.difficulty
         };
     });
     const dispatch = (0, hooks_1.useAppDispatch)();
-    const { wordAmount, setWordAmount, KEnglish, setKEnglish, 
-    // typingMode,
-    // setTypingMode,
-    setText, setAuthor, } = (0, react_router_dom_1.useOutletContext)();
+    const { wordAmount, setWordAmount, setText, setAuthor, } = (0, react_router_dom_1.useOutletContext)();
     (0, react_1.useEffect)(() => {
         if (wordAmount > 5) {
             localStorage.setItem('wordAmount', JSON.stringify(wordAmount));
             localStorage.setItem('typingMode', JSON.stringify(typingMode));
-            localStorage.setItem('KEnglish', JSON.stringify(KEnglish));
+            localStorage.setItem('difficulty', JSON.stringify(difficulty));
         }
-    }, [KEnglish, typingMode, wordAmount]);
+    }, [difficulty, typingMode, wordAmount]);
     (0, react_1.useEffect)(() => {
         if (localStorage.getItem('typingMode') !== null) {
             setWordAmount(JSON.parse(localStorage.getItem('wordAmount')));
-            setKEnglish(JSON.parse(localStorage.getItem('KEnglish')));
+            dispatch(difficulty_1.default.setDifficulty(JSON.parse(localStorage.getItem('difficulty'))));
             dispatch(typingMode_1.default.setTypingMode(JSON.parse(localStorage.getItem('typingMode'))));
         }
-    }, [dispatch, setKEnglish, setWordAmount]);
+    }, [dispatch, setWordAmount]);
     (0, react_1.useEffect)(() => {
         wordOrQuote(localStorage.getItem('wordAmount') ? JSON.parse(localStorage.getItem('wordAmount')) : 15, typingMode);
-    }, [typingMode, KEnglish, reset]);
+    }, [typingMode, difficulty, reset]);
     async function getQuotes(length) {
         const data = await index_1.default.FetchQuotes(length);
         let quote = data.content.split('');
@@ -71,7 +70,7 @@ function Bar({ setCheckInput }) {
         setAuthor(data.author);
     }
     async function getWords(num) {
-        const data = await index_1.default.fetchEnglishK(KEnglish, num);
+        const data = await index_1.default.fetchEnglishK(difficulty, num);
         setText(data);
     }
     async function wordOrQuote(chars, quote = 'WORDS') {
@@ -94,8 +93,8 @@ function Bar({ setCheckInput }) {
         typingMode === 'WORDS' && (react_1.default.createElement(react_1.default.Fragment, null,
             react_1.default.createElement("div", { className: "spacer" }),
             react_1.default.createElement("div", { className: "fadeIn" },
-                react_1.default.createElement("button", { onClick: () => setKEnglish(10) }, " HARD "),
-                react_1.default.createElement("button", { onClick: () => setKEnglish(5) }, " MEDIUM "),
-                react_1.default.createElement("button", { onClick: () => setKEnglish(1) }, " EASY "))))));
+                react_1.default.createElement("button", { onClick: () => dispatch(difficulty_1.default.hard()) }, " HARD "),
+                react_1.default.createElement("button", { onClick: () => dispatch(difficulty_1.default.medium()) }, " MEDIUM "),
+                react_1.default.createElement("button", { onClick: () => dispatch(difficulty_1.default.easy()) }, " EASY "))))));
 }
 exports.default = Bar;

@@ -9,7 +9,6 @@ import authenticated from '../redux/actions/authenticated'
 export default function Register() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // TODO context or Redux
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerUsername, setRegisterUsername] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');

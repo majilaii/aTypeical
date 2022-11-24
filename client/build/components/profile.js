@@ -12,7 +12,6 @@ const react_2 = __importDefault(require("react"));
 const hooks_1 = require("../redux/hooks");
 const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
 function Profile() {
-    // TODO move to context (or Redux)
     const navigate = (0, react_router_dom_1.useNavigate)();
     const dispatch = (0, hooks_1.useAppDispatch)();
     const [username, setUsername] = (0, react_1.useState)(null);

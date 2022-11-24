@@ -36,7 +36,6 @@ function App() {
     const [speed, setSpeed] = (0, react_1.useState)(0);
     const [text, setText] = (0, react_1.useState)([]);
     const [incorrect, setIncorrect] = (0, react_1.useState)(0);
-    const [KEnglish, setKEnglish] = (0, react_1.useState)(1);
     const [author, setAuthor] = (0, react_1.useState)(null);
     const [prevInputLength, setPrevInputLength] = (0, react_1.useState)([]);
     const [gameState, setGameState] = (0, react_1.useState)(null);
@@ -53,8 +52,6 @@ function App() {
                 setText,
                 incorrect,
                 setIncorrect,
-                KEnglish,
-                setKEnglish,
                 author,
                 setAuthor,
                 prevInputLength,

@@ -22,11 +22,6 @@ const corsConfig = {
 app.use((0, cors_1.default)(corsConfig));
 (0, websocket_1.default)(app, corsConfig);
 app.use(express_1.default.json());
-app.use((req, res, next) => {
-    console.log('updating');
-    console.log(req.body);
-    next();
-});
 app.use((0, express_session_1.default)({
     name: 'sid',
     saveUninitialized: false,

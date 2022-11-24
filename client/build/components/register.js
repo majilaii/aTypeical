@@ -35,7 +35,6 @@ const authenticated_1 = __importDefault(require("../redux/actions/authenticated"
 function Register() {
     const navigate = (0, react_router_dom_1.useNavigate)();
     const dispatch = (0, hooks_1.useAppDispatch)();
-    // TODO context or Redux
     const [registerEmail, setRegisterEmail] = (0, react_1.useState)('');
     const [registerUsername, setRegisterUsername] = (0, react_1.useState)('');
     const [registerPassword, setRegisterPassword] = (0, react_1.useState)('');

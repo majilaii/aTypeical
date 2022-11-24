@@ -50,8 +50,7 @@ function Main() {
             applied: true,
         },
     };
-    const { setWordAmount, setIncorrect, setSpeed, text, setText, author, setPrevInputLength, } = (0, react_router_dom_1.useOutletContext)();
-    // TODO potentially move to context (or to Redux, if we use)
+    const { setIncorrect, setSpeed, text, setText, author, setPrevInputLength, } = (0, react_router_dom_1.useOutletContext)();
     const [checkFirstInput, setCheckInput] = (0, react_1.useState)(false);
     const [loading, setLoading] = (0, react_1.useState)(true);
     const inputRef = (0, react_1.useRef)(null);
@@ -60,7 +59,6 @@ function Main() {
         async function isLoggedIn() {
             const res = await index_1.default.profile();
             if (!res) {
-                // TODO check where else we're using local storage
                 localStorage.removeItem('userData');
                 dispatch(authenticated_1.default.logout());
             }
@@ -88,7 +86,6 @@ function Main() {
         }
     }, [checkFirstInput]);
     (0, react_1.useEffect)(() => {
-        // TODO double-check that this only adds one event listener
         window.addEventListener('keydown', focus);
         inputRef.current.value = '';
         setCheckInput(false);
@@ -97,13 +94,8 @@ function Main() {
     const preventCopyPaste = (e) => {
         e.preventDefault();
     };
-    // TODO more descriptive name?
     function focus() {
         inputRef.current.focus();
-    }
-    // TODO probably don't need this function inside the function this time
-    function changeWordAmount(num) {
-        setWordAmount(num);
     }
     // TODO move into a separate file (separate into smaller functions)
     function textValidate(e) {
@@ -138,7 +130,7 @@ function Main() {
         if (value.length === text.length) {
             const currentTime = new Date();
             // TODO try moving the line below to the reset function
-            setIncorrect(false);
+            setIncorrect(0);
             for (let obj of text) {
                 for (let key in obj) {
                     if (obj[key] === 'incorrect') {

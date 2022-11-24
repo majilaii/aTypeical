@@ -25,7 +25,6 @@ export default function Main() {
     },
   };
   const {
-    setWordAmount,
     setIncorrect,
     setSpeed,
     text,
@@ -33,8 +32,6 @@ export default function Main() {
     author,
     setPrevInputLength,
   } = useOutletContext() as any;
-
-  // TODO potentially move to context (or to Redux, if we use)
 
   const [checkFirstInput, setCheckInput] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -46,7 +43,6 @@ export default function Main() {
     async function isLoggedIn() {
       const res = await APIservice.profile();
       if (!res) {
-        // TODO check where else we're using local storage
         localStorage.removeItem('userData');
         dispatch(authenticated.logout());
       } else dispatch(authenticated.login());
@@ -74,7 +70,6 @@ export default function Main() {
   }, [checkFirstInput]);
 
   useEffect(() => {
-    // TODO double-check that this only adds one event listener
     window.addEventListener('keydown', focus);
     inputRef.current.value = '';
     setCheckInput(false);
@@ -85,14 +80,8 @@ export default function Main() {
     e.preventDefault();
   };
 
-  // TODO more descriptive name?
   function focus() {
     inputRef.current.focus();
-  }
-
-  // TODO probably don't need this function inside the function this time
-  function changeWordAmount(num: number) {
-    setWordAmount(num);
   }
 
   // TODO move into a separate file (separate into smaller functions)
@@ -134,7 +123,7 @@ export default function Main() {
     if (value.length === text.length) {
       const currentTime = new Date();
       // TODO try moving the line below to the reset function
-      setIncorrect(false);
+      setIncorrect(0);
       for (let obj of text) {
         for (let key in obj) {
           if (obj[key] === 'incorrect') {
