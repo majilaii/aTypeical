@@ -1,4 +1,3 @@
-// TODO Separate login and register
 import '../css/register-login.css';
 import React, { useState, useEffect } from 'react';
 import APIservice from '../APIService/index';
