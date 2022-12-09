@@ -55,7 +55,7 @@ export interface updateUser {
 };
 
 const register = (user: loginUser & {email: string}) => {
-  return fetch(`${process.env.SERVER || 'http://localhost:4000'}/register`, {
+  return fetch(`${process.env.REACT_APP_SERVER|| 'http://localhost:4000'}/register`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
@@ -67,7 +67,7 @@ const register = (user: loginUser & {email: string}) => {
 };
 
 const login = (user: loginUser) => {
-  return fetch(`${process.env.SERVER || 'http://localhost:4000'}/login`, {
+  return fetch(`${process.env.REACT_APP_SERVER|| 'http://localhost:4000'}/login`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
@@ -79,7 +79,7 @@ const login = (user: loginUser) => {
 };
 
 const profile = () => {
-  return fetch(`${process.env.SERVER || 'http://localhost:4000'}/profile`, {
+  return fetch(`${process.env.REACT_APP_SERVER|| 'http://localhost:4000'}/profile`, {
     method: 'GET',
     credentials: 'include',
     mode: 'cors',
@@ -92,7 +92,7 @@ const profile = () => {
 };
 
 const update = (user: updateUser) => {
-  return fetch(`${process.env.SERVER || 'http://localhost:4000'}/update`, {
+  return fetch(`${process.env.REACT_APP_SERVER|| 'http://localhost:4000'}/update`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
@@ -106,7 +106,7 @@ const update = (user: updateUser) => {
 };
 
 const logout = () => {
-  return fetch(`${process.env.SERVER || 'http://localhost:4000'}/logout`, {
+  return fetch(`${process.env.REACT_APP_SERVER|| 'http://localhost:4000'}/logout`, {
     method: 'POST',
     credentials: 'include',
     mode: 'cors',
