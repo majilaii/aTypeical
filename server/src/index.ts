@@ -8,8 +8,10 @@ const router = require('./routers/router');
 import websocketing from './utils/websocket';
 const app = express();
 
+console.log(process.env.DATABASE_URL);
+
 const corsConfig = {
-  origin: 'http://localhost:3000',
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
   methods: 'GET, POST, PUT, DELETE',
   credentials: true,
   maxAge: 3600,
