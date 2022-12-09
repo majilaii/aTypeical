@@ -40,20 +40,22 @@ export default function ChoicePage() {
     <div className='choiceContainer'>
       <div className='joinRoom'>
         <div className='roomContainer'>
-          <input
-            type='text'
-            className='email'
-            placeholder='nickname'
-            name='nickname'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => saveData(e)}
-          />
-          <input
-            type='text'
-            className='email'
-            placeholder='lobby ID'
-            name='gameID'
-            onChange={(e) => saveData(e)}
-          />
+          <div className="inputContainer">
+            <input
+              type='text'
+              className='email'
+              placeholder='nickname'
+              name='nickname'
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => saveData(e)}
+            />
+            <input
+              type='text'
+              className='email'
+              placeholder='lobby ID'
+              name='gameID'
+              onChange={(e) => saveData(e)}
+            />
+          </div>
           <button className='submit' onClick={joinRoom}>
             {' '}
             JOIN ROOM

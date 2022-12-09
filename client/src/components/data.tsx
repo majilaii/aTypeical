@@ -49,6 +49,7 @@ export default function Data() {
     );
   }
   const options = {
+    maintainAspectRatio: false,
     layout: {
       padding: {
         right: 0,

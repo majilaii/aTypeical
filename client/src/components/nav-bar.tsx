@@ -31,14 +31,16 @@ export default function NavBar() {
 
   return (
     <div className='navContainer'>
-      <Link to={linkTarget} className='link'>
-        aTYPEical
-      </Link>
-      <div className='wrapper'>
-        <div className='tagline'>This is a typing app.</div>
+      <div className="group">
+        <Link to={linkTarget} className='link'>
+          aTYPEical
+        </Link>
+        <div className='wrapper'>
+          <div className='tagline'>This is a typing app.</div>
+        </div>
       </div>
 
-      <div className='buttons'>
+      <div className='buttons group'>
         {isAuthenticated && (
           <Link to='/profile' className='linkLogin'>
             <button className='profile'>PROFILE</button>{' '}
@@ -50,15 +52,20 @@ export default function NavBar() {
             RACE{' '}
           </button>
         )}
-        {isAuthenticated === false ? (
+        {isAuthenticated === false && window.location.href !== 'http://localhost:3000/login'? (
           <Link to='/login' className='linkLogin'>
             <button className='logIn'>LOGIN</button>{' '}
           </Link>
-        ) : (
+        ) : window.location.href !== 'http://localhost:3000/login' ? (
           <button className='logIn' onClick={logout}>
             LOGOUT
           </button>
-        )}
+        ) : (
+          <button className='logIn' onClick={() => navigate('/register')}>
+            REGISTER
+          </button>
+        ) 
+        }
       </div>
     </div>
   );

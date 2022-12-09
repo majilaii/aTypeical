@@ -69,18 +69,22 @@ export default function Bar({ setCheckInput }: { setCheckInput: any }) {
 
   return (
     <div className="choiceBar">
-      <button onClick={() => dispatch(typing.words())}> WORDS </button>
-      <button onClick={() => dispatch(typing.quotes())}> QUOTE </button>
+      <div className="choiceSection">
+        <button onClick={() => dispatch(typing.words())}> WORDS </button>
+        <button onClick={() => dispatch(typing.quotes())}> QUOTE </button>
+      </div>
       <div className="spacer"></div>
 
-      <button onClick={() => typingMode ? wordOrQuote(250, 'QUOTES') : wordOrQuote(100)}> THICC </button>
-      <button onClick={() => typingMode ? wordOrQuote(150, 'QUOTES') : wordOrQuote(50)}> LONG </button>
-      <button onClick={() => typingMode ? wordOrQuote(30, 'QUOTES') : wordOrQuote(20)}> SHORT </button>
+      <div className="choiceSection">
+        <button onClick={() => typingMode ? wordOrQuote(250, 'QUOTES') : wordOrQuote(100)}> THICC </button>
+        <button onClick={() => typingMode ? wordOrQuote(150, 'QUOTES') : wordOrQuote(50)}> LONG </button>
+        <button onClick={() => typingMode ? wordOrQuote(30, 'QUOTES') : wordOrQuote(20)}> SHORT </button>
+      </div>
 
       {typingMode === 'WORDS' && (
         <>
           <div className="spacer"></div>
-          <div className="fadeIn">
+          <div className="fadeIn choiceSection">
             <button onClick={() => dispatch(difficultyActions.hard())}> HARD </button>
             <button onClick={() => dispatch(difficultyActions.medium())}> MEDIUM </button>
             <button onClick={() => dispatch(difficultyActions.easy())}> EASY </button>

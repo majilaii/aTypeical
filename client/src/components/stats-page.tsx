@@ -93,13 +93,15 @@ export default function Stats() {
         </p>
       </div>
       <Data />
-      <Link to={linkTarget} reloadDocument className="linkReset">
-        <img
-          alt="reload"
-          className="icon"
-          src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"
-        />
-      </Link>
+      <div className="linkCenter">
+        <Link to={linkTarget} reloadDocument className="linkReset">
+          <img
+            alt="reload"
+            className="icon"
+            src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"
+          />
+        </Link>
+      </div>
       {!isAuthenticated && (
         <p className="loginMessage">
           {' '}

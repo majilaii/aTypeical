@@ -3,3 +3,7 @@
   height: max-content;
   padding-top: 100px;
 }
+
+.chart {
+  min-height: 500px;
+}
