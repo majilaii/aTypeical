@@ -8,6 +8,7 @@ const socket_io_1 = require("socket.io");
 const game_1 = __importDefault(require("../model/game"));
 const quotesAPI_1 = __importDefault(require("./quotesAPI"));
 const WPMcalc_1 = __importDefault(require("./WPMcalc"));
+const PORT = process.env.PORT || 3000;
 function websocketing(app, corsConfig) {
     const server = http_1.default.createServer(app);
     const io = new socket_io_1.Server(server, { cors: corsConfig });
@@ -147,8 +148,8 @@ function websocketing(app, corsConfig) {
             console.log(socket.id + 'disconnected');
         });
     });
-    server.listen(3001, () => {
-        console.log('listening on 3001');
+    server.listen(PORT, () => {
+        console.log('listening on', PORT);
     });
 }
 exports.default = websocketing;

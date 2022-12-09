@@ -6,6 +6,7 @@ import FetchQuotes from './quotesAPI';
 import WPMcalc from './WPMcalc';
 import { CorsOptions } from 'cors';
 import { Types } from 'mongoose';
+const PORT = process.env.PORT || 3000;
 
 function websocketing(app: Express, corsConfig: CorsOptions) {
   const server = http.createServer(app);
@@ -162,9 +163,10 @@ function websocketing(app: Express, corsConfig: CorsOptions) {
     });
   });
 
-  server.listen(3001, () => {
-    console.log('listening on 3001');
+  server.listen(PORT, () => {
+    console.log('listening on', PORT);
   });
+
 }
 
 export default websocketing;

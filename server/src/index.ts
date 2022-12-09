@@ -1,5 +1,4 @@
 require('dotenv').config();
-const PORT = process.env.PORT || 3000;
 import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
@@ -48,6 +47,6 @@ app.get('*', (req, res) => {
 });
 
 // TODO: Combine this port with the socket port
-app.listen(PORT, () => {
-  console.log(`listening to port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`listening to port ${PORT}`);
+// });
