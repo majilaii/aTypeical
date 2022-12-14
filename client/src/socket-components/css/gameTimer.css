@@ -1,0 +1,13 @@
+.gameTimerMessage {
+  color: rgba(208, 139, 1, 0.742);
+  font-size: 50px;
+}
+
+.WPMMessage {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(208, 139, 1, 0.742);
+  z-index: 100;
+}

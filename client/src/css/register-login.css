@@ -1,0 +1,93 @@
+.forms-container {
+  height: 80%;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.formTitle {
+  color: rgb(162, 162, 162);
+  margin-left: 13px;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  width: max-content;
+  height: 100%;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: max-content;
+  gap: 7px;
+}
+
+input,
+.submit {
+  border-radius: 5px;
+  border-style: none;
+  padding: 5px;
+  margin: 5px;
+  background-color: #101212;
+  font-size: 0.6em;
+  font-weight: normal;
+  color: rgb(162, 162, 162);
+  outline: none;
+}
+
+input {
+  padding-left: 15px;
+}
+
+.submit {
+  height: 40px;
+  color: #101212;
+  font-size: 1rem;
+  background-color: rgba(208, 139, 1, 0.742);
+}
+
+.submit:hover {
+  color: #101212;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+p {
+  font-size: 14px;
+  text-align: center;
+  /* text-decoration: none; */
+}
+
+.linkLogin, .linkRegister {
+  background-color: inherit;
+  width: auto;
+}
+
+.have-account-register {
+  background-color: inherit;
+  margin-top: 15px;
+  margin-bottom: 7px;
+  text-decoration: none;
+}
+
+.login-register-link {
+  transition: 0.5s;
+  font-weight: bold;
+  background-color: inherit;
+  color: rgb(208, 139, 1);
+  font-size: 17px;
+}
+
+.login-register-link:hover {
+  transition: 0.5s;
+  background-color: inherit;
+  color: green;
+}

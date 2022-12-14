@@ -1,0 +1,21 @@
+.socket-typing {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.socketContainer {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(26, 26, 26);
+}
+
+.roomCode {
+  color: white;
+  font-size: 30px;
+}
