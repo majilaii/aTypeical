@@ -4,8 +4,6 @@ body {
 .Main-container {
   display: flex;
   flex-direction: column;
-  width: inherit;
-  height: inherit;
   justify-content: flex-start;
   align-items: center;
   background-color: rgb(26, 26, 26);
@@ -116,8 +114,4 @@ span {
   color: white;
   align-self: flex-start;
   margin-bottom: -10px;
-}
-
-a {
-  width: 100px;
 }

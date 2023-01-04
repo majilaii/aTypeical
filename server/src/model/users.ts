@@ -47,11 +47,11 @@ const userSchema = new Schema({
       wordAmount: {
         type: Number,
       },
-      KEnglish: {
-        type: Number,
+      difficulty: {
+        type: String,
       },
       typingMode: {
-        type: Boolean,
+        type: String,
       },
     },
   ],
@@ -71,8 +71,8 @@ export interface user extends mongoose.Document {
         textLength?: number;
         incorrect?: number;
         wordAmount?: number;
-        KEnglish?: number;
-        typingMode?: boolean;
+        difficulty?: 'EASY' | 'MEDIUM' | 'HARD';
+        typingMode?: 'WORDS' | 'QUOTES';
     }[];
 }
 

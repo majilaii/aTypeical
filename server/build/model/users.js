@@ -48,11 +48,11 @@ const userSchema = new Schema({
             wordAmount: {
                 type: Number,
             },
-            KEnglish: {
-                type: Number,
+            difficulty: {
+                type: String,
             },
             typingMode: {
-                type: Boolean,
+                type: String,
             },
         },
     ],

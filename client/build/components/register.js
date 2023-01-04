@@ -30,13 +30,14 @@ require("../css/register-login.css");
 const react_1 = __importStar(require("react"));
 const index_1 = __importDefault(require("../APIService/index"));
 const react_router_dom_1 = require("react-router-dom");
+const hooks_1 = require("../redux/hooks");
+const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
 function Register() {
     const navigate = (0, react_router_dom_1.useNavigate)();
-    // TODO context or Redux
+    const dispatch = (0, hooks_1.useAppDispatch)();
     const [registerEmail, setRegisterEmail] = (0, react_1.useState)('');
     const [registerUsername, setRegisterUsername] = (0, react_1.useState)('');
     const [registerPassword, setRegisterPassword] = (0, react_1.useState)('');
-    const { setIsAuthenticated } = (0, react_router_dom_1.useOutletContext)();
     const [alertMessage] = (0, react_1.useState)('your Email sucks ass btw');
     (0, react_1.useEffect)(() => {
         if (localStorage.getItem('userData') !== null)
@@ -64,7 +65,7 @@ function Register() {
             setRegisterEmail('');
             setRegisterPassword('');
             setRegisterEmail('');
-            setIsAuthenticated(true);
+            dispatch(authenticated_1.default.login());
             navigate('/profile');
         }
     };

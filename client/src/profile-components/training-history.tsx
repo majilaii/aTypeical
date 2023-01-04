@@ -7,16 +7,14 @@ export default function Session({ element }: { element: updateUser & {
   rawwpm: number,
   accuracy: number,
   textLength: number,
-  typingMode: boolean,
+  typingMode: 'WORDS' | 'QUOTES',
   date: string
 }}) {
-  function whatMode(typing: boolean, english: number) {
-    if (typing === false) return 'Word';
-    if (typing === true) return 'Quotes';
-
-    if (english === 1) return '1K';
-    if (english === 5) return '5K';
-    if (english === 10) return '10K';
+  function whatMode(typing: 'WORDS' | 'QUOTES', difficultyLevel: 'EASY' | 'MEDIUM' | 'HARD') {
+    if (typing === 'WORDS') return 'Word';
+    if (typing === 'QUOTES') return 'Quotes';
+    
+    return difficultyLevel;
   }
   return (
     <>
@@ -31,8 +29,8 @@ export default function Session({ element }: { element: updateUser & {
         </td>
 
         <td>
-          {whatMode(element.typingMode, element.KEnglish)}/{element.wordAmount}/
-          {whatMode(null, element.KEnglish)}
+          {whatMode(element.typingMode, element.difficulty)}/{element.wordAmount}/
+          {whatMode(null, element.difficulty)}
         </td>
 
         <td>

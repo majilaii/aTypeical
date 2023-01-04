@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
-const PORT = process.env.PORT || 3000;
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
@@ -42,6 +41,6 @@ app.get('*', (req, res) => {
     res.status(404).send('Sorry, route not found');
 });
 // TODO: Combine this port with the socket port
-app.listen(PORT, () => {
-    console.log(`listening to port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`listening to port ${PORT}`);
+// });

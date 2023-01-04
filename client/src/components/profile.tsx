@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import '../css/profile.css';
-import { useOutletContext, useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import APIservice from '../APIService';
 import Session from '../profile-components/training-history';
 import React from 'react';
+import { useAppDispatch } from '../redux/hooks';
+import authenticated from '../redux/actions/authenticated'
+
 
 export default function Profile() {
-  // TODO move to context (or Redux)
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [username, setUsername] = useState(null);
   const [history, setHistory] = useState([]);
-  const { setIsAuthenticated } = useOutletContext() as { setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>};
   const [totalTime, setTotalTIme] = useState(0);
   const [totalLetters, setTotalLetters] = useState(0);
   const [totalWPM, setTotalWPM] = useState(0);
@@ -23,7 +25,7 @@ export default function Profile() {
       if (userInfo) {
         const { username, history } = userInfo;
         setUsername(username);
-        setIsAuthenticated(true);
+        dispatch(authenticated.login());
         setHistory(history);
         let counter = 0;
         let timeCounter = 0;

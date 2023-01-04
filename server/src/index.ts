@@ -1,5 +1,4 @@
 require('dotenv').config();
-const PORT = process.env.PORT || 3000;
 import cors from 'cors';
 import express from 'express';
 import session from 'express-session';
@@ -9,8 +8,10 @@ const router = require('./routers/router');
 import websocketing from './utils/websocket';
 const app = express();
 
+console.log(process.env.DATABASE_URL);
+
 const corsConfig = {
-  origin: 'http://localhost:3000',
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
   methods: 'GET, POST, PUT, DELETE',
   credentials: true,
   maxAge: 3600,
@@ -48,6 +49,6 @@ app.get('*', (req, res) => {
 });
 
 // TODO: Combine this port with the socket port
-app.listen(PORT, () => {
-  console.log(`listening to port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`listening to port ${PORT}`);
+// });

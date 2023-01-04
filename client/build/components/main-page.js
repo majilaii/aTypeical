@@ -31,8 +31,18 @@ const react_1 = __importStar(require("react"));
 const react_router_dom_1 = require("react-router-dom");
 const index_1 = __importDefault(require("../APIService/index"));
 const choiceBar_1 = __importDefault(require("./choiceBar"));
+const hooks_1 = require("../redux/hooks");
+const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
+const reset_1 = __importDefault(require("../redux/actions/reset"));
 function Main() {
     const navigate = (0, react_router_dom_1.useNavigate)();
+    const dispatch = (0, hooks_1.useAppDispatch)();
+    const { reset, typingMode } = (0, hooks_1.useAppSelector)((state) => {
+        return {
+            reset: state.resetReducer.reset,
+            typingMode: state.typingModeReducer.typingMode
+        };
+    });
     const linkTarget = {
         pathname: '/',
         key: Math.random(),
@@ -40,8 +50,7 @@ function Main() {
             applied: true,
         },
     };
-    const { setWordAmount, setIncorrect, setSpeed, typingMode, text, setText, author, reset, setPrevInputLength, setIsAuthenticated, } = (0, react_router_dom_1.useOutletContext)();
-    // TODO potentially move to context (or to Redux, if we use)
+    const { setIncorrect, setSpeed, text, setText, author, setPrevInputLength, } = (0, react_router_dom_1.useOutletContext)();
     const [checkFirstInput, setCheckInput] = (0, react_1.useState)(false);
     const [loading, setLoading] = (0, react_1.useState)(true);
     const inputRef = (0, react_1.useRef)(null);
@@ -50,15 +59,14 @@ function Main() {
         async function isLoggedIn() {
             const res = await index_1.default.profile();
             if (!res) {
-                // TODO check where else we're using local storage
                 localStorage.removeItem('userData');
-                setIsAuthenticated(false);
+                dispatch(authenticated_1.default.logout());
             }
             else
-                setIsAuthenticated(true);
+                dispatch(authenticated_1.default.login());
         }
         isLoggedIn();
-    });
+    }, [dispatch]);
     (0, react_1.useEffect)(() => {
         if (checkFirstInput !== false) {
             // TODO replace setInterval function
@@ -78,7 +86,6 @@ function Main() {
         }
     }, [checkFirstInput]);
     (0, react_1.useEffect)(() => {
-        // TODO double-check that this only adds one event listener
         window.addEventListener('keydown', focus);
         inputRef.current.value = '';
         setCheckInput(false);
@@ -87,13 +94,8 @@ function Main() {
     const preventCopyPaste = (e) => {
         e.preventDefault();
     };
-    // TODO more descriptive name?
     function focus() {
         inputRef.current.focus();
-    }
-    // TODO probably don't need this function inside the function this time
-    function changeWordAmount(num) {
-        setWordAmount(num);
     }
     // TODO move into a separate file (separate into smaller functions)
     function textValidate(e) {
@@ -128,7 +130,7 @@ function Main() {
         if (value.length === text.length) {
             const currentTime = new Date();
             // TODO try moving the line below to the reset function
-            setIncorrect(false);
+            setIncorrect(0);
             for (let obj of text) {
                 for (let key in obj) {
                     if (obj[key] === 'incorrect') {
@@ -153,12 +155,14 @@ function Main() {
                                 ? 'correct'
                                 : 'incorrect'} ${el.active === 'true' ? 'active' : ''}`, key: i, id: i }, el.letter));
                 })),
-                typingMode === true && react_1.default.createElement("span", { className: "author" },
+                typingMode === 'QUOTES' && react_1.default.createElement("span", { className: "author" },
                     "- ",
                     author)),
             react_1.default.createElement("div", { className: "inputDiv" },
                 react_1.default.createElement("input", { ref: inputRef, id: "mainPageInput", type: "text", className: "inputBar", onChange: textValidate }),
-                react_1.default.createElement(react_router_dom_1.Link, { to: linkTarget, reloadDocument: true, className: "linkReset" },
-                    react_1.default.createElement("button", { className: "resetButton" }, "Reset"))))));
+                react_1.default.createElement(react_router_dom_1.Link, { to: linkTarget, className: "linkReset" },
+                    react_1.default.createElement("button", { className: "resetButton", onClick: () => {
+                            (dispatch((0, reset_1.default)()));
+                        } }, "Reset"))))));
 }
 exports.default = Main;

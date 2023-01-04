@@ -1,29 +1,35 @@
 import '../css/stats-page.css';
 import React, { useEffect } from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
-
 import Data from './data';
 import APIservice from '../APIService';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import authenticated from '../redux/actions/authenticated'
+
 
 export function CalculateRawWPM(text: string[], speed: number) {
   return Math.round(text.length / 5 / (speed / 1000 / 60));
 }
 
 export default function Stats() {
+  const {isAuthenticated, typingMode, difficulty} = useAppSelector<{isAuthenticated: boolean, typingMode: 'QUOTES' | 'WORDS', difficulty: 'EASY' | 'MEDIUM' | 'HARD'}>((state) => {
+    return {
+      isAuthenticated: state.authenticatedReducer.isAuthenticated,
+      typingMode: state.typingModeReducer.typingMode,
+      difficulty: state.difficultyReducer.difficulty
+    }
+  }); 
+  const dispatch = useAppDispatch();
   const {
     text,
     speed,
     incorrect,
-    setIsAuthenticated,
-    isAuthenticated,
-    KEnglish,
     wordAmount,
-    typingMode,
   } = useOutletContext() as any;
 
   useEffect(() => {
     if (localStorage.getItem('userData') !== null) {
-      setIsAuthenticated(true);
+      dispatch(authenticated.login());
     }
   }, []);
 
@@ -37,7 +43,7 @@ export default function Stats() {
           incorrect: incorrect,
           wordAmount,
           typingMode,
-          KEnglish,
+          difficulty,
         };
         await APIservice.update(user);
       })();
@@ -87,13 +93,15 @@ export default function Stats() {
         </p>
       </div>
       <Data />
-      <Link to={linkTarget} reloadDocument className="linkReset">
-        <img
-          alt="reload"
-          className="icon"
-          src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"
-        />
-      </Link>
+      <div className="linkCenter">
+        <Link to={linkTarget} reloadDocument className="linkReset">
+          <img
+            alt="reload"
+            className="icon"
+            src="https://htmlacademy.ru/assets/icons/reload-6x-white.png"
+          />
+        </Link>
+      </div>
       {!isAuthenticated && (
         <p className="loginMessage">
           {' '}

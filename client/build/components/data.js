@@ -11,19 +11,6 @@ const react_1 = __importDefault(require("react"));
 chart_js_1.Chart.register(chart_js_1.CategoryScale, chart_js_1.LinearScale, chart_js_1.PointElement, chart_js_1.LineElement, chart_js_1.Title, chart_js_1.Tooltip, chart_js_1.Legend);
 function Data() {
     const { speed, prevInputLength, } = (0, react_router_dom_1.useOutletContext)();
-    // TODO LOCAL STORAGE
-    // useEffect(() => {
-    //   console.log(prevInputLength, speed, 'hello')
-    //   if(prevInputLength.length) {
-    //     localStorage.setItem('arr', JSON.stringify(prevInputLength))
-    //   }
-    // }, [])
-    // useEffect(() => {
-    //   if(localStorage.getItem('arr') !== null && localStorage.getItem('speed') !== null) {
-    //     const stats = JSON.parse(localStorage.getItem('arr'))
-    //     setPrevInputLength(stats)
-    //   }
-    // }, [])
     const eachInterval = [];
     const finalDataArr = [];
     let lastVal = prevInputLength.pop();

@@ -1,15 +1,16 @@
-// TODO Separate login and register
 import '../css/register-login.css';
 import React, { useState, useEffect } from 'react';
 import APIservice from '../APIService/index';
-import { useNavigate, useOutletContext, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import authenticated from '../redux/actions/authenticated'
+import { useAppDispatch } from '../redux/hooks';
 
 export default function Login() {
   const navigate = useNavigate();
-  // TODO context or Redux
+  const dispatch = useAppDispatch();
+  
   const [loginUsername, setLoginUsername] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
-  const { setIsAuthenticated } = useOutletContext() as any;
+  const [loginPassword, setLoginPassword] = useState('');  
 
   useEffect(() => {
     if (localStorage.getItem('userData') !== null) navigate('/profile');
@@ -23,7 +24,7 @@ export default function Login() {
       setLoginUsername('');
       setLoginPassword('');
     } else {
-      setIsAuthenticated(true);
+      dispatch(authenticated.login());
       localStorage.setItem('userData', JSON.stringify(res));
       navigate('/profile');
     }

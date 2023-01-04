@@ -3,9 +3,20 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useOutletContext, useNavigate, Link } from 'react-router-dom';
 import APIservice from '../APIService/index';
 import Bar from './choiceBar';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import authenticated from '../redux/actions/authenticated'
+import resetToggle from '../redux/actions/reset';
+
 
 export default function Main() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const {reset, typingMode} = useAppSelector<{reset: boolean, typingMode: 'QUOTES' | 'WORDS'}>( (state) => {
+    return {
+      reset: state.resetReducer.reset,
+      typingMode: state.typingModeReducer.typingMode
+    }
+  }); 
   const linkTarget = {
     pathname: '/',
     key: Math.random(), // we could use Math.random, but that's not guaranteed unique.
@@ -14,19 +25,13 @@ export default function Main() {
     },
   };
   const {
-    setWordAmount,
     setIncorrect,
     setSpeed,
-    typingMode,
     text,
     setText,
     author,
-    reset,
     setPrevInputLength,
-    setIsAuthenticated,
   } = useOutletContext() as any;
-
-  // TODO potentially move to context (or to Redux, if we use)
 
   const [checkFirstInput, setCheckInput] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -38,13 +43,13 @@ export default function Main() {
     async function isLoggedIn() {
       const res = await APIservice.profile();
       if (!res) {
-        // TODO check where else we're using local storage
         localStorage.removeItem('userData');
-        setIsAuthenticated(false);
-      } else setIsAuthenticated(true);
+        dispatch(authenticated.logout());
+      } else dispatch(authenticated.login());
+
     }
     isLoggedIn();
-  });
+  }, [dispatch]);
 
   useEffect(() => {
     if (checkFirstInput !== false) {
@@ -65,7 +70,6 @@ export default function Main() {
   }, [checkFirstInput]);
 
   useEffect(() => {
-    // TODO double-check that this only adds one event listener
     window.addEventListener('keydown', focus);
     inputRef.current.value = '';
     setCheckInput(false);
@@ -76,14 +80,8 @@ export default function Main() {
     e.preventDefault();
   };
 
-  // TODO more descriptive name?
   function focus() {
     inputRef.current.focus();
-  }
-
-  // TODO probably don't need this function inside the function this time
-  function changeWordAmount(num: number) {
-    setWordAmount(num);
   }
 
   // TODO move into a separate file (separate into smaller functions)
@@ -125,7 +123,7 @@ export default function Main() {
     if (value.length === text.length) {
       const currentTime = new Date();
       // TODO try moving the line below to the reset function
-      setIncorrect(false);
+      setIncorrect(0);
       for (let obj of text) {
         for (let key in obj) {
           if (obj[key] === 'incorrect') {
@@ -171,7 +169,7 @@ export default function Main() {
               );
             })}
           </p>
-          {typingMode === true && <span className="author">- {author}</span>}
+          {typingMode === 'QUOTES' && <span className="author">- {author}</span>}
         </div>
         <div className="inputDiv">
           <input
@@ -181,8 +179,10 @@ export default function Main() {
             className="inputBar"
             onChange={textValidate}
           />
-          <Link to={linkTarget} reloadDocument className="linkReset">
-            <button className="resetButton">Reset</button>
+          <Link to={linkTarget}  className="linkReset">
+            <button className="resetButton" onClick = {() => {
+               (dispatch(resetToggle()))
+            }}>Reset</button>
           </Link>
         </div>
       </div>

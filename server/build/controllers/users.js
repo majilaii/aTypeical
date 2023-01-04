@@ -7,7 +7,7 @@ exports.putHistory = void 0;
 const WPMcalc_1 = __importDefault(require("../utils/WPMcalc"));
 const users_1 = __importDefault(require("./../model/users"));
 const putHistory = async (req, res) => {
-    const { wordAmount, KEnglish, typingMode, date } = req.body;
+    const { wordAmount, difficulty, typingMode, date } = req.body;
     const incorrects = req.body.incorrect;
     const textLength = req.body.text;
     const wpm = (0, WPMcalc_1.default)((textLength - incorrects) / 5, req.body.speed);
@@ -24,7 +24,7 @@ const putHistory = async (req, res) => {
                 accuracy: accuracy,
                 time: req.body.speed / 1000,
                 wordAmount,
-                KEnglish,
+                difficulty,
                 typingMode,
             },
             $position: 0

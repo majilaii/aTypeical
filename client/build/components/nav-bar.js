@@ -7,18 +7,19 @@ require("../css/nav-bar.css");
 const react_router_dom_1 = require("react-router-dom");
 const APIService_1 = __importDefault(require("../APIService"));
 const react_1 = __importDefault(require("react"));
-function NavBar({ isAuthenticated, setIsAuthenticated }) {
+const hooks_1 = require("../redux/hooks");
+const authenticated_1 = __importDefault(require("../redux/actions/authenticated"));
+function NavBar() {
     const navigate = (0, react_router_dom_1.useNavigate)();
+    const isAuthenticated = (0, hooks_1.useAppSelector)((state) => state.authenticatedReducer.isAuthenticated);
+    const dispatch = (0, hooks_1.useAppDispatch)();
     async function logout() {
         const res = await APIService_1.default.logout();
         if (res.message) {
             localStorage.removeItem('userData');
-            setIsAuthenticated(false);
+            dispatch(authenticated_1.default.logout());
             navigate('/');
         }
-    }
-    function toRace() {
-        navigate('/race');
     }
     const linkTarget = {
         pathname: '/',
@@ -35,7 +36,7 @@ function NavBar({ isAuthenticated, setIsAuthenticated }) {
             isAuthenticated && (react_1.default.createElement(react_router_dom_1.Link, { to: '/profile', className: 'linkLogin' },
                 react_1.default.createElement("button", { className: 'profile' }, "PROFILE"),
                 ' ')),
-            window.location.href !== 'http://localhost:3000/race' && (react_1.default.createElement("button", { className: 'raceButton', onClick: toRace },
+            window.location.href !== 'http://localhost:3000/race' && (react_1.default.createElement("button", { className: 'raceButton', onClick: () => { navigate('/race'); } },
                 ' ',
                 "RACE",
                 ' ')),

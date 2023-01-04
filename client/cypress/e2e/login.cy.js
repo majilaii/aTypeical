@@ -1,15 +1,14 @@
 /* eslint-disable no-undef */
-describe('Registration', () => {
+describe('Login', () => {
 
   it('Loads the page', () => {
     cy.visit('http://localhost:3000/login');
-    cy.contains('Register').click();
     cy.contains('Login').click();
     cy.url().should('equal', 'http://localhost:3000/login');
   });
 
   it('Username or password is incorrect', () => {
-    cy.visit('http://localhost:3000/register')
+    cy.visit('http://localhost:3000/login')
     cy.get('#usernameLogin').type('incorrect')
       .get('#passwordLogin').type('incorrect')
       .get('#buttonLogin').click();
@@ -19,13 +18,13 @@ describe('Registration', () => {
   });
 
   it('Login sends the correct request, loads the /profile page, gets the cookie', () => {
-    cy.visit('http://localhost:3000/register')
+    cy.visit('http://localhost:3000/login')
 
     cy.get('#usernameLogin').type('email')
       .get('#passwordLogin').type('email')
       .get('#buttonLogin').click()
 
-    cy.request('POST', 'http://localhost:3000/register', { username: 'email', password: 'email' }).then(
+    cy.request('POST', 'http://localhost:3000/login', { username: 'email', password: 'email' }).then(
       (response) => {
         expect(response.body).to.have.property('message')
       })
